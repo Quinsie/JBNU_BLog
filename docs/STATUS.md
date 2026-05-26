@@ -4,10 +4,10 @@
 > 전체 그림·단계 의존성은 [ROADMAP.md](ROADMAP.md), 데이터 신뢰성은 [DATA_NOTES.md](DATA_NOTES.md).
 
 ## 현재 위치
-**Phase 1(수집기) 구현 완료 → ITS IP 차단으로 가동 일시 중단(쿨다운).**
-병행: **Phase 4 1차 모델 설계** + **Phase 3 데이터 파악**(branch `design/first-model`).
+**Phase 3 trip 재구성 v1 구현·검증 완료** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
 - 1차 모델 검증·결정 → [design/first-model.md](design/first-model.md) (갈림길 3개 확정).
-- 5/26 raw 2시간 실측으로 trip 구조·노이즈·출발검출 설계 → [design/trip-reconstruction.md](design/trip-reconstruction.md).
+- trip 재구성 설계 확정 → [design/trip-reconstruction.md](design/trip-reconstruction.md) (발차검출·종료일반화·구간타깃).
+- **v1 스크립트** `src/preprocess/trip_reconstruct.py`: 305200112 검증 — 발차 5건 전부 예정시간표 ±64s 매칭, 품질분기·종점·글리치·공백분할 정상.
 
 ## 완료
 - **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
@@ -26,11 +26,10 @@
 - **중기예보(longForecast) 403**: KMA 키 중기예보 API 구독 반영 대기(비차단).
 
 ## 다음 할 일
-1. (차단 해제 후) 수집 재가동 → 1~2h 무손실·디스크 추세 확인. clean 데이터 축적 시작.
-2. 데이터 쌓는 동안 **설계**(ITS 불필요):
-   - **trip 재구성 + 배차시각 매칭 휴리스틱** 설계 (모델 무관, Phase 3)
-   - **1차 모델 구조** 결정 (MLP vs GBDT, 입력/타깃) — feature 가공을 여는 키스톤
-3. 모델 구조 확정 → feature 가공 → 1차 학습 (Phase 4)
+1. **trip 재구성 v1 전노선 스트레스테스트**: 저녁 데이터로 전 stdid 돌려 집계(풀trip 수율·발차매칭 분포·품질분기·이상치) → 임계값(R/K/gap) 튜닝.
+2. **v1.1**: 시간표 prior 슬롯 게이팅(발차 애매구간 보정), 공휴일 캘린더, 종점 stop수 reference 연결.
+3. **1차 feature 가공** → GBDT 학습 (Phase 4). 미결정 갈림길 #3(지리종속성→route_nodes) 결판.
+4. (운영) `.73` 차단 풀리면 `.74` 우회 원복(STATUS 위 §원복).
 
 ## 후처리에서 풀 과제 (기억)
 - **배차 시각 식별**: raw 만 받으므로 trip↔시간표 매칭 휴리스틱 필요.
