@@ -16,6 +16,11 @@
 5. **추측하지 말고 검증·측정으로 결정한다.** 가져온 데이터/산출물은 원본을 맹신하지 말고 검증한다(예: 격자 변환식은 KMA 표준 기준점으로 확인). 성능/부하는 실측으로 판단한다.
 6. **작년 코드(`~/BIS_APP/`)는 정답이 아니다.** ML 입문기 연습물이므로 참고만 하고 뿌리부터 재설계한다.
 7. **docs·commit 메시지는 한글.** worklog 는 두지 않는다(= commit 단위로 추적).
+8. **커밋은 Conventional Commits 규약을 지킨다.** `type(scope): 설명` 형식.
+   - type: `feat`(기능) `fix`(버그) `docs`(문서) `refactor` `perf`(성능) `chore`(잡무·설정) `test` `build` `ci`
+   - scope(선택): `collector` `reference` `preprocess` `models` `agent` `serve` `deploy` 등
+   - 설명은 한글, 명령형/요약형. 본문엔 상세, 끝에 `Co-Authored-By` 트레일러.
+   - 예: `feat(collector): 적응형 폴링 + 버스트 하드금지`
 
 ## 아키텍처 원칙
 - **한 서버에서 전부**: 수집 → 전처리 → ML 학습 → 1차(사전)추론 → 2차(실시간)추론 → Agent 의사결정. (작년 backend/midServer 분리는 폐지)
