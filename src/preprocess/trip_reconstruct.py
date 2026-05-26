@@ -312,22 +312,81 @@ def _summary(records: list[dict]) -> None:
               f"구간 {len(seg)}개 총 {tot/60:.1f}분 glitch버림 {r['glitch_dropped']}")
 
 
+def stdids_with_data(date_str: str) -> list[str]:
+    """해당 날짜 raw 파일이 있는 stdid 목록."""
+    out = []
+    for d in sorted(RAW_BUS_DIR.glob("*")):
+        if d.is_dir() and any(d.glob(f"{date_str}_*.jsonl")):
+            out.append(d.name)
+    return out
+
+
+def _save(records: list[dict], date_str: str, stdid: str) -> None:
+    from src.common.paths import INTERIM_DIR
+    out_dir = INTERIM_DIR / "trips" / date_str
+    out_dir.mkdir(parents=True, exist_ok=True)
+    with open(out_dir / f"{stdid}.jsonl", "w", encoding="utf-8") as f:
+        for r in records:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+
+
+def _aggregate(all_recs: list[dict]) -> None:
+    """전노선 집계 리포트 (스트레스테스트용)."""
+    from collections import Counter
+    import statistics as st
+    n = len(all_recs)
+    q = Counter(r["departure_quality"] for r in all_recs)
+    full = sum(1 for r in all_recs if r["reached_terminus"])
+    deltas = [abs(r["sched_delta_sec"]) for r in all_recs
+              if r["sched_delta_sec"] is not None]
+    glitch = sum(r["glitch_dropped"] for r in all_recs)
+    seg_counts = [len(r["segments"]) for r in all_recs]
+
+    def p(v, q_):
+        v = sorted(v)
+        return v[min(len(v) - 1, int(len(v) * q_))] if v else None
+
+    print(f"\n{'='*60}\n전노선 집계: trip {n}개")
+    print(f"  품질분기: {dict(q)}")
+    print(f"  종점도달(풀trip): {full} ({full/n*100:.0f}%)")
+    print(f"  구간수/trip: median {st.median(seg_counts):.0f} max {max(seg_counts)}")
+    if deltas:
+        within = lambda s: sum(1 for d in deltas if d <= s) / len(deltas) * 100
+        print(f"  발차매칭 |오차|: median {st.median(deltas):.0f}s p90 {p(deltas,.9)}s "
+              f"max {max(deltas)}s | ≤60s {within(60):.0f}% ≤180s {within(180):.0f}%")
+    print(f"  글리치 버린 관측 총합: {glitch}")
+
+
 if __name__ == "__main__":
     import argparse
-    ap = argparse.ArgumentParser(description="trip 재구성 v1 (단일 노선)")
-    ap.add_argument("stdid")
+    ap = argparse.ArgumentParser(description="trip 재구성 v1")
+    ap.add_argument("stdid", help="단일 stdid 또는 'all'(전노선)")
     ap.add_argument("date", help="YYYYMMDD")
     ap.add_argument("--save", action="store_true", help="interim 에 jsonl 저장")
     args = ap.parse_args()
 
-    recs = reconstruct_stdid(args.stdid, args.date)
-    _summary(recs)
-    if args.save:
-        from src.common.paths import INTERIM_DIR
-        out_dir = INTERIM_DIR / "trips" / args.date
-        out_dir.mkdir(parents=True, exist_ok=True)
-        out = out_dir / f"{args.stdid}.jsonl"
-        with open(out, "w", encoding="utf-8") as f:
-            for r in recs:
-                f.write(json.dumps(r, ensure_ascii=False) + "\n")
-        print(f"저장: {out}")
+    if args.stdid == "all":
+        sids = stdids_with_data(args.date)
+        print(f"전노선 재구성: {len(sids)}개 노선, date={args.date}")
+        all_recs: list[dict] = []
+        empty = 0
+        for sid in sids:
+            recs = reconstruct_stdid(sid, args.date)
+            if not recs:
+                empty += 1
+                continue
+            all_recs.extend(recs)
+            if args.save:
+                _save(recs, args.date, sid)
+        print(f"trip 산출 노선 {len(sids)-empty} / trip 0개 노선 {empty}")
+        _aggregate(all_recs)
+        if args.save:
+            from src.common.paths import INTERIM_DIR
+            print(f"저장 위치: {INTERIM_DIR / 'trips' / args.date}/")
+    else:
+        recs = reconstruct_stdid(args.stdid, args.date)
+        _summary(recs)
+        if args.save:
+            _save(recs, args.date, args.stdid)
+            from src.common.paths import INTERIM_DIR
+            print(f"저장: {INTERIM_DIR / 'trips' / args.date / (args.stdid + '.jsonl')}")
