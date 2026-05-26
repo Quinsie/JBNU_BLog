@@ -64,11 +64,13 @@ def haversine(lat1, lng1, lat2, lng2) -> float:
 
 
 # ── 로드 ────────────────────────────────────────────────
-def load_observations(stdid: int | str, dates: str | list[str]) -> dict[str, list[Obs]]:
-    """raw bus jsonl → {plate: [Obs ...]} (plate 내 시간순).
+def load_observations(stdid: int | str, dates: str | list[str],
+                      ) -> dict[tuple[str, str], list[Obs]]:
+    """raw bus jsonl → {(plate, company): [Obs ...]} (키 내 시간순).
 
     dates: 단일 날짜 또는 리스트. **여러 날짜를 하나의 연속 스트림으로 병합**한다
-    (자정 무경계 — trip 분할은 달력 날짜가 아니라 gap·ord리셋 신호로만)."""
+    (자정 무경계 — trip 분할은 달력 날짜가 아니라 gap·ord리셋 신호로만).
+    키는 (번호판, 회사) — PLATE_NO 4자리 비유일 보강 + 회사=기사/차량 특성."""
     if isinstance(dates, str):
         dates = [dates]
     out: dict[str, list[Obs]] = {}
@@ -88,7 +90,10 @@ def load_observations(stdid: int | str, dates: str | list[str]) -> dict[str, lis
                         plate = str(b.get("PLATE_NO", "")).strip()
                         if not plate:
                             continue
-                        out.setdefault(plate, []).append(Obs(
+                        co = str(b.get("COMPANY_NAME") or "").strip()
+                        # 키 = (plate, 회사). PLATE_NO 4자리는 비유일이라 회사로 보강
+                        # (현재 plate↔회사 1:1 이나 전국확장 시 번호충돌 대비). 회사=기사/차량 특성.
+                        out.setdefault((plate, co), []).append(Obs(
                             ts=ts, iso=rec["ts"],
                             so=b.get("LATEST_STOP_ORD"),
                             spd=b.get("SPEED") or 0,
@@ -429,13 +434,13 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
 
     # 하드드롭: reference 로 불가능한 ord(>종점, <1) = 외래/오염(API 누수·번호중복).
     # 거리 무관이라 안전(305001677 ord45 류). None-ord(위치만) 은 궤적용으로 유지.
-    for plate in by_plate:
-        by_plate[plate] = [o for o in by_plate[plate]
-                           if o.so is None or 1 <= o.so <= terminus_ord]
+    for key in by_plate:
+        by_plate[key] = [o for o in by_plate[key]
+                         if o.so is None or 1 <= o.so <= terminus_ord]
 
     # 1) trip 레코드 (매칭 필드는 아래 노선전역 배정에서 채움)
     records: list[dict] = []
-    for plate, seq in by_plate.items():
+    for (plate, company), seq in by_plate.items():
         clean, dropped = filter_glitches(seq)
         for trip in split_trips(clean):
             if len(trip) < 2:
@@ -455,7 +460,8 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
                 > route_max_gap) if route_max_gap else 0
             records.append({
                 "stdid": int(stdid), "brt_no": meta.get("brt_no"),
-                "plate_no": plate, "service_date": date_str, "daytype": dtype,
+                "plate_no": plate, "company_name": company,
+                "service_date": date_str, "daytype": dtype,
                 "departure_ts": dep_iso, "departure_quality": quality,
                 "matched_sched": None, "sched_delta_sec": None,
                 "on_schedule": None,  # 발차없음(mid_entry)=null, 발차있음은 아래서 T/F

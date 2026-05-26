@@ -99,6 +99,7 @@ ITS `selectBisRouteTimeInfo`. 노선(방향)별 시점 시간표.
 `src/preprocess/trip_reconstruct.py` 출력. 한 줄 = 재구성된 trip 1개(차량 1회 운행).
 ```jsonc
 { "stdid":305200112, "brt_no":"385", "plate_no":"2055",
+  "company_name":"성진여객",                    // 운수사. trip 키=(plate,회사)(PLATE 4자리 비유일 보강) + 기사/차량 특성 feature
   "service_date":"20260526", "daytype":"평일", // trip 시작(첫 관측)일 = 소유 운행일. 자정 넘어 끝나도 시작일 소유(연속성 기반, 고정경계 없음)
   "departure_ts":"2026-05-26T21:36:56+09:00",  // 검출 실발차(없으면 null)
   "departure_quality":"origin_wait",            // origin_wait|origin_moving|mid_entry
