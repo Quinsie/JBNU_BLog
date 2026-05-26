@@ -21,12 +21,16 @@ docs/   문서
 ```bash
 git clone https://github.com/Quinsie/JBNU_BLog.git
 cd JBNU_BLog
-python3 -m venv .venv && source .venv/bin/activate
+conda create -n Blog python=3.12 -y
+conda activate Blog
 pip install -r requirements.txt
-cp .env.example .env        # KMA_API_KEY 채우기
+cp .env.example .env        # KMA_API_KEY 에 자신의 Decoding 키 입력
 
 # (JBNU 서버에서) 공유 raw 디스크 연결
 bash src/scripts/setup_data.sh
 ```
+
+> API 키는 `.env` 의 `KMA_API_KEY` 에 본인 키를 넣는다 (git 에 안 올라감). 공공데이터포털 발급 키의
+> **Decoding** 형태를 사용. 자세한 건 [docs/SETUP.md](docs/SETUP.md).
 
 자세한 데이터 경로 설정(다른 서버 / 데이터를 전달받은 경우 포함)은 [docs/SETUP.md](docs/SETUP.md).

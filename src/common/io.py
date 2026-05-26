@@ -19,8 +19,13 @@ def _lock_for(path: str) -> threading.Lock:
         return lk
 
 
-def append_jsonl(path: str | Path, obj: Any) -> None:
-    """JSONL 한 줄 append + flush + fsync. 한 줄 = 한 호출 결과."""
+def append_jsonl(path: str | Path, obj: Any, *, fsync: bool = True) -> None:
+    """JSONL 한 줄 append. 한 줄 = 한 호출 결과.
+
+    fsync=True: flush+fsync (전력손실까지 안전, 저빈도용).
+    fsync=False: flush 만 (고빈도용 — fsync 는 HDD 동기 블로킹이라 이벤트 루프를
+                 막는다. OS 페이지캐시에 들어가므로 전력손실 시 최근 수초만 손실).
+    """
     path = str(path)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     line = json.dumps(obj, ensure_ascii=False, separators=(",", ":"))
@@ -28,7 +33,8 @@ def append_jsonl(path: str | Path, obj: Any) -> None:
         with open(path, "a", encoding="utf-8") as f:
             f.write(line + "\n")
             f.flush()
-            os.fsync(f.fileno())
+            if fsync:
+                os.fsync(f.fileno())
 
 
 def write_json_atomic(path: str | Path, obj: Any) -> None:

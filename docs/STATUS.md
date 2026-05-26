@@ -18,15 +18,18 @@
 - **수집기 구현 완료** (`src/collector/`): bus/traffic/weather(전격자43)/incident + supervisor(`__main__`, flock 중복방지) + common(clock/log/io) + health(에러분류·tickstats). venv(.venv, py3.13) 설치.
 - 스모크 테스트: bus 446 stdid 로드·busPosList 8필드 정상 저장 확인.
 
-## ⚠️ 막힌 지점 — 수집 부하/조율 (사용자 결정 필요)
-- 446 stdid @5s = 초당 89req. **게다가 같은 머신/IP에서 yubin(132@5s, pid236689)·gaeun(run.sh, pid133422) 수집기가 동시 가동 중** → ITS 서버 throttle. 내 테스트 중 yubin 로그에도 tick 지연 경고 발생.
-- 측정: 내 수집기 단독 아닌 상태라 timeout/SERVER_DISCONNECTED 다발, median latency 큼 (세마포어 대기 포함 과장).
-- **결정 필요**: ① BLog 수집기가 yubin/gaeun 것을 대체 → 그 둘 중단? ② 446@5s 단독도 버거우면 부하정책(시간표필터 ON / 10초 주기 / 그대로).
+## 부하 문제 해결 — 균등 페이싱 (핵심 교훈)
+- 문제는 89req/s 라는 **속도가 아니라 버스트**였음. 446개를 한꺼번에 쏘면 백로그→throttle (ok 88%, 19s 지연). 세마포어 방식은 느린응답→백로그→더느림 피드백 루프.
+- **해결**: 5초 윈도 안에서 dt=5/N(≈11ms) 간격 **균등 페이싱** 디스패치. → 동시연결 ~6, 응답 ~15ms.
+- **+ per-line fsync 제거**(HDD 동기블로킹이 이벤트루프 막음, flush만 유지). 
+- **실측 결과: ok 100%, 446 stdid 전부 실효 polling 5.0s(p90 6s), 처리량 81/s.** ✅ 목표 달성.
+- 기존 수집기(yubin pid236689 / gaeun run.sh pid133422)는 중단 완료 → BLog 단독 체제. 5/26 데이터는 오염(DATA_NOTES).
+- 확정 설정: interval=5, 페이싱, BUS_CONCURRENCY=100(안전망), BUS_HTTP_TIMEOUT=4.5. USE_TIMETABLE_FILTER=0.
 
-## 다음 할 일 (사용자 결정 후)
-1. 기존 수집기 중단 조율 → 내 수집기 단독으로 446@5s 실측
-2. 필요시 USE_TIMETABLE_FILTER=1 또는 interval 조정
-3. run.sh(nohup/systemd) + 디스크 증가율 측정 → 내일 첫차 전 가동
+## 다음 할 일
+1. `src/scripts/run.sh` (nohup supervisor) 로 상시 가동 → 내일 첫차 전부터 무손실 수집
+2. weather(전격자43)·traffic 가동 검증, 디스크 증가율 측정
+3. (이후) Phase 2 정적정비 잔여 / Phase 3 후처리
 
 ## 결정 사항 (확정)
 

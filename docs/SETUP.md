@@ -9,10 +9,17 @@ raw 데이터를 다른 디스크에 두는 경우에만 아래 추가 설정이
 ```bash
 git clone https://github.com/Quinsie/JBNU_BLog.git
 cd JBNU_BLog
-python3 -m venv .venv && source .venv/bin/activate
+conda create -n Blog python=3.12 -y
+conda activate Blog
 pip install -r requirements.txt
-cp .env.example .env          # KMA_API_KEY 입력
+cp .env.example .env          # 아래 'API 키' 참고해 KMA_API_KEY 입력
 ```
+
+### API 키 (.env)
+- `.env` 는 git 에 올라가지 않는다. **각자 자신의 공공데이터포털 키**를 `.env` 의 `KMA_API_KEY` 에 넣는다.
+- 발급 키에는 **Encoding / Decoding** 두 형태가 있는데, **Decoding 키**(원문, `+` `/` `=` 포함)를 넣는다.
+  코드가 요청 시 자동 URL 인코딩하므로 Encoding 키를 넣으면 이중 인코딩되어 실패한다.
+- 예: `KMA_API_KEY=ttHSb/Plt...==`
 
 ## 경우별 raw 데이터 위치
 
