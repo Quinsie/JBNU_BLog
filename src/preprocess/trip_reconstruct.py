@@ -36,6 +36,9 @@ R_DEPART = 50.0        # 발차 판정: 중심점에서 이만큼 벗어나고
 K_DEPART = 3           #   K틱 연속 유지되면 지속이탈 = 발차
 MATCH_GATE_SEC = 600   # 매칭 게이트: 검출발차가 최근접 예정슬롯과 이보다 멀면 off-schedule
                        #   (벽지노선 슬롯공백·미편성 운행 등 → 무의미한 강제매칭 방지)
+R_STOP_MATCH = 150     # GPS 복원: ord 가 얼어 빠진 정류장을, 버스 GPS 가 정류장 좌표
+                       #   이 반경 안에 든 샘플이 있으면 통과시각 복원(case A). 없으면
+                       #   복원불가=쓸수없는구간(case B). 결측 ord별 GPS최근접 분포 p60≈160m.
 
 
 @dataclass
@@ -175,35 +178,74 @@ def detect_departure(trip: list[Obs]) -> tuple[str | None, str]:
 
 
 # ── 구간 추출 (§5) ──────────────────────────────────────
-def extract_segments(trip: list[Obs], departure_iso: str | None,
-                     ) -> tuple[list[dict], list[dict]]:
-    """정류장 통과시각(stops) + 구간 소요시간(segments).
+def extract_segments(
+    trip: list[Obs], departure_iso: str | None,
+    stop_coords: dict[int, tuple[float, float]] | None = None,
+) -> tuple[list[dict], list[dict], int, int]:
+    """정류장 통과시각(stops) + 구간 소요시간(segments) + (gps복원수, 복원불가수).
 
-    pass_ts[N] = stop_ord==N 최초 관측 ts. 단 기점(첫 ord)은 발차시각으로 대체
-    (ord=1 최초관측은 기점 정차/시스템-on 시점이라 통과가 아님)."""
+    pass_ts[N] = stop_ord==N 최초 관측 ts. 단 기점(첫 ord)은 발차시각으로 대체.
+    각 stop 에 `src`: "ord"(LATEST_STOP_ORD 전이) | "gps"(아래 복원).
+
+    GPS 복원(§DATA_NOTES telemetry 불량): LATEST_STOP_ORD 가 얼어 점프하면
+    그 사이 정류장 통과시각이 결측. 버스 GPS 는 그 정류장들을 물리적으로 지났으므로
+    (검증됨), 점프 gap 시간창에서 정류장 좌표(`stop_coords`)에 R_STOP_MATCH 안으로
+    근접한 GPS 샘플이 있으면 그 시각으로 복원(case A). 근접 샘플이 없으면(GPS 도 그
+    구간에 얼어 한 번도 못 다가감) 복원불가 = 쓸 수 없는 구간 → 비움(case B).
+    보간하지 않는다(작년 오염 방식 회피) — 실제 GPS 샘플만 사용."""
     first_ord = trip[0].so
     pass_ts: dict[int, str] = {}
     pass_epoch: dict[int, float] = {}
+    src: dict[int, str] = {}
     for o in trip:
         if o.so is None or o.so in pass_ts:
             continue
         pass_ts[o.so] = o.iso
         pass_epoch[o.so] = o.ts
+        src[o.so] = "ord"
 
     if departure_iso is not None and first_ord in pass_ts:
         pass_ts[first_ord] = departure_iso
         pass_epoch[first_ord] = datetime.fromisoformat(departure_iso).timestamp()
 
+    # GPS 근접매칭 복원 (점프 gap 만 — 깨끗한 연속 ord 는 손대지 않음)
+    n_recovered = n_unrecoverable = 0
+    if stop_coords:
+        observed = sorted(pass_epoch)
+        for a, b in zip(observed, observed[1:]):
+            if b - a < 2:        # 점프 아님(연속)
+                continue
+            win = [o for o in trip if pass_epoch[a] <= o.ts <= pass_epoch[b]]
+            prev_t = pass_epoch[a]
+            for m in range(a + 1, b):
+                if m not in stop_coords:
+                    continue
+                slat, slng = stop_coords[m]
+                cands = [o for o in win if o.ts > prev_t]   # 시간단조 보장
+                best = min(cands, key=lambda o: haversine(o.lat, o.lng, slat, slng),
+                           default=None)
+                if best is not None and \
+                        haversine(best.lat, best.lng, slat, slng) <= R_STOP_MATCH:
+                    pass_ts[m] = best.iso
+                    pass_epoch[m] = best.ts
+                    src[m] = "gps"
+                    prev_t = best.ts
+                    n_recovered += 1
+                else:
+                    n_unrecoverable += 1   # GPS 도 근접 못 함 = 쓸 수 없는 구간
+
     ords = sorted(pass_ts)
-    stops = [{"ord": n, "pass_ts": pass_ts[n]} for n in ords]
+    stops = [{"ord": n, "pass_ts": pass_ts[n], "src": src.get(n, "ord")} for n in ords]
     segments = []
     for n in ords:
         if n + 1 in pass_epoch:
             segments.append({
                 "from": n, "to": n + 1,
                 "elapsed_sec": round(pass_epoch[n + 1] - pass_epoch[n], 1),
+                # 양끝 다 ord 면 high-conf, GPS복원 끼면 "gps"(다운스트림이 선택)
+                "src": "ord" if src[n] == "ord" and src[n + 1] == "ord" else "gps",
             })
-    return stops, segments
+    return stops, segments, n_recovered, n_unrecoverable
 
 
 # ── 시간표 prior / 매칭 (§4.4) ──────────────────────────
@@ -271,6 +313,20 @@ def load_terminus_ord(stdid: int | str) -> int | None:
     ords = [s.get("STOP_ORD") for s in d.get("resultList", [])]
     ords = [o for o in ords if o is not None]
     return max(ords) if ords else None
+
+
+def load_stop_coords(stdid: int | str) -> dict[int, tuple[float, float]]:
+    """stops reference → {STOP_ORD: (lat, lng)}. GPS 근접매칭 복원용."""
+    fp = REF_SOURCE_DIR / "stops" / f"{stdid}.json"
+    if not fp.exists():
+        return {}
+    d = json.load(open(fp, encoding="utf-8"))
+    out: dict[int, tuple[float, float]] = {}
+    for s in d.get("resultList", []):
+        so, lat, lng = s.get("STOP_ORD"), s.get("LAT"), s.get("LNG")
+        if so is not None and lat is not None and lng is not None:
+            out[so] = (lat, lng)
+    return out
 
 
 def _parse_slots(sched: list[str]) -> tuple[list[str], list[int]]:
@@ -346,6 +402,7 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
     slot_hhmm, slot_min = _parse_slots(meta.get("sched", {}).get(dtype, []))
 
     by_plate = load_observations(stdid, date_str)
+    stop_coords = load_stop_coords(stdid)
     # 종점 ord: reference(권위) 우선, 없으면 그날 관측 최대 ord 로 폴백
     terminus_ord = load_terminus_ord(stdid)
     if terminus_ord is None:
@@ -360,7 +417,8 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
             if len(trip) < 2:
                 continue
             dep_iso, quality = detect_departure(trip)
-            stops, segments = extract_segments(trip, dep_iso)
+            stops, segments, n_rec, n_unrec = extract_segments(
+                trip, dep_iso, stop_coords)
             if not segments:
                 continue
             max_ord = max((o.so for o in trip if o.so is not None), default=0)
@@ -374,6 +432,8 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
                 "n_stops_route": terminus_ord,
                 "reached_terminus": terminus_ord > 0 and max_ord >= terminus_ord - 1,
                 "n_obs": len(trip), "glitch_dropped": dropped,
+                "seg_gps_recovered": n_rec,        # ord 얼음 → GPS 근접으로 복원한 정류장 수
+                "stops_unrecoverable": n_unrec,    # ord·GPS 둘 다 얼어 못 잡은 정류장 수(쓸수없음)
                 "stops": stops, "segments": segments,
             })
 
@@ -480,6 +540,14 @@ def _aggregate(all_recs: list[dict], all_diags: list[dict]) -> None:
           f"/ off-schedule 발차 {tot_off} ({tot_off/tot_dep*100:.1f}%)" if tot_dep else "")
     print(f"  예정슬롯 {tot_slot} 중 미매칭 {tot_unmatched} "
           f"({tot_unmatched/tot_slot*100:.0f}%, =수집공백·미운행·검출누락)" if tot_slot else "")
+    # ord 얼음 GPS 복원 집계
+    rec = sum(r.get("seg_gps_recovered", 0) for r in all_recs)
+    unrec = sum(r.get("stops_unrecoverable", 0) for r in all_recs)
+    seg_gps = sum(1 for r in all_recs for s in r["segments"] if s.get("src") == "gps")
+    seg_all = sum(len(r["segments"]) for r in all_recs)
+    print(f"  ord얼음 정류장: GPS복원 {rec} / 복원불가(쓸수없음) {unrec} "
+          f"({rec/(rec+unrec)*100:.0f}% 복원)" if rec + unrec else "  ord얼음: 없음")
+    print(f"  구간 출처: ord(고신뢰) {seg_all-seg_gps} / gps복원 {seg_gps} ({seg_gps/seg_all*100:.1f}%)")
     print(f"  글리치 버린 관측 총합: {glitch}")
 
 

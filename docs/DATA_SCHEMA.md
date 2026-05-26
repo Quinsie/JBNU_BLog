@@ -108,11 +108,14 @@ ITS `selectBisRouteTimeInfo`. 노선(방향)별 시점 시간표.
   "n_stops_route":43,                           // 노선 종점 ord(reference max STOP_ORD, =정류장수). ROUTE_ORD 아님 — 버스 ord 는 STOP_ORD 공간
   "reached_terminus":true,                      // end_ord >= n_stops_route-1 (ord 의미상 −1 허용)
   "n_obs":328, "glitch_dropped":0,
-  "stops":    [ {"ord":1,"pass_ts":"...T21:36:56+09:00"}, ... ],  // 정류장 통과시각
-  "segments": [ {"from":1,"to":2,"elapsed_sec":210.0}, ... ] }    // ← 1차 모델 y(구간소요)
+  "seg_gps_recovered":2,                        // ord 얼음으로 결측된 정류장을 GPS 근접매칭으로 복원한 수
+  "stops_unrecoverable":1,                      // ord·GPS 둘 다 얼어 못 잡은 정류장 수(쓸 수 없는 구간)
+  "stops":    [ {"ord":1,"pass_ts":"...","src":"ord"}, {"ord":7,"pass_ts":"...","src":"gps"}, ... ],
+  "segments": [ {"from":1,"to":2,"elapsed_sec":210.0,"src":"ord"}, ... ] }  // ← 1차 모델 y(구간소요)
 }
 ```
 - `pass_ts[기점ord]` = 발차시각으로 대체(첫관측은 정차/시스템-on 시점이라 통과 아님).
+- **`src`** (stops·segments): `"ord"`=LATEST_STOP_ORD 전이 관측(고신뢰) / `"gps"`=ord 가 얼어 결측된 걸 GPS↔정류장좌표 근접매칭(`R_STOP_MATCH`=150m)으로 복원(저신뢰). segment 는 양끝 다 ord 면 "ord", GPS복원 끼면 "gps". **y 학습 시 신뢰도로 필터/가중 가능.** GPS 도 얼어 근접 못 한 정류장은 복원 안 함(보간 금지) → 그 구간 비움(`stops_unrecoverable`). 근거 [DATA_NOTES](DATA_NOTES.md) telemetry 불량.
 - 발차↔슬롯은 **노선전역 시간순 1:1 배정**(greedy 최근접 아님 — `assign_departures_to_slots`). 중복매칭·순서꼬임 구조적 제거.
 - 설계 근거: [design/trip-reconstruction.md](design/trip-reconstruction.md), [design/first-model.md](design/first-model.md) §3.1.
 
