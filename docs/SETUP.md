@@ -56,3 +56,17 @@ tar xzf 받은_raw.tar.gz -C data/raw    # 결과: data/raw/{bus,traffic,weather
 ```bash
 python3 src/common/paths.py     # 해석된 경로 출력 (RAW_DIR 가 심볼릭인지 등)
 ```
+
+## 상시 가동 (systemd)
+부팅 후 자동 가동 + 크래시 자동 재시작. (서버 전용)
+```bash
+sudo cp deploy/blog-collector.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now blog-collector   # 즉시 + 부팅 자동
+sudo systemctl status blog-collector
+sudo journalctl -u blog-collector -f          # 실시간 로그
+sudo systemctl stop blog-collector            # 중지
+```
+- 유닛은 env 의 python 을 직접 실행(`/home/jiho/miniconda3/envs/Blog/bin/python -m src.collector`), `User=jiho Group=blog`.
+- 중복 실행은 collector 내부 flock 으로 차단.
+- 임시(비상)로는 `nohup bash src/scripts/run.sh &` 도 가능.

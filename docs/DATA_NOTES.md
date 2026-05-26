@@ -11,6 +11,11 @@
 - **결론: 2026-05-26 raw(bus/traffic 등)는 학습/후처리에 사용하지 않는다.**
 - 같은 날 yubin/gaeun 기존 수집기를 중단하고 BLog 수집기 단독 체제로 전환.
 
+## 2026-05-26 오후 — ITS IP 차단 (수집 일시 중단)
+- 오늘 셋업/부하테스트 누적(수집기 3개 동시 + conc 100/200 버스트 테스트 다수)으로 **ITS 서버(its.jeonju.go.kr, 115.92.162.200)가 우리 공인 IP 를 차단**. 증상: TCP connect timeout(SYN 드롭), DNS·KMA(apis.data.go.kr)는 정상.
+- 차단 식히려 수집기(systemd) stop. 재가동은 ITS 443 연결 회복 확인 후.
+- **교훈**: 부하 실험은 짧고 신중히. 단독 운영 시에도 446@5s=89req/s 는 yubin 의 검증된 26/s(132@5s) 대비 3.4배 → 지속 운영 시 rate-cap 위험. 재가동 시 rate 정책(페이싱 유지/시간표필터/interval↑) 재검토 필요.
+
 ## 날씨 수집 상태 (2026-05-26 기준)
 - 실황(getUltraSrtNcst)·초단기예보(getUltraSrtFcst)·단기예보(getVilageFcst): **정상**, 43격자 거의 전부 ok.
 - 중기예보 longForecast(getMidLandFcst/getMidTa, MidFcstInfoService): **HTTP_403**.

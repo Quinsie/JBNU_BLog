@@ -5,12 +5,16 @@
 ## 현재 단계
 **Phase 1 수집기 — 가동 중 ✅** (446@5s 무손실). 다음은 Phase 2 정적정비 잔여 / Phase 3 후처리.
 
-### 가동 현황 (2026-05-26 배포)
-- `nohup bash src/scripts/run.sh` 로 상시 가동 (flock 중복방지, 크래시 시 자동 재시작).
-- bus 446@5s ok 100%·polling 5.0s / traffic 60s / weather 실황·초단기·단기 43격자.
+### 가동 현황 (2026-05-26)
+- **systemd `blog-collector` 설치·enabled (부팅 자동가동)** — `deploy/blog-collector.service`, env python 직접 실행, flock 중복방지.
+- 검증: bus 446@5s ok 100%·polling 5.0s / traffic 60s / weather 실황·초단기·단기 43격자.
 - 저장: `/mnt/data1/B_Log/raw` (jiho:blog 2775, 팀 공유). data/raw 심볼릭.
-- 알려진 이슈: 중기예보(longForecast) HTTP_403 = KMA 키 중기예보 API 미구독(비차단, DATA_NOTES).
-- 재시작/종료: `pkill -f src.collector` / 부팅 후 재가동은 추후 systemd or cron @reboot.
+
+### ⚠️ 현재 중단 — ITS IP 차단 (2026-05-26 오후)
+- 오늘 부하테스트 누적으로 ITS 서버가 우리 IP 차단(connect timeout). KMA 는 정상.
+- 수집기 stop 해서 식히는 중 (enabled 유지). **ITS 443 연결 회복 확인 후 `systemctl start blog-collector` 로 재가동.**
+- 재가동 전 결정: 446@5s=89req/s 지속 운영 rate 정책(페이싱 유지 / 시간표필터 / interval↑). 상세 DATA_NOTES.
+- 중기예보(longForecast) HTTP_403 = KMA 키 중기예보 API 미구독(반영 대기, 비차단).
 
 ## 완료
 - **Phase 0 골격**: 디렉토리, `.gitignore`(raw/interim/features/models/predictions·logs·zip·flutter·env 제외, reference 추적), `paths.py`(절대경로 0), `requirements.txt`, `.env.example`, docs(ROADMAP/STATUS/SETUP), README
