@@ -11,6 +11,12 @@
 - **결론: 2026-05-26 raw(bus/traffic 등)는 학습/후처리에 사용하지 않는다.**
 - 같은 날 yubin/gaeun 기존 수집기를 중단하고 BLog 수집기 단독 체제로 전환.
 
+## 날씨 수집 상태 (2026-05-26 기준)
+- 실황(getUltraSrtNcst)·초단기예보(getUltraSrtFcst)·단기예보(getVilageFcst): **정상**, 43격자 거의 전부 ok.
+- 중기예보 longForecast(getMidLandFcst/getMidTa, MidFcstInfoService): **HTTP_403**.
+  - 원인: 현재 KMA 키가 "중기예보 조회서비스" API 에 **미구독**. (data.go.kr 는 API별 활용신청이 따로)
+  - 영향: 중기(3~10일)는 버스 ETA 에 거의 무관 → 비차단. 필요 시 data.go.kr 에서 해당 서비스 활용신청하면 코드 수정 없이 자동 수집됨.
+
 ## 정적 데이터 기준
 - stdid 총 **446개** (2026-05-26 API 기준). 작년(2025) 451 에서 노선 개편으로 -5.
 - 정적 원본은 `data/reference/source/` (fetch 시각은 각 파일 `fetched_at`).
