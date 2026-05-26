@@ -357,27 +357,36 @@ def _aggregate(all_recs: list[dict]) -> None:
     print(f"  글리치 버린 관측 총합: {glitch}")
 
 
+def _reconstruct_one(task: tuple[str, str, bool]) -> list[dict]:
+    """전노선 배치용 워커(피클 가능, 모듈 레벨). 저장까지 워커가 수행."""
+    sid, date_str, save = task
+    recs = reconstruct_stdid(sid, date_str)
+    if save and recs:
+        _save(recs, date_str, sid)
+    return recs
+
+
 if __name__ == "__main__":
     import argparse
+    import os
     ap = argparse.ArgumentParser(description="trip 재구성 v1")
     ap.add_argument("stdid", help="단일 stdid 또는 'all'(전노선)")
     ap.add_argument("date", help="YYYYMMDD")
     ap.add_argument("--save", action="store_true", help="interim 에 jsonl 저장")
+    ap.add_argument("--workers", type=int, default=os.cpu_count(),
+                    help="전노선 모드 프로세스 수(기본=전 코어)")
     args = ap.parse_args()
 
     if args.stdid == "all":
+        from concurrent.futures import ProcessPoolExecutor
         sids = stdids_with_data(args.date)
-        print(f"전노선 재구성: {len(sids)}개 노선, date={args.date}")
-        all_recs: list[dict] = []
-        empty = 0
-        for sid in sids:
-            recs = reconstruct_stdid(sid, args.date)
-            if not recs:
-                empty += 1
-                continue
-            all_recs.extend(recs)
-            if args.save:
-                _save(recs, args.date, sid)
+        print(f"전노선 재구성: {len(sids)}개 노선, date={args.date} "
+              f"(workers={args.workers}/{os.cpu_count()}코어)")
+        tasks = [(s, args.date, args.save) for s in sids]
+        with ProcessPoolExecutor(max_workers=args.workers) as ex:
+            results = list(ex.map(_reconstruct_one, tasks, chunksize=4))
+        all_recs = [r for recs in results for r in recs]
+        empty = sum(1 for recs in results if not recs)
         print(f"trip 산출 노선 {len(sids)-empty} / trip 0개 노선 {empty}")
         _aggregate(all_recs)
         if args.save:
