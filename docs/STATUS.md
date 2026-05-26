@@ -9,6 +9,12 @@
   - ⚠️ ②는 처음 `ROUTE_ORD`(노드기반·결번有)로 잘못 구현 → 버스 `LATEST_STOP_ORD`가 `STOP_ORD`(연속) 공간임을 검증하고 정정(설계문서에도 STOP_ORD 명시돼 있었음). [DATA_NOTES](DATA_NOTES.md).
   - greedy 최근접의 중복매칭(5/26 4노선)·수집중단 오배정·벽지 무의미매칭(max 8787s) → 전역배정으로 구조적 제거(max delta 584s). 미매칭 슬롯=수집공백 가시화.
 - **⑥ LATEST_STOP_ORD 얼음 → GPS 근접매칭 복원**(API 불신·교차검증): ord 가 얼어 점프하면 GPS↔정류장좌표 근접(R_STOP=150m)으로 통과시각 복원(`src=gps`), GPS도 얼면 복원불가=비움(보간 금지). 5/26 결측 ord 862 중 57% 복원, 구간 1.9%가 복원분. 구간 `src`로 학습 신뢰도 선택. [DATA_NOTES](DATA_NOTES.md).
+- **⑦ 자정 무경계**(연속성 기반 trip): load 가 인접일 연속 병합 → split 은 gap·ord리셋 신호로만 → trip 은 시작일 소유(중복 0). 자정 crosser 온전(305001153/1587 22:49→익일00:06 검증), **24h 버스(전국확장)도 동작**, service-day 고정경계 불필요.
+
+## raw robustness 점검 (2026-05-26 전체 310,969 관측)
+- **깨끗**: 좌표 null/zero 0, SPEED>120 0, (stdid,plate,ts)중복 0, badjson 0.
+- **PLATE_NO 비유일**(4자리 숫자·한글0 → "31바1206"="31사1206"): 같은poll 내 중복 0(노선내 안전), 동시겹침 12건 전부 노선間(번호 같은 다른 버스, 대개 무해). → 노선내 동시중복 가드는 추후.
+- **off-route 관측**(차고지/회송/주박, ord 종점값 고정): 22 trip이 정류장서 300m+(최대4.8km). 대부분 ord진행0=segment0=이미제외. 진행 있는 소수만 유입. **305001677 ord45 정체=이것**(plate1203 타위치). stop-geometry 교차검증으로 게이팅 가능 → 추후.
 - 1차 모델 검증·결정 → [design/first-model.md](design/first-model.md) (갈림길 3개 확정).
 - trip 재구성 설계 확정 → [design/trip-reconstruction.md](design/trip-reconstruction.md) (발차검출·종료일반화·구간타깃).
 - **v1 스크립트** `src/preprocess/trip_reconstruct.py`: 305200112 검증 — 발차 5건 전부 예정시간표 ±64s 매칭, 품질분기·종점·글리치·공백분할 정상.

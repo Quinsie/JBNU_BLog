@@ -20,7 +20,7 @@ import glob
 import json
 import math
 from dataclasses import dataclass, field
-from datetime import datetime, date as date_cls
+from datetime import datetime, date as date_cls, timedelta
 
 import holidays as _holidays
 
@@ -64,30 +64,36 @@ def haversine(lat1, lng1, lat2, lng2) -> float:
 
 
 # ── 로드 ────────────────────────────────────────────────
-def load_observations(stdid: int | str, date_str: str) -> dict[str, list[Obs]]:
-    """raw bus jsonl → {plate: [Obs ...]} (plate 내 시간순)."""
+def load_observations(stdid: int | str, dates: str | list[str]) -> dict[str, list[Obs]]:
+    """raw bus jsonl → {plate: [Obs ...]} (plate 내 시간순).
+
+    dates: 단일 날짜 또는 리스트. **여러 날짜를 하나의 연속 스트림으로 병합**한다
+    (자정 무경계 — trip 분할은 달력 날짜가 아니라 gap·ord리셋 신호로만)."""
+    if isinstance(dates, str):
+        dates = [dates]
     out: dict[str, list[Obs]] = {}
-    pattern = str(RAW_BUS_DIR / str(stdid) / f"{date_str}_*.jsonl")
-    for fp in sorted(glob.glob(pattern)):
-        with open(fp, encoding="utf-8") as f:
-            for line in f:
-                rec = json.loads(line)
-                if not rec.get("ok"):
-                    continue
-                body = rec.get("body")
-                if not isinstance(body, dict):
-                    continue
-                ts = datetime.fromisoformat(rec["ts"]).timestamp()
-                for b in body.get("busPosList", []):
-                    plate = str(b.get("PLATE_NO", "")).strip()
-                    if not plate:
+    for date_str in dates:
+        pattern = str(RAW_BUS_DIR / str(stdid) / f"{date_str}_*.jsonl")
+        for fp in sorted(glob.glob(pattern)):
+            with open(fp, encoding="utf-8") as f:
+                for line in f:
+                    rec = json.loads(line)
+                    if not rec.get("ok"):
                         continue
-                    out.setdefault(plate, []).append(Obs(
-                        ts=ts, iso=rec["ts"],
-                        so=b.get("LATEST_STOP_ORD"),
-                        spd=b.get("SPEED") or 0,
-                        lat=b.get("LAT"), lng=b.get("LNG"),
-                    ))
+                    body = rec.get("body")
+                    if not isinstance(body, dict):
+                        continue
+                    ts = datetime.fromisoformat(rec["ts"]).timestamp()
+                    for b in body.get("busPosList", []):
+                        plate = str(b.get("PLATE_NO", "")).strip()
+                        if not plate:
+                            continue
+                        out.setdefault(plate, []).append(Obs(
+                            ts=ts, iso=rec["ts"],
+                            so=b.get("LATEST_STOP_ORD"),
+                            spd=b.get("SPEED") or 0,
+                            lat=b.get("LAT"), lng=b.get("LNG"),
+                        ))
     for seq in out.values():
         seq.sort(key=lambda o: o.ts)
     return out
@@ -401,7 +407,12 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
     dtype = daytype_of(svc_date)
     slot_hhmm, slot_min = _parse_slots(meta.get("sched", {}).get(dtype, []))
 
-    by_plate = load_observations(stdid, date_str)
+    # 자정 무경계: 전날·다음날까지 연속 로드해 split 이 신호로만 자르게 한다.
+    # trip 은 "시작(첫 관측) 날짜"가 소유 — owner != date_str 면 그 trip 은 다른 운행일
+    # 소유라 스킵(인접일 처리 때 잡힘). 이러면 23h→00h crosser 온전·중복 0·24h버스 OK.
+    prev_d = (svc_date - timedelta(days=1)).strftime("%Y%m%d")
+    next_d = (svc_date + timedelta(days=1)).strftime("%Y%m%d")
+    by_plate = load_observations(stdid, [prev_d, date_str, next_d])
     stop_coords = load_stop_coords(stdid)
     # 종점 ord: reference(권위) 우선, 없으면 그날 관측 최대 ord 로 폴백
     terminus_ord = load_terminus_ord(stdid)
@@ -416,6 +427,8 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
         for trip in split_trips(clean):
             if len(trip) < 2:
                 continue
+            if trip[0].iso[:10].replace("-", "") != date_str:
+                continue   # 시작일이 다른 운행일 → 인접일 처리에서 소유(중복방지)
             dep_iso, quality = detect_departure(trip)
             stops, segments, n_rec, n_unrec = extract_segments(
                 trip, dep_iso, stop_coords)
