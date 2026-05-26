@@ -34,6 +34,8 @@
 - **코드에 절대경로를 박지 않는다.** 모든 경로는 `src/common/paths.py` 한 곳에서 해석. 머신 차이는 심볼릭 링크 + 환경변수로 흡수.
 - **원천 데이터(실시간 고용량: bus·traffic·weather·incident)만** HDD(`/mnt/data1/B_Log`) 심볼릭 + gitignore. 정적 산출물·파생물·중간물은 `data/` 에 두되 git 은 `data/reference/` 만 추적.
 - 파이프라인 단계 = 디렉토리 이름: `reference → raw → interim → features → models → predictions` (한 방향, 동의어 없음).
+- **새로 만드는 모든 데이터 파일(raw·중간산출물)의 json/jsonl 구조는 `docs/DATA_SCHEMA.md` 에 반드시 표기.** 파일을 만들면 스키마 문서화는 당연한 동반 작업(같은 커밋에서 갱신).
+- **CPU 전처리는 전부 multiprocessing(전 코어) 으로.** trip 재구성·feature 가공 등 CPU 바운드 작업은 `ProcessPoolExecutor(max_workers=os.cpu_count())` + 모듈레벨 워커로 all-core 사용. 직렬 처리 금지.
 - **conda 환경 `Blog`** 사용 (venv 안 씀). 의존성은 `requirements.txt`.
 - 구조: `app/`(Flutter, iOS+Android) + `src/`(Python) **monorepo**. git remote `Quinsie/JBNU_BLog`. **push 는 사용자 신호가 있을 때만.**
 - 비밀(`.env`, API 키)은 git 에 올리지 않는다. 데이터 신뢰성 이슈는 `docs/DATA_NOTES.md` 에 기록.
