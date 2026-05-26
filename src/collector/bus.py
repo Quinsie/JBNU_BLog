@@ -1,16 +1,18 @@
 """버스 실시간 위치 수집기 (핵심).
 
-- selectBisRouteLocationList.do 를 전 stdid 5초 주기 폴링.
-- 매칭/필터/이벤트추출 일체 없음. raw 응답 통째로 박는다. 빈 응답·실패도 기록.
+- selectBisRouteLocationList.do 를 stdid 별로 폴링. raw 응답 통째 저장(빈 응답·실패 포함).
 - 저장: data/raw/bus/{stdid}/{YYYYMMDD_HH}.jsonl  (한 줄 = 한 호출)
 
-[핵심 설계 — 균등 페이싱]
-446개를 한꺼번에 쏘면(버스트) 서버가 백로그·throttle 로 무너진다(ok 88%, 19s 지연).
-대신 5초 윈도 안에서 dt=5/N(≈11ms) 간격으로 고르게 흘려보내면 동시연결 ~6,
-응답 ~15ms, ok 100% 로 446개 전부 5초 해상도 달성. (실측 검증)
-세마포어는 서버 hiccup 시 백프레셔용 안전망일 뿐 평상시엔 안 걸린다.
+[적응형 폴링]
+- 버스가 있으면(busPosList 비어있지 않음) ACTIVE 주기(기본 10s).
+- 빈 응답이면 IDLE 주기(기본 60s)로 백오프 → 운행 안 하는 노선/시간대 부하 급감.
+  버스가 다시 잡히면 자동으로 ACTIVE 복귀.
 
-- 부하저감 레버: USE_TIMETABLE_FILTER (기본 OFF). 운행시간 밖 노선 폴링 생략.
+[버스트 절대 금지 — gap 스케줄러]
+- 단일 디스패처가 "가장 밀린(overdue) stdid 하나"를 골라 발사하고, 발사 사이에
+  반드시 BUS_MIN_GAP_MS 만큼 쉰다. 따라서 아무리 많은 stdid 가 동시에 due 여도
+  최대 1/gap 속도로만 나가고 절대 동시 발사(burst)되지 않는다. (IP 차단 방지의 핵심)
+- in-flight 는 stdid 당 1개만(중복 발사 방지) + 세마포어로 총량 안전망.
 """
 
 import asyncio
@@ -23,14 +25,16 @@ from src.common.clock import hour_key, now_kst, ts_iso
 from src.common.io import append_jsonl
 from src.common.log import get_logger
 from .config import (
-    ACTIVE_POSTROLL_MIN, ACTIVE_PREROLL_MIN, BUS_CONCURRENCY, BUS_DIR,
-    BUS_HTTP_TIMEOUT, BUS_INTERVAL_SEC, BUS_URL, ITS_HEADERS,
-    STDID_LIST_PATH, USE_TIMETABLE_FILTER,
+    ACTIVE_POSTROLL_MIN, ACTIVE_PREROLL_MIN, BUS_ACTIVE_INTERVAL_SEC, BUS_CONCURRENCY,
+    BUS_DIR, BUS_HTTP_TIMEOUT, BUS_IDLE_INTERVAL_SEC, BUS_MIN_GAP_MS, BUS_URL,
+    ITS_HEADERS, STDID_LIST_PATH, USE_TIMETABLE_FILTER,
 )
 from .health import TickStats, classify_error
 
 log = get_logger("bus")
 stats = TickStats("bus", period_sec=60.0)
+
+_GAP = BUS_MIN_GAP_MS / 1000.0
 
 
 def load_routes() -> list[dict]:
@@ -39,7 +43,6 @@ def load_routes() -> list[dict]:
 
 
 def _hhmm_to_min(v) -> int | None:
-    """'550'/'2250'/'0550' → 분(자정기준). None 이면 무시."""
     if v is None:
         return None
     s = str(v).strip()
@@ -50,7 +53,6 @@ def _hhmm_to_min(v) -> int | None:
 
 
 def active_window(route: dict) -> tuple[int, int] | None:
-    """[first-preroll, last+postroll] 분 구간. None = 항상 active."""
     f = _hhmm_to_min(route.get("first_time"))
     l = _hhmm_to_min(route.get("last_time"))
     if f is None or l is None:
@@ -66,16 +68,18 @@ def is_active(win: tuple[int, int] | None) -> bool:
     s, e = win
     if s <= mod <= e:
         return True
-    if s < 0 and mod >= s + 1440:        # 새벽 전날 경계
+    if s < 0 and mod >= s + 1440:
         return True
-    if e >= 1440 and mod <= e - 1440:    # 자정 넘김
+    if e >= 1440 and mod <= e - 1440:
         return True
     return False
 
 
-async def fetch_one(session: aiohttp.ClientSession, stdid: int, ts) -> None:
+async def fetch_one(session: aiohttp.ClientSession, stdid: int, ts) -> bool:
+    """1회 호출 + 저장. busPosList 에 버스가 있으면 True 반환(없거나 실패면 False)."""
     rec = {"ts": ts_iso(ts), "stdid": stdid}
     t0 = time.monotonic()
+    has_bus = False
     try:
         async with session.post(
             BUS_URL, headers=ITS_HEADERS,
@@ -97,7 +101,8 @@ async def fetch_one(session: aiohttp.ClientSession, stdid: int, ts) -> None:
                 body = json.loads(text)
                 rec.update(ok=True, body=body)
                 n = len(body.get("busPosList", [])) if isinstance(body, dict) else 0
-                stats.add("active" if n else "idle")
+                has_bus = n > 0
+                stats.add("active" if has_bus else "idle")
     except Exception as e:  # noqa: BLE001
         kind = classify_error(e)
         rec.update(ok=False, error=f"{kind}:{e}")
@@ -105,41 +110,69 @@ async def fetch_one(session: aiohttp.ClientSession, stdid: int, ts) -> None:
 
     rec["elapsed_ms"] = int(1000 * (time.monotonic() - t0))
     try:
-        # 고빈도(89건/s) → fsync 생략(flush만). HDD fsync 가 이벤트 루프를 막는다.
+        # 고빈도 → fsync 생략(flush만). HDD fsync 가 이벤트 루프를 막는다.
         append_jsonl(BUS_DIR / str(stdid) / f"{hour_key(ts)}.jsonl", rec, fsync=False)
     except Exception as we:  # noqa: BLE001
         log.error(f"{stdid} write 실패: {we}")
         stats.add("write_fail")
+    return has_bus
 
 
 async def run() -> None:
     routes = load_routes()
-    n = len(routes)
-    dt = BUS_INTERVAL_SEC / n  # 균등 페이싱 간격 (≈11ms)
-    log.info(f"bus 시작: stdid={n} interval={BUS_INTERVAL_SEC}s pacing={dt*1000:.1f}ms "
-             f"safety_cap={BUS_CONCURRENCY} timetable_filter={USE_TIMETABLE_FILTER}")
+    stdids = [r["stdid"] for r in routes]
+    wins = {r["stdid"]: active_window(r) for r in routes}
+    log.info(f"bus 시작: stdid={len(stdids)} active={BUS_ACTIVE_INTERVAL_SEC}s "
+             f"idle={BUS_IDLE_INTERVAL_SEC}s gap={BUS_MIN_GAP_MS}ms cap={BUS_CONCURRENCY} "
+             f"timetable_filter={USE_TIMETABLE_FILTER}")
 
-    sem = asyncio.Semaphore(BUS_CONCURRENCY)   # 평상시 안 걸림. 서버 hiccup 시 백프레셔.
+    sem = asyncio.Semaphore(BUS_CONCURRENCY)
     connector = aiohttp.TCPConnector(limit=BUS_CONCURRENCY * 2, ttl_dns_cache=300)
 
-    wins = {r["stdid"]: active_window(r) for r in routes}
+    next_due = {s: 0.0 for s in stdids}   # monotonic 기준 다음 폴링 시각 (0 = 즉시)
+    inflight: set[int] = set()
 
-    async def fire(stdid, ts):
+    async def fire(session, sid):
         try:
-            await fetch_one(session, stdid, ts)
+            has_bus = await fetch_one(session, sid, now_kst())
+            interval = BUS_ACTIVE_INTERVAL_SEC if has_bus else BUS_IDLE_INTERVAL_SEC
+        except Exception as e:  # noqa: BLE001
+            log.error(f"{sid} fire 오류: {e}")
+            interval = BUS_ACTIVE_INTERVAL_SEC   # 일시 오류는 곧 재시도
         finally:
+            next_due[sid] = time.monotonic() + interval
+            inflight.discard(sid)
             sem.release()
 
     async with aiohttp.ClientSession(connector=connector) as session:
         while True:
-            cycle = time.monotonic()
-            for r in routes:
-                sid = r["stdid"]
-                if is_active(wins[sid]):
-                    await sem.acquire()           # 안전망 + 백프레셔 (평상시 즉시 통과)
-                    asyncio.create_task(fire(sid, now_kst()))
-                else:
-                    stats.add("skipped")
-                await asyncio.sleep(dt)            # 균등 페이싱
-            # 남은 윈도 소진 (페이싱이 윈도를 다 못 채운 경우)
-            await asyncio.sleep(max(0.0, BUS_INTERVAL_SEC - (time.monotonic() - cycle)))
+            now = time.monotonic()
+            # 발사 후보: in-flight 아니고 due 지난 것 중 '가장 밀린' 하나
+            cand, cand_due = None, None
+            soonest = None
+            for s in stdids:
+                if s in inflight:
+                    continue
+                d = next_due[s]
+                if d <= now:
+                    if cand_due is None or d < cand_due:
+                        cand, cand_due = s, d
+                elif soonest is None or d < soonest:
+                    soonest = d
+
+            if USE_TIMETABLE_FILTER and cand is not None and not is_active(wins[cand]):
+                # 운행창 밖이면 폴링 생략하고 IDLE 만큼 미룸
+                next_due[cand] = now + BUS_IDLE_INTERVAL_SEC
+                stats.add("skipped")
+                continue
+
+            if cand is None:
+                # due 없음 → 가장 이른 시각까지 (gap~1s 범위로) 대기
+                wait = (soonest - now) if soonest is not None else _GAP
+                await asyncio.sleep(min(max(wait, 0.001), 1.0))
+                continue
+
+            await sem.acquire()          # in-flight 총량 안전망
+            inflight.add(cand)
+            asyncio.create_task(fire(session, cand))
+            await asyncio.sleep(_GAP)    # ★ 버스트 방지: 발사 간 최소 간격 강제

@@ -10,11 +10,19 @@
 - 검증: bus 446@5s ok 100%·polling 5.0s / traffic 60s / weather 실황·초단기·단기 43격자.
 - 저장: `/mnt/data1/B_Log/raw` (jiho:blog 2775, 팀 공유). data/raw 심볼릭.
 
-### ⚠️ 현재 중단 — ITS IP 차단 (2026-05-26 오후)
-- 오늘 부하테스트 누적으로 ITS 서버가 우리 IP 차단(connect timeout). KMA 는 정상.
-- 수집기 stop 해서 식히는 중 (enabled 유지). **ITS 443 연결 회복 확인 후 `systemctl start blog-collector` 로 재가동.**
-- 재가동 전 결정: 446@5s=89req/s 지속 운영 rate 정책(페이싱 유지 / 시간표필터 / interval↑). 상세 DATA_NOTES.
-- 중기예보(longForecast) HTTP_403 = KMA 키 중기예보 API 미구독(반영 대기, 비차단).
+### 수집 rate 정책 확정 (2026-05-26) — 적응형 + 버스트 금지
+- 기존 5s 전수 페이싱(89req/s) → **적응형 폴링**으로 변경: 버스 있으면 **10s**, 빈 응답이면 **60s 백오프**(운행 안 하는 노선·시간대 부하 급감, 버스 잡히면 자동 복귀).
+- **버스트 하드 금지**: gap 스케줄러(발사 간 최소 20ms 강제) → 최대 50req/s 캡, 동시 발사 불가능. 로컬 검증: 최소간격 20.2ms, 커버 446/446.
+- 예상 부하: active 피크 ~45/s, 정상상태 idle ~7/s. (차단 유발 수준보다 훨씬 낮음)
+
+### ⚠️ 현재 중단 — ITS IP 차단 (2026-05-26 오후, 쿨다운 중)
+- 오늘 부하테스트 누적으로 ITS 가 우리 IP 차단(connect timeout, SYN 드롭). KMA·DNS 정상 = 영구 아님, rate-limit 쿨다운.
+- 수집기 stop (enabled 유지). **ITS 443 연결 회복 확인되면 `sudo systemctl start blog-collector` 로 재가동.** 적응형+gap 적용본이라 재발 위험 낮음.
+- 중기예보(longForecast) HTTP_403 = KMA 키 중기예보 API 구독 반영 대기(비차단).
+
+### 후처리에서 풀 과제 (기억해둘 것)
+- **배차 시각 식별**: raw 만 받으므로 어떤 버스가 "몇시몇분 배차"인지 직접 알 수 없음 → trip 재구성 + 시간표 그리디 매칭 **휴리스틱** 필요.
+- vtx 는 실제 경로/정류장과 불일치 가능(작년 101개 노선 오류) → route_nodes 만들면 검증 동반. 단 **vtx/route_node 는 1차 모델과 무관**(2차 전용), 올해 busPosList 의 CURRENT_NODE_ORD/LATEST_STOP_ORD 가 진행도를 직접 제공.
 
 ## 완료
 - **Phase 0 골격**: 디렉토리, `.gitignore`(raw/interim/features/models/predictions·logs·zip·flutter·env 제외, reference 추적), `paths.py`(절대경로 0), `requirements.txt`, `.env.example`, docs(ROADMAP/STATUS/SETUP), README

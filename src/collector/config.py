@@ -9,13 +9,17 @@ from src.common.paths import (
 
 # ── 버스 위치 (핵심) ─────────────────────────────────
 BUS_URL = "https://its.jeonju.go.kr/bis/selectBisRouteLocationList.do"
-BUS_INTERVAL_SEC = int(os.environ.get("BUS_INTERVAL_SEC", "5"))
-BUS_CONCURRENCY = int(os.environ.get("BUS_CONCURRENCY", "100"))
-BUS_HTTP_TIMEOUT = float(os.environ.get("BUS_HTTP_TIMEOUT", "4.5"))
+# 적응형 폴링: 버스 있으면 ACTIVE 주기, 빈 응답이면 IDLE 주기로 백오프.
+BUS_ACTIVE_INTERVAL_SEC = float(os.environ.get("BUS_ACTIVE_INTERVAL_SEC", "10"))
+BUS_IDLE_INTERVAL_SEC = float(os.environ.get("BUS_IDLE_INTERVAL_SEC", "60"))
+# 버스트 방지 핵심: launch 사이 강제 최소 간격(ms). 어떤 경우에도 이보다 촘촘히 안 쏨.
+BUS_MIN_GAP_MS = float(os.environ.get("BUS_MIN_GAP_MS", "20"))
+BUS_CONCURRENCY = int(os.environ.get("BUS_CONCURRENCY", "50"))   # in-flight 안전망 상한
+BUS_HTTP_TIMEOUT = float(os.environ.get("BUS_HTTP_TIMEOUT", "8"))
 BUS_DIR = RAW_BUS_DIR
 STDID_LIST_PATH = REF_BUILT_DIR / "stdid_list.json"
 
-# v1 부하저감 레버: 시간표 active 구간만 폴링 (기본 OFF = 전체 5초)
+# (옵션) 시간표 운행창 밖 노선은 폴링 생략. 기본 OFF (적응형 백오프가 idle 을 자동 처리).
 USE_TIMETABLE_FILTER = os.environ.get("USE_TIMETABLE_FILTER", "0") == "1"
 ACTIVE_PREROLL_MIN = int(os.environ.get("ACTIVE_PREROLL_MIN", "10"))
 ACTIVE_POSTROLL_MIN = int(os.environ.get("ACTIVE_POSTROLL_MIN", "140"))
