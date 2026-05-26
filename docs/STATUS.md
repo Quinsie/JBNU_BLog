@@ -18,9 +18,11 @@
   - **수집 rate 정책**: 버스 있으면 10s / 빈 응답이면 60s 백오프. 발사 간 20ms 강제(버스트 하드금지, 최대 50req/s). 로컬 mock 검증: 최소간격 20.2ms, 커버 446/446.
   - **systemd `blog-collector`** 설치·enabled(부팅 자동). env python 직접 실행.
 
-## ⚠️ 막힌 것
-- **ITS IP 차단** (오늘 부하테스트 누적). connect timeout, KMA·DNS 정상 = rate-limit 쿨다운(영구 아님). 수집기 stop(enabled 유지).
-  - **재가동**: ITS 443 연결 회복 확인 → `sudo systemctl start blog-collector`. (적응형+gap 적용본이라 재발 위험 낮음)
+## ⚠️ 막힌 것 / 임시조치
+- **ITS IP 차단** (`.73`, 부하테스트 누적). 5시간+ 지속 = 수 시간~24h급 임시차단(영구 아님).
+  - 🔧 **임시 우회 가동 중**: 보조 IP `210.117.134.74`(.73과 같은 /18, ARP로 빈 IP 확인)를 `enp6s0`에 붙이고, 수집기 ITS 아웃바운드를 거기로 소스바인딩(`ITS_SOURCE_IP` env, 없으면 기본 IP 자동 폴백). `.74`로 ITS 200 확인, 수집 재개(20:18~). **비영속(리부팅 시 IP 소멸→코드가 .73 폴백)**.
+  - **원복(`.73` 차단 풀리면)**: ① `.env`의 `ITS_SOURCE_IP` 줄 삭제 ② `sudo ip addr del 210.117.134.74/18 dev enp6s0` ③ `sudo systemctl restart blog-collector`. (코드는 그대로 둬도 무해 — env 없으면 기본 IP 사용)
+  - cf. `.74`는 **임시**(사용자 요청: 28일 02:00 무렵 .73 회복 기대). 자동원복 타이머는 두지 않음.
 - **중기예보(longForecast) 403**: KMA 키 중기예보 API 구독 반영 대기(비차단).
 
 ## 다음 할 일

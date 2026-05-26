@@ -1,6 +1,7 @@
 """수집기 설정. 값은 환경변수로 오버라이드 가능 (.env)."""
 
 import os
+import socket
 
 from src.common.paths import (
     RAW_BUS_DIR, RAW_TRAFFIC_DIR, RAW_WEATHER_DIR, RAW_INCIDENT_DIR,
@@ -64,3 +65,21 @@ ITS_HEADERS = {
     "X-Requested-With": "XMLHttpRequest",
     "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
 }
+
+# ── ITS 아웃바운드 소스 IP (임시 차단 우회용) ────────────
+# .73 이 ITS 에 차단됐을 때, 보조 IP(.74)로 내보내기 위한 임시 바인딩.
+# 해당 IP 가 로컬에 실제로 붙어있지 않으면(원복/리부팅 후) 자동으로 기본 IP 로 폴백.
+ITS_SOURCE_IP = os.environ.get("ITS_SOURCE_IP", "").strip()
+
+
+def its_local_addr():
+    """ITS_SOURCE_IP 가 로컬에 바인딩 가능하면 (ip, 0) 반환, 아니면 None(기본 IP 사용)."""
+    if not ITS_SOURCE_IP:
+        return None
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind((ITS_SOURCE_IP, 0))
+        s.close()
+        return (ITS_SOURCE_IP, 0)
+    except OSError:
+        return None

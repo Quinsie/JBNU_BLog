@@ -27,7 +27,7 @@ from src.common.log import get_logger
 from .config import (
     ACTIVE_POSTROLL_MIN, ACTIVE_PREROLL_MIN, BUS_ACTIVE_INTERVAL_SEC, BUS_CONCURRENCY,
     BUS_DIR, BUS_HTTP_TIMEOUT, BUS_IDLE_INTERVAL_SEC, BUS_MIN_GAP_MS, BUS_URL,
-    ITS_HEADERS, STDID_LIST_PATH, USE_TIMETABLE_FILTER,
+    ITS_HEADERS, STDID_LIST_PATH, USE_TIMETABLE_FILTER, its_local_addr,
 )
 from .health import TickStats, classify_error
 
@@ -127,7 +127,11 @@ async def run() -> None:
              f"timetable_filter={USE_TIMETABLE_FILTER}")
 
     sem = asyncio.Semaphore(BUS_CONCURRENCY)
-    connector = aiohttp.TCPConnector(limit=BUS_CONCURRENCY * 2, ttl_dns_cache=300)
+    local_addr = its_local_addr()
+    if local_addr:
+        log.info(f"ITS 아웃바운드 소스 IP 바인딩: {local_addr[0]}")
+    connector = aiohttp.TCPConnector(limit=BUS_CONCURRENCY * 2, ttl_dns_cache=300,
+                                     local_addr=local_addr)
 
     next_due = {s: 0.0 for s in stdids}   # monotonic 기준 다음 폴링 시각 (0 = 즉시)
     inflight: set[int] = set()
