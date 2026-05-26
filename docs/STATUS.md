@@ -5,7 +5,9 @@
 
 ## 현재 위치
 **Phase 1(수집기) 구현 완료 → ITS IP 차단으로 가동 일시 중단(쿨다운).**
-병행: **Phase 4 1차 모델 설계 착수**(branch `design/first-model`). 작년 모델 검증 + 재설계 결정 기록 → [design/first-model.md](design/first-model.md). 갈림길 3개(y 앵커/형태, 선행작업) 합의 대기.
+병행: **Phase 4 1차 모델 설계** + **Phase 3 데이터 파악**(branch `design/first-model`).
+- 1차 모델 검증·결정 → [design/first-model.md](design/first-model.md) (갈림길 3개 확정).
+- 5/26 raw 2시간 실측으로 trip 구조·노이즈·출발검출 설계 → [design/trip-reconstruction.md](design/trip-reconstruction.md).
 
 ## 완료
 - **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
