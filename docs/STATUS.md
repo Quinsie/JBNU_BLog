@@ -4,22 +4,17 @@
 > 전체 그림·단계 의존성은 [ROADMAP.md](ROADMAP.md), 데이터 신뢰성은 [DATA_NOTES.md](DATA_NOTES.md).
 
 ## 현재 위치
-**Phase 3 trip 재구성 v1.1 정련 완료** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
-- v1.1 ①공휴일 캘린더(`holidays` KR public) ②종점 reference 연결(**max STOP_ORD** 권위·`n_stops_route`, 종점도달 66%) ③이상치 25건 분석(흩어짐=시간표 최신) ④발차↔슬롯 **노선전역 1:1 배정**(greedy 최근접 폐기) + `on_schedule` + 미매칭슬롯 진단 `_match_diag.jsonl` ⑤매칭 게이트 600s — **전부 완료**.
-  - ⚠️ ②는 처음 `ROUTE_ORD`(노드기반·결번有)로 잘못 구현 → 버스 `LATEST_STOP_ORD`가 `STOP_ORD`(연속) 공간임을 검증하고 정정(설계문서에도 STOP_ORD 명시돼 있었음). [DATA_NOTES](DATA_NOTES.md).
-  - greedy 최근접의 중복매칭(5/26 4노선)·수집중단 오배정·벽지 무의미매칭(max 8787s) → 전역배정으로 구조적 제거(max delta 584s). 미매칭 슬롯=수집공백 가시화.
-- **⑥ LATEST_STOP_ORD 얼음 → GPS 근접매칭 복원**(API 불신·교차검증): ord 가 얼어 점프하면 GPS↔정류장좌표 근접(R_STOP=150m)으로 통과시각 복원(`src=gps`), GPS도 얼면 복원불가=비움(보간 금지). 5/26 결측 ord 862 중 57% 복원, 구간 1.9%가 복원분. 구간 `src`로 학습 신뢰도 선택. [DATA_NOTES](DATA_NOTES.md).
-- **⑦ 자정 무경계**(연속성 기반 trip): load 가 인접일 연속 병합 → split 은 gap·ord리셋 신호로만 → trip 은 시작일 소유(중복 0). 자정 crosser 온전(305001153/1587 22:49→익일00:06 검증), **24h 버스(전국확장)도 동작**, service-day 고정경계 불필요.
+**Phase 3 trip 재구성 v1.1 + robustness 보강 완료** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
+다음(내일~): **미결정 갈림길 #3 결판**(지리종속성→vtx/route_nodes 재검증) → feature 가공.
 
-- **⑧ off-route 게이팅**(C): ①`ord>종점` 불가능값 load 단계 하드드롭(거리무관 안전, 6관측—305001677 ord45 해결) ②`off_route_obs` flag(최근접정류장>노선최대간격, 노선적응형 과삭제0, drop아닌 flag). 5/26 4.7% trip flag.
+**trip 재구성 `src/preprocess/trip_reconstruct.py` — 출력 정착**: trip당 `stdid·brt_no·plate_no·company_name·service_date·daytype·발차(검출+품질)·매칭(on_schedule)·종점·구간(elapsed+src)·품질플래그`. 노선단위 진단 `_match_diag.jsonl`. 전노선(5/26) 1170 trip, 발차매칭 median 22s.
 
-## raw robustness 점검 (2026-05-26 전체 310,969 관측) — 완료
-- **깨끗**: 좌표 null/zero 0, SPEED>120 0, (stdid,plate,ts)중복 0, badjson 0.
-- **PLATE_NO 비유일**(4자리 숫자·한글0 → "31바1206"="31사1206"): 같은poll 중복0(노선내 안전), 복수노선 320 중 308순차(정상)·12동시겹침(번호같은 다른버스). plate 단독신뢰 금지→지오메트리 병행. **off-route 게이팅(⑧)으로 흡수.**
-- **자정(⑦)·off-route(⑧) 처리 완료.** bbox밖 307(0.1%)=시외구간 추정, 비차단.
-- 1차 모델 검증·결정 → [design/first-model.md](design/first-model.md) (갈림길 3개 확정).
-- trip 재구성 설계 확정 → [design/trip-reconstruction.md](design/trip-reconstruction.md) (발차검출·종료일반화·구간타깃).
-- **v1 스크립트** `src/preprocess/trip_reconstruct.py`: 305200112 검증 — 발차 5건 전부 예정시간표 ±64s 매칭, 품질분기·종점·글리치·공백분할 정상.
+v1.1 + 보강 항목(상세는 [DATA_NOTES](DATA_NOTES.md)·[design/trip-reconstruction.md](design/trip-reconstruction.md)):
+- ① 공휴일 캘린더(`holidays` KR) ② 종점=**max STOP_ORD**(ROUTE_ORD 아님, 종점도달 66%) ③ 이상치 분석(시간표 최신 재확인) ④ 발차↔슬롯 **노선전역 1:1 배정**(greedy 폐기, max delta 8787→584s) ⑤ 매칭게이트 600s
+- ⑥ **ord 얼음 GPS 근접매칭 복원**(API불신·교차검증, `src=ord/gps`, 결측 57% 복원, 보간금지) ⑦ **자정 무경계**(연속성 기반, 24h버스·전국확장 대비) ⑧ **off-route 게이팅**(불가능 ord 드롭 + `off_route_obs` flag)
+- 회사+번호판을 차량/기사 키로(`company_name`, PLATE 4자리 비유일 보강)
+
+**raw robustness 점검(310,969 관측) 완료**: 기본위생 깨끗(좌표·SPEED·중복·badjson 0). PLATE_NO 비유일·off-route·자정 전부 처리. bbox밖 307(0.1%)=시외구간, 비차단. (설계근거 [design/first-model.md](design/first-model.md) 갈림길 3개)
 
 ## 완료
 - **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
@@ -38,9 +33,9 @@
 - ~~중기예보(longForecast) 403~~ **해결**(5/26): KMA 중기예보 API 구독 반영 → land/ta ok=200 실데이터 수집 중.
 
 ## 다음 할 일
-1. **데이터 축적 대기**: 전일(평일·주말) 풀데이터 쌓이면 임계값(R/K/gap/MATCH_GATE) 재튜닝 + gap≥5 종점미달 49노선 해소 확인. (현재 5/26 저녁 부분데이터뿐 → 1차 학습은 시기상조)
-2. **미결정 갈림길 #3 결판**: 지리종속성을 1차에 넣을지 → 넣으면 vtx/route_nodes 올해 데이터로 재검증이 선행조건(작년 101노선 어긋남). feature 스키마 확정의 블로커.
-3. **1차 feature 가공** → GBDT 학습 (Phase 4). #3 결판 후 착수.
+1. **(내일 시작) 미결정 갈림길 #3 결판**: 지리종속성을 1차에 넣을지 → 넣으면 vtx/route_nodes 올해 데이터로 재검증이 선행조건(작년 101노선 어긋남). feature 스키마 확정의 블로커.
+2. **1차 feature 가공** → GBDT 학습 (Phase 4). #3 결판 후 착수.
+3. **데이터 축적 대기**: 전일(평일·주말) 풀데이터 쌓이면 임계값(R/K/gap/MATCH_GATE/R_STOP) 재튜닝 + gap≥5 종점미달 25노선 해소 확인. (현재 5/26 부분데이터 → 1차 학습은 시기상조)
 4. (운영) `.73` 차단 풀리면 `.74` 우회 원복(STATUS 위 §원복).
 
 ## 후처리에서 풀 과제 (기억)

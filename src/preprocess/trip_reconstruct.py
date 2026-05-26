@@ -19,7 +19,7 @@ from __future__ import annotations
 import glob
 import json
 import math
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, date as date_cls, timedelta
 
 import holidays as _holidays
