@@ -22,6 +22,8 @@ import math
 from dataclasses import dataclass, field
 from datetime import datetime, date as date_cls
 
+import holidays as _holidays
+
 from src.common.paths import RAW_BUS_DIR, REF_SOURCE_DIR
 
 # ── 잠정 임계값 (실데이터 튜닝 대상) ──────────────────────
@@ -203,8 +205,22 @@ def extract_segments(trip: list[Obs], departure_iso: str | None,
 
 
 # ── 시간표 prior / 매칭 (§4.4) ──────────────────────────
+_kr_holidays_cache: dict[int, object] = {}
+
+
+def _kr_holidays(year: int):
+    """연도별 한국 공휴일(public) 캐시. 음력 명절·대체공휴일·선거일·재지정 제헌절 포함."""
+    h = _kr_holidays_cache.get(year)
+    if h is None:
+        h = _holidays.SouthKorea(years=year, categories=("public",))
+        _kr_holidays_cache[year] = h
+    return h
+
+
 def daytype_of(d: date_cls) -> str:
-    """평일 / 토 / 일+공휴일. (공휴일 캘린더는 미반영 — TODO)"""
+    """평일 / 토 / 일+공휴일. 공휴일(holidays KR public)은 토·평일보다 우선."""
+    if d in _kr_holidays(d.year):
+        return "일+공휴일"          # 공휴일이 토요일과 겹쳐도 일+공휴일 시간표 우선
     wd = d.weekday()
     if wd == 5:
         return "토"
