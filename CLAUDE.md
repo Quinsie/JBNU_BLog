@@ -21,6 +21,8 @@
    - scope(선택): `collector` `reference` `preprocess` `models` `agent` `serve` `deploy` 등
    - 설명은 한글, 명령형/요약형. 본문엔 상세, 끝에 `Co-Authored-By` 트레일러.
    - 예: `feat(collector): 적응형 폴링 + 버스트 하드금지`
+9. **브랜치 → PR 워크플로.** main 에서 직접 작업하지 않는다. 작업 단위로 브랜치(`type/주제`,
+   예 `design/first-model`)를 따고, 완료되면 PR 로 main 에 merge. main 은 항상 동작/배포 가능 상태 유지.
 
 ## 아키텍처 원칙
 - **한 서버에서 전부**: 수집 → 전처리 → ML 학습 → 1차(사전)추론 → 2차(실시간)추론 → Agent 의사결정. (작년 backend/midServer 분리는 폐지)
