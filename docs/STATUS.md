@@ -1,65 +1,38 @@
 # STATUS
 
 > **매 작업(commit)마다 갱신.** "지금 어디까지 왔고, 바로 다음 뭘 할지"를 항상 여기서 확인.
+> 전체 그림·단계 의존성은 [ROADMAP.md](ROADMAP.md), 데이터 신뢰성은 [DATA_NOTES.md](DATA_NOTES.md).
 
-## 현재 단계
-**Phase 1 수집기 — 가동 중 ✅** (446@5s 무손실). 다음은 Phase 2 정적정비 잔여 / Phase 3 후처리.
-
-### 가동 현황 (2026-05-26)
-- **systemd `blog-collector` 설치·enabled (부팅 자동가동)** — `deploy/blog-collector.service`, env python 직접 실행, flock 중복방지.
-- 검증: bus 446@5s ok 100%·polling 5.0s / traffic 60s / weather 실황·초단기·단기 43격자.
-- 저장: `/mnt/data1/B_Log/raw` (jiho:blog 2775, 팀 공유). data/raw 심볼릭.
-
-### 수집 rate 정책 확정 (2026-05-26) — 적응형 + 버스트 금지
-- 기존 5s 전수 페이싱(89req/s) → **적응형 폴링**으로 변경: 버스 있으면 **10s**, 빈 응답이면 **60s 백오프**(운행 안 하는 노선·시간대 부하 급감, 버스 잡히면 자동 복귀).
-- **버스트 하드 금지**: gap 스케줄러(발사 간 최소 20ms 강제) → 최대 50req/s 캡, 동시 발사 불가능. 로컬 검증: 최소간격 20.2ms, 커버 446/446.
-- 예상 부하: active 피크 ~45/s, 정상상태 idle ~7/s. (차단 유발 수준보다 훨씬 낮음)
-
-### ⚠️ 현재 중단 — ITS IP 차단 (2026-05-26 오후, 쿨다운 중)
-- 오늘 부하테스트 누적으로 ITS 가 우리 IP 차단(connect timeout, SYN 드롭). KMA·DNS 정상 = 영구 아님, rate-limit 쿨다운.
-- 수집기 stop (enabled 유지). **ITS 443 연결 회복 확인되면 `sudo systemctl start blog-collector` 로 재가동.** 적응형+gap 적용본이라 재발 위험 낮음.
-- 중기예보(longForecast) HTTP_403 = KMA 키 중기예보 API 구독 반영 대기(비차단).
-
-### 후처리에서 풀 과제 (기억해둘 것)
-- **배차 시각 식별**: raw 만 받으므로 어떤 버스가 "몇시몇분 배차"인지 직접 알 수 없음 → trip 재구성 + 시간표 그리디 매칭 **휴리스틱** 필요.
-- vtx 는 실제 경로/정류장과 불일치 가능(작년 101개 노선 오류) → route_nodes 만들면 검증 동반. 단 **vtx/route_node 는 1차 모델과 무관**(2차 전용), 올해 busPosList 의 CURRENT_NODE_ORD/LATEST_STOP_ORD 가 진행도를 직접 제공.
+## 현재 위치
+**Phase 1(수집기) 구현 완료 → ITS IP 차단으로 가동 일시 중단(쿨다운).**
+차단 풀리면 재가동, 데이터 축적되면 Phase 3(trip 재구성) 설계로.
 
 ## 완료
-- **Phase 0 골격**: 디렉토리, `.gitignore`(raw/interim/features/models/predictions·logs·zip·flutter·env 제외, reference 추적), `paths.py`(절대경로 0), `requirements.txt`, `.env.example`, docs(ROADMAP/STATUS/SETUP), README
-- **공유 데이터**: `blog` 그룹(jiho·yubin·hyewon·gaeun, gid 1005), `/mnt/data1/B_Log`=`jiho:blog` 2775(setgid), `data/raw` 심볼릭. `setup_data.sh`
-- **git**: `~/BLog` 독립 리포 init, remote `Quinsie/JBNU_BLog` 등록 (push 보류). 첫 commit `ec73d80`
-- **정적 기준 데이터 (API 실수집, 446 기준)**:
-  - `src/common/jeonju_api.py`(ITS 클라이언트, WAF체크), `src/common/grid.py`(격자변환)
-  - `src/scripts/fetch_static.py` → `reference/source/`: route_list(132)·subList(132)·stops(446)·vtx(446)·timetable(446, BRT_TEXT 85개). 24MB
-  - `src/scripts/build_reference.py` → `reference/built/`: `stdid_list.json`(446+메타)·`nx_ny_coords.json`(격자 43개)
+- **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
+- **공유 데이터**: `blog` 그룹(jiho·yubin·hyewon·gaeun), `/mnt/data1/B_Log`=`jiho:blog` 2775(setgid), `data/raw` 심볼릭. `setup_data.sh`.
+- **git**: `~/BLog` 독립 리포, remote `Quinsie/JBNU_BLog` (push 보류).
+- **Phase 2 정적 기준 데이터** (API 실수집, 446): `reference/source/`(route_list·subList·stops·vtx·timetable, 24MB) + `reference/built/`(stdid_list 446, nx_ny_coords 격자 43). 격자식 KMA 표준점 검증.
+- **Phase 1 수집기** (`src/collector/`): bus(적응형+버스트금지)·traffic·weather(전격자43)·incident + supervisor(flock) + common(clock/log/io) + health.
+  - **수집 rate 정책**: 버스 있으면 10s / 빈 응답이면 60s 백오프. 발사 간 20ms 강제(버스트 하드금지, 최대 50req/s). 로컬 mock 검증: 최소간격 20.2ms, 커버 446/446.
+  - **systemd `blog-collector`** 설치·enabled(부팅 자동). env python 직접 실행.
 
-## 완료 (이어서)
-- **수집기 구현 완료** (`src/collector/`): bus/traffic/weather(전격자43)/incident + supervisor(`__main__`, flock 중복방지) + common(clock/log/io) + health(에러분류·tickstats). venv(.venv, py3.13) 설치.
-- 스모크 테스트: bus 446 stdid 로드·busPosList 8필드 정상 저장 확인.
-
-## 부하 문제 해결 — 균등 페이싱 (핵심 교훈)
-- 문제는 89req/s 라는 **속도가 아니라 버스트**였음. 446개를 한꺼번에 쏘면 백로그→throttle (ok 88%, 19s 지연). 세마포어 방식은 느린응답→백로그→더느림 피드백 루프.
-- **해결**: 5초 윈도 안에서 dt=5/N(≈11ms) 간격 **균등 페이싱** 디스패치. → 동시연결 ~6, 응답 ~15ms.
-- **+ per-line fsync 제거**(HDD 동기블로킹이 이벤트루프 막음, flush만 유지). 
-- **실측 결과: ok 100%, 446 stdid 전부 실효 polling 5.0s(p90 6s), 처리량 81/s.** ✅ 목표 달성.
-- 기존 수집기(yubin pid236689 / gaeun run.sh pid133422)는 중단 완료 → BLog 단독 체제. 5/26 데이터는 오염(DATA_NOTES).
-- 확정 설정: interval=5, 페이싱, BUS_CONCURRENCY=100(안전망), BUS_HTTP_TIMEOUT=4.5. USE_TIMETABLE_FILTER=0.
+## ⚠️ 막힌 것
+- **ITS IP 차단** (오늘 부하테스트 누적). connect timeout, KMA·DNS 정상 = rate-limit 쿨다운(영구 아님). 수집기 stop(enabled 유지).
+  - **재가동**: ITS 443 연결 회복 확인 → `sudo systemctl start blog-collector`. (적응형+gap 적용본이라 재발 위험 낮음)
+- **중기예보(longForecast) 403**: KMA 키 중기예보 API 구독 반영 대기(비차단).
 
 ## 다음 할 일
-1. `src/scripts/run.sh` (nohup supervisor) 로 상시 가동 → 내일 첫차 전부터 무손실 수집
-2. weather(전격자43)·traffic 가동 검증, 디스크 증가율 측정
-3. (이후) Phase 2 정적정비 잔여 / Phase 3 후처리
+1. (차단 해제 후) 수집 재가동 → 1~2h 무손실·디스크 추세 확인. clean 데이터 축적 시작.
+2. 데이터 쌓는 동안 **설계**(ITS 불필요):
+   - **trip 재구성 + 배차시각 매칭 휴리스틱** 설계 (모델 무관, Phase 3)
+   - **1차 모델 구조** 결정 (MLP vs GBDT, 입력/타깃) — feature 가공을 여는 키스톤
+3. 모델 구조 확정 → feature 가공 → 1차 학습 (Phase 4)
 
-## 결정 사항 (확정)
+## 후처리에서 풀 과제 (기억)
+- **배차 시각 식별**: raw 만 받으므로 trip↔시간표 매칭 휴리스틱 필요.
+- **vtx 불신**: 작년 101개 노선이 실제 경로/정류장과 어긋남 → route_nodes 만들면 검증 동반. 단 route_nodes 는 **2차 전용**(1차 무관), busPosList 의 CURRENT_NODE_ORD/LATEST_STOP_ORD 가 진행도 직접 제공.
 
-## 결정 사항 (확정)
-- 한 서버에서 전부 처리 (backend/midServer 분리 없음).
-- app + src 한 리포(monorepo). app = Flutter.
-- 원천 데이터(버스/교통/날씨/사고 실시간 고용량)만 HDD(`/mnt/data1/B_Log`) 심볼릭. 나머지 + 정적 산출물은 repo.
-- 정적: `reference/source`(API 원본) vs `reference/built`(후처리 산출물, route_nodes 등).
-- worklog 안 씀 → commit 단위로 추적. docs 한글.
-- baseline = 이가은 collector. 1차=MLP/GBDT 실험, 2차=Transformer.
-
-## 열린 질문 / 메모
-- 날씨 전격자 수집 vs 단일격자: 격자맵(`nx_ny`) 빌드는 Phase 2 정적정비에 의존 → 수집기 1차 가동은 단일/소수 격자로 시작할지 결정 필요.
-- 수집 대상 추가 항목(sky_air 미세먼지, 공지) 은 v1 로 이월 검토.
+## 확정 사항
+- 단일 서버 전부 처리(backend/midServer 분리 없음). app(Flutter)+src(Python) monorepo.
+- 원천(버스·교통·날씨·사고 실시간)만 HDD 심볼릭. 정적/파생은 repo(reference 만 git).
+- baseline=이가은 collector(아이디어). 1차=MLP/GBDT, 2차=Transformer. docs 한글, commit 단위 추적.
