@@ -5,7 +5,7 @@
 
 ## 현재 위치
 **Phase 1(수집기) 구현 완료 → ITS IP 차단으로 가동 일시 중단(쿨다운).**
-차단 풀리면 재가동, 데이터 축적되면 Phase 3(trip 재구성) 설계로.
+병행: **Phase 4 1차 모델 설계 착수**(branch `design/first-model`). 작년 모델 검증 + 재설계 결정 기록 → [design/first-model.md](design/first-model.md). 갈림길 3개(y 앵커/형태, 선행작업) 합의 대기.
 
 ## 완료
 - **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
@@ -30,7 +30,8 @@
 
 ## 후처리에서 풀 과제 (기억)
 - **배차 시각 식별**: raw 만 받으므로 trip↔시간표 매칭 휴리스틱 필요.
-- **vtx 불신**: 작년 101개 노선이 실제 경로/정류장과 어긋남 → route_nodes 만들면 검증 동반. 단 route_nodes 는 **2차 전용**(1차 무관), busPosList 의 CURRENT_NODE_ORD/LATEST_STOP_ORD 가 진행도 직접 제공.
+- **vtx 불신**: 작년 101개 노선 vtx 어긋남 → 구글맵으로 수작업 보정했었음. mtime으로 복원: [design/vtx_manual_2025.json](design/vtx_manual_2025.json). 검수기=`checkRoute.py`(정류장 누락수), 육안검수 일회용 스크립트는 소실. **올해 데이터로 재구성·재검증 필요** = 지리기반 1차 모델의 선행조건.
+  - ⚠️ route_nodes 가 1차 무관(2차 전용)이라던 기존 가정은 재검토 중 — 지리기반 종속성·교통결합을 1차에 넣으면 1차도 route_nodes 필요(미결정 갈림길 #3).
 
 ## 확정 사항
 - 단일 서버 전부 처리(backend/midServer 분리 없음). app(Flutter)+src(Python) monorepo.
