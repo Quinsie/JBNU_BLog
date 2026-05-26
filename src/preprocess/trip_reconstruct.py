@@ -273,33 +273,77 @@ def load_terminus_ord(stdid: int | str) -> int | None:
     return max(ords) if ords else None
 
 
-def match_schedule(dep_iso: str | None, sched: list[str]) -> tuple[str | None, int | None]:
-    """검출 발차를 가장 가까운 예정 슬롯에 매칭 → (슬롯hhmm, delta_sec)."""
-    if dep_iso is None or not sched:
-        return None, None
-    dep = datetime.fromisoformat(dep_iso)
-    dep_min = dep.hour * 60 + dep.minute + dep.second / 60
-    best, best_dist, best_smin = None, None, None
+def _parse_slots(sched: list[str]) -> tuple[list[str], list[int]]:
+    """예정 시간표 → (hhmm 정렬, 분단위 정렬). 파싱불가 슬롯은 버림."""
+    pairs = []
     for hhmm in sched:
         try:
             h, m = hhmm.split(":")
-            smin = int(h) * 60 + int(m)
+            pairs.append((hhmm.strip(), int(h) * 60 + int(m)))
         except ValueError:
             continue
-        d = abs(dep_min - smin)
-        if best_dist is None or d < best_dist:
-            best, best_dist, best_smin = hhmm, d, smin
-    if best is None:
-        return None, None
-    return best, int(round((dep_min - best_smin) * 60))
+    pairs.sort(key=lambda p: p[1])
+    return [p[0] for p in pairs], [p[1] for p in pairs]
+
+
+def assign_departures_to_slots(
+    dep_min: list[float], slot_min: list[int], gate_sec: float,
+) -> tuple[list[int | None], list[int]]:
+    """검출발차열 ↔ 예정슬롯열 시간순보존 1:1 배정 (greedy 최근접 대체).
+
+    둘 다 시간정렬 입력. 단조 매칭 DP 로 `(매칭수 최대, 총|delta| 최소)` 를
+    사전식으로 최적화. 슬롯·발차 각각 최대 1회, 게이트(gate_sec) 초과 매칭 금지,
+    순서 보존(앞선 발차가 뒤 슬롯에 붙고 뒤 발차가 앞 슬롯에 붙는 교차 불가).
+    → greedy 의 '두 버스가 같은 슬롯' / 수집중단 시 오배정 구조적 제거.
+
+    반환 (dep_slot, unmatched_slots): dep_slot[i] = 발차 i 에 배정된 슬롯 idx 또는 None,
+    unmatched_slots = 배정 안 된 슬롯 idx 목록(=관측 못 한 예정 발차 → 수집공백·미운행)."""
+    m, n = len(dep_min), len(slot_min)
+    gate_min = gate_sec / 60.0
+    # dp[i][j] = (매칭수, -총delta) 사전식 최대. bp = 역추적용 선택.
+    dp = [[(0, 0.0)] * (n + 1) for _ in range(m + 1)]
+    bp = [[""] * (n + 1) for _ in range(m + 1)]
+    for i in range(m + 1):
+        for j in range(n + 1):
+            if i == 0 and j == 0:
+                continue
+            cands = []
+            if i > 0:
+                cands.append((dp[i - 1][j], "d"))          # 발차 i-1 미매칭
+            if j > 0:
+                cands.append((dp[i][j - 1], "s"))          # 슬롯 j-1 미매칭
+            if i > 0 and j > 0:
+                d = abs(dep_min[i - 1] - slot_min[j - 1])
+                if d <= gate_min:
+                    pm, pd = dp[i - 1][j - 1]
+                    cands.append(((pm + 1, pd - d), "m"))   # 매칭
+            dp[i][j], bp[i][j] = max(cands, key=lambda c: c[0])
+
+    dep_slot: list[int | None] = [None] * m
+    matched_slot = [False] * n
+    i, j = m, n
+    while i > 0 or j > 0:
+        c = bp[i][j]
+        if c == "d":
+            i -= 1
+        elif c == "s":
+            j -= 1
+        else:  # "m"
+            dep_slot[i - 1] = j - 1
+            matched_slot[j - 1] = True
+            i -= 1
+            j -= 1
+    unmatched = [k for k in range(n) if not matched_slot[k]]
+    return dep_slot, unmatched
 
 
 # ── 한 노선 재구성 ──────────────────────────────────────
-def reconstruct_stdid(stdid: int | str, date_str: str) -> list[dict]:
+def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict]:
+    """반환 (trip 레코드들, 노선단위 매칭진단). 진단=미매칭 슬롯 등."""
     meta = load_route_meta(stdid)
     svc_date = datetime.strptime(date_str, "%Y%m%d").date()
     dtype = daytype_of(svc_date)
-    sched = meta.get("sched", {}).get(dtype, [])
+    slot_hhmm, slot_min = _parse_slots(meta.get("sched", {}).get(dtype, []))
 
     by_plate = load_observations(stdid, date_str)
     # 종점 ord: reference(권위) 우선, 없으면 그날 관측 최대 ord 로 폴백
@@ -308,6 +352,7 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> list[dict]:
         terminus_ord = max((o.so for seq in by_plate.values() for o in seq
                             if o.so is not None), default=0)
 
+    # 1) trip 레코드 (매칭 필드는 아래 노선전역 배정에서 채움)
     records: list[dict] = []
     for plate, seq in by_plate.items():
         clean, dropped = filter_glitches(seq)
@@ -319,23 +364,45 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> list[dict]:
             if not segments:
                 continue
             max_ord = max((o.so for o in trip if o.so is not None), default=0)
-            slot, delta = match_schedule(dep_iso, sched)
-            # 게이트: 슬롯과 너무 멀면 매칭 무의미(벽지 슬롯공백·미편성) → on_schedule=False.
-            # slot/delta 는 정보로 남기되 schedule 파생 feature 는 on_schedule 로 거른다.
-            on_sched = None if delta is None else (abs(delta) <= MATCH_GATE_SEC)
             records.append({
                 "stdid": int(stdid), "brt_no": meta.get("brt_no"),
                 "plate_no": plate, "service_date": date_str, "daytype": dtype,
                 "departure_ts": dep_iso, "departure_quality": quality,
-                "matched_sched": slot, "sched_delta_sec": delta,
-                "on_schedule": on_sched,
+                "matched_sched": None, "sched_delta_sec": None,
+                "on_schedule": None,  # 발차없음(mid_entry)=null, 발차있음은 아래서 T/F
                 "start_ord": trip[0].so, "end_ord": max_ord,
                 "n_stops_route": terminus_ord,
                 "reached_terminus": terminus_ord > 0 and max_ord >= terminus_ord - 1,
                 "n_obs": len(trip), "glitch_dropped": dropped,
                 "stops": stops, "segments": segments,
             })
-    return records
+
+    # 2) 노선전역 발차↔슬롯 1:1 배정 (시간순)
+    dep_recs = sorted(
+        ((datetime.fromisoformat(r["departure_ts"]), k)
+         for k, r in enumerate(records) if r["departure_ts"]),
+        key=lambda x: x[0])
+    dep_min = [t.hour * 60 + t.minute + t.second / 60 for t, _ in dep_recs]
+    dep_slot, unmatched_slot = assign_departures_to_slots(
+        dep_min, slot_min, MATCH_GATE_SEC)
+
+    for di, (_, k) in enumerate(dep_recs):
+        sj = dep_slot[di]
+        if sj is not None:
+            records[k]["matched_sched"] = slot_hhmm[sj]
+            records[k]["sched_delta_sec"] = int(round((dep_min[di] - slot_min[sj]) * 60))
+            records[k]["on_schedule"] = True
+        else:
+            records[k]["on_schedule"] = False   # 발차 검출됐으나 게이트 내 배정슬롯 없음
+
+    diag = {
+        "stdid": int(stdid), "service_date": date_str, "daytype": dtype,
+        "n_slots": len(slot_min), "n_dep": len(dep_recs),
+        "n_matched": sum(1 for x in dep_slot if x is not None),
+        "n_off_schedule_dep": sum(1 for x in dep_slot if x is None),
+        "unmatched_slots": [slot_hhmm[j] for j in unmatched_slot],
+    }
+    return records, diag
 
 
 # ── CLI ─────────────────────────────────────────────────
@@ -373,7 +440,13 @@ def _save(records: list[dict], date_str: str, stdid: str) -> None:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
 
 
-def _aggregate(all_recs: list[dict]) -> None:
+def _print_diag(diag: dict) -> None:
+    print(f"  매칭: 발차 {diag['n_dep']} / 슬롯 {diag['n_slots']} → "
+          f"배정 {diag['n_matched']}, off-schedule 발차 {diag['n_off_schedule_dep']}, "
+          f"미매칭 슬롯 {len(diag['unmatched_slots'])}{diag['unmatched_slots'][:8]}")
+
+
+def _aggregate(all_recs: list[dict], all_diags: list[dict]) -> None:
     """전노선 집계 리포트 (스트레스테스트용)."""
     from collections import Counter
     import statistics as st
@@ -397,21 +470,35 @@ def _aggregate(all_recs: list[dict]) -> None:
         within = lambda s: sum(1 for d in deltas if d <= s) / len(deltas) * 100
         print(f"  발차매칭 |오차|: median {st.median(deltas):.0f}s p90 {p(deltas,.9)}s "
               f"max {max(deltas)}s | ≤60s {within(60):.0f}% ≤180s {within(180):.0f}%")
-    matched = [r for r in all_recs if r.get("on_schedule") is not None]
-    if matched:
-        off = sum(1 for r in matched if not r["on_schedule"])
-        print(f"  off-schedule(게이트 {MATCH_GATE_SEC}s 초과): {off} / {len(matched)} "
-              f"({off/len(matched)*100:.1f}%)")
+    # 노선전역 1:1 배정 결과 집계
+    tot_dep = sum(d["n_dep"] for d in all_diags)
+    tot_slot = sum(d["n_slots"] for d in all_diags)
+    tot_match = sum(d["n_matched"] for d in all_diags)
+    tot_off = sum(d["n_off_schedule_dep"] for d in all_diags)
+    tot_unmatched = sum(len(d["unmatched_slots"]) for d in all_diags)
+    print(f"  매칭(전역1:1, 게이트 {MATCH_GATE_SEC}s): 발차 {tot_dep} 중 배정 {tot_match} "
+          f"/ off-schedule 발차 {tot_off} ({tot_off/tot_dep*100:.1f}%)" if tot_dep else "")
+    print(f"  예정슬롯 {tot_slot} 중 미매칭 {tot_unmatched} "
+          f"({tot_unmatched/tot_slot*100:.0f}%, =수집공백·미운행·검출누락)" if tot_slot else "")
     print(f"  글리치 버린 관측 총합: {glitch}")
 
 
-def _reconstruct_one(task: tuple[str, str, bool]) -> list[dict]:
+def _save_diags(diags: list[dict], date_str: str) -> None:
+    from src.common.paths import INTERIM_DIR
+    out_dir = INTERIM_DIR / "trips" / date_str
+    out_dir.mkdir(parents=True, exist_ok=True)
+    with open(out_dir / "_match_diag.jsonl", "w", encoding="utf-8") as f:
+        for d in diags:
+            f.write(json.dumps(d, ensure_ascii=False) + "\n")
+
+
+def _reconstruct_one(task: tuple[str, str, bool]) -> tuple[list[dict], dict]:
     """전노선 배치용 워커(피클 가능, 모듈 레벨). 저장까지 워커가 수행."""
     sid, date_str, save = task
-    recs = reconstruct_stdid(sid, date_str)
+    recs, diag = reconstruct_stdid(sid, date_str)
     if save and recs:
         _save(recs, date_str, sid)
-    return recs
+    return recs, diag
 
 
 if __name__ == "__main__":
@@ -433,16 +520,19 @@ if __name__ == "__main__":
         tasks = [(s, args.date, args.save) for s in sids]
         with ProcessPoolExecutor(max_workers=args.workers) as ex:
             results = list(ex.map(_reconstruct_one, tasks, chunksize=4))
-        all_recs = [r for recs in results for r in recs]
-        empty = sum(1 for recs in results if not recs)
+        all_recs = [r for recs, _ in results for r in recs]
+        all_diags = [diag for _, diag in results]
+        empty = sum(1 for recs, _ in results if not recs)
         print(f"trip 산출 노선 {len(sids)-empty} / trip 0개 노선 {empty}")
-        _aggregate(all_recs)
+        _aggregate(all_recs, all_diags)
         if args.save:
             from src.common.paths import INTERIM_DIR
-            print(f"저장 위치: {INTERIM_DIR / 'trips' / args.date}/")
+            _save_diags(all_diags, args.date)
+            print(f"저장 위치: {INTERIM_DIR / 'trips' / args.date}/ (+_match_diag.jsonl)")
     else:
-        recs = reconstruct_stdid(args.stdid, args.date)
+        recs, diag = reconstruct_stdid(args.stdid, args.date)
         _summary(recs)
+        _print_diag(diag)
         if args.save:
             _save(recs, args.date, args.stdid)
             from src.common.paths import INTERIM_DIR

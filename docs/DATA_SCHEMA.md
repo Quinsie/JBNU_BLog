@@ -102,8 +102,8 @@ ITS `selectBisRouteTimeInfo`. 노선(방향)별 시점 시간표.
   "service_date":"20260526", "daytype":"평일",
   "departure_ts":"2026-05-26T21:36:56+09:00",  // 검출 실발차(없으면 null)
   "departure_quality":"origin_wait",            // origin_wait|origin_moving|mid_entry
-  "matched_sched":"21:38", "sched_delta_sec":-64, // 최근접 예정슬롯 + (검출−예정)초
-  "on_schedule":true,                           // |delta|<=게이트(600s). false=무의미매칭(벽지 슬롯공백·미편성), null=시간표/발차없음
+  "matched_sched":"21:38", "sched_delta_sec":-64, // 배정된 예정슬롯 + (검출−예정)초 (미배정 시 둘 다 null)
+  "on_schedule":true,                           // 전역1:1 배정됨=true / 발차검출O 배정X(추가운행·검출이상)=false / 발차없음(mid_entry)=null
   "start_ord":1, "end_ord":42,
   "n_stops_route":43,                           // 노선 종점 ord(reference max STOP_ORD, =정류장수). ROUTE_ORD 아님 — 버스 ord 는 STOP_ORD 공간
   "reached_terminus":true,                      // end_ord >= n_stops_route-1 (ord 의미상 −1 허용)
@@ -113,4 +113,16 @@ ITS `selectBisRouteTimeInfo`. 노선(방향)별 시점 시간표.
 }
 ```
 - `pass_ts[기점ord]` = 발차시각으로 대체(첫관측은 정차/시스템-on 시점이라 통과 아님).
+- 발차↔슬롯은 **노선전역 시간순 1:1 배정**(greedy 최근접 아님 — `assign_departures_to_slots`). 중복매칭·순서꼬임 구조적 제거.
 - 설계 근거: [design/trip-reconstruction.md](design/trip-reconstruction.md), [design/first-model.md](design/first-model.md) §3.1.
+
+### interim/trips/{YYYYMMDD}/_match_diag.jsonl
+노선전역 발차↔슬롯 배정 진단(한 줄 = 한 노선). trip 레코드 밖 노선단위 리포트.
+```jsonc
+{ "stdid":305001763, "service_date":"20260526", "daytype":"평일",
+  "n_slots":36, "n_dep":6,          // 예정슬롯 수 / 검출발차 수
+  "n_matched":5,                     // 1:1 배정 성공
+  "n_off_schedule_dep":1,            // 발차검출됐으나 미배정(추가운행·검출이상·게이트밖)
+  "unmatched_slots":["06:20","07:00", ...] }  // 관측 못 한 예정 발차(수집공백·미운행·검출누락)
+```
+- ⚠️ 수집창이 부분(예: 5/26 저녁만)이면 unmatched_slots 가 대부분(아침·낮 슬롯) — 정상. 전일 수집 시 해소.
