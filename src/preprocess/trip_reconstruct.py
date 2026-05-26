@@ -253,6 +253,21 @@ def load_route_meta(stdid: int | str) -> dict:
     }
 
 
+def load_terminus_ord(stdid: int | str) -> int | None:
+    """stops reference → 종점 ord(= max ROUTE_ORD).
+
+    ⚠️ len(resultList) 가 아니라 max(ROUTE_ORD): 446노선 중 76개는 ROUTE_ORD 에
+    결번이 있어 len 으로는 종점 ord 를 과소추정한다. 버스 API LATEST_STOP_ORD 는
+    ROUTE_ORD 공간을 쓰므로 max 가 실제 종점 순번."""
+    fp = REF_SOURCE_DIR / "stops" / f"{stdid}.json"
+    if not fp.exists():
+        return None
+    d = json.load(open(fp, encoding="utf-8"))
+    ords = [s.get("ROUTE_ORD") for s in d.get("resultList", [])]
+    ords = [o for o in ords if o is not None]
+    return max(ords) if ords else None
+
+
 def match_schedule(dep_iso: str | None, sched: list[str]) -> tuple[str | None, int | None]:
     """검출 발차를 가장 가까운 예정 슬롯에 매칭 → (슬롯hhmm, delta_sec)."""
     if dep_iso is None or not sched:
@@ -282,9 +297,11 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> list[dict]:
     sched = meta.get("sched", {}).get(dtype, [])
 
     by_plate = load_observations(stdid, date_str)
-    # 종점 추정용: 노선 전체 관측 최대 ord
-    global_max = max((o.so for seq in by_plate.values() for o in seq
-                      if o.so is not None), default=0)
+    # 종점 ord: reference(권위) 우선, 없으면 그날 관측 최대 ord 로 폴백
+    terminus_ord = load_terminus_ord(stdid)
+    if terminus_ord is None:
+        terminus_ord = max((o.so for seq in by_plate.values() for o in seq
+                            if o.so is not None), default=0)
 
     records: list[dict] = []
     for plate, seq in by_plate.items():
@@ -304,7 +321,8 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> list[dict]:
                 "departure_ts": dep_iso, "departure_quality": quality,
                 "matched_sched": slot, "sched_delta_sec": delta,
                 "start_ord": trip[0].so, "end_ord": max_ord,
-                "reached_terminus": global_max > 0 and max_ord >= global_max - 1,
+                "n_stops_route": terminus_ord,
+                "reached_terminus": terminus_ord > 0 and max_ord >= terminus_ord - 1,
                 "n_obs": len(trip), "glitch_dropped": dropped,
                 "stops": stops, "segments": segments,
             })

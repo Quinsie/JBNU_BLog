@@ -102,7 +102,9 @@ ITS `selectBisRouteTimeInfo`. 노선(방향)별 시점 시간표.
   "departure_ts":"2026-05-26T21:36:56+09:00",  // 검출 실발차(없으면 null)
   "departure_quality":"origin_wait",            // origin_wait|origin_moving|mid_entry
   "matched_sched":"21:38", "sched_delta_sec":-64, // 최근접 예정슬롯 + (검출−예정)초
-  "start_ord":1, "end_ord":42, "reached_terminus":true,
+  "start_ord":1, "end_ord":42,
+  "n_stops_route":48,                           // 노선 종점 ord(reference max ROUTE_ORD)
+  "reached_terminus":true,                      // end_ord >= n_stops_route-1 (ord 의미상 −1 허용)
   "n_obs":328, "glitch_dropped":0,
   "stops":    [ {"ord":1,"pass_ts":"...T21:36:56+09:00"}, ... ],  // 정류장 통과시각
   "segments": [ {"from":1,"to":2,"elapsed_sec":210.0}, ... ] }    // ← 1차 모델 y(구간소요)

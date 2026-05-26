@@ -22,6 +22,12 @@
   - 원인: 현재 KMA 키가 "중기예보 조회서비스" API 에 **미구독**. (data.go.kr 는 API별 활용신청이 따로)
   - 영향: 중기(3~10일)는 버스 ETA 에 거의 무관 → 비차단. 필요 시 data.go.kr 에서 해당 서비스 활용신청하면 코드 수정 없이 자동 수집됨.
 
+## reference stops — 종점 ord 신뢰성 (2026-05-26 trip v1.1 검증)
+- 종점 ord = `stops/{stdid}.json` 의 **max ROUTE_ORD**(len 아님 — 446중 76노선이 ROUTE_ORD 결번).
+  - 검증: 305200112 종점 ord 48 = stop명 "우석대종점" = timetable `BRT_ENAME` 일치 → reference 신뢰 가능.
+  - 5/26 저녁 부분데이터 기준 reference 종점 ord vs 실측 최대 end_ord: median gap=1(ord 의미상 종점 도착 직전 ord=N-1 에서 소멸 → 정상), gap≥5 노선 49개(=저녁창에 종점근접 trip 미포착, 전일 데이터로 해소 예상).
+- ⚠️ **305001677 (83번, 종점 소양행정복지센터=ord33)**: plate 1203 이 ord 34·43·45 까지 5회 관측 — 공개 stops(33개)에 **없는 ord 34~45 존재**. 차고지 회송/미등재 종점구간 추정. 1개 노선뿐이고 terminus 판정엔 무해(45≥32). 전일 데이터로 재확인 대상.
+
 ## 정적 데이터 기준
 - stdid 총 **446개** (2026-05-26 API 기준). 작년(2025) 451 에서 노선 개편으로 -5.
 - 정적 원본은 `data/reference/source/` (fetch 시각은 각 파일 `fetched_at`).

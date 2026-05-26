@@ -5,7 +5,7 @@
 
 ## 현재 위치
 **Phase 3 trip 재구성 v1 검증 완료 → v1.1 정련 진행 중** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
-- v1.1 ①공휴일 캘린더 **완료**(`holidays` KR public: 음력명절·대체공휴일·선거일·2026 재지정 제헌절, 휴일>토 우선). ②종점 reference ③이상치25건 ④시간표 prior 게이팅 = 잔여.
+- v1.1 ①공휴일 캘린더 **완료**(`holidays` KR public: 음력명절·대체공휴일·선거일·2026 재지정 제헌절, 휴일>토 우선). ②종점 reference 연결 **완료**(max ROUTE_ORD 권위·`n_stops_route` 기록, 종점도달 55%로 정직화). ③이상치 분석 ④시간표 prior 게이팅 = 잔여.
 - 1차 모델 검증·결정 → [design/first-model.md](design/first-model.md) (갈림길 3개 확정).
 - trip 재구성 설계 확정 → [design/trip-reconstruction.md](design/trip-reconstruction.md) (발차검출·종료일반화·구간타깃).
 - **v1 스크립트** `src/preprocess/trip_reconstruct.py`: 305200112 검증 — 발차 5건 전부 예정시간표 ±64s 매칭, 품질분기·종점·글리치·공백분할 정상.
