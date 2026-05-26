@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001476,
+ "result": {
+  "BRT_SNAME": "풍남문",
+  "COURSE_STIMELIST": " 09:00, 11:25",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001476,
+  "BRT_NO": "13",
+  "BRT_ENAME": "은석마을",
+  "BRT_ID": "13",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 13.1
+ },
+ "timeList": [
+  " 09:00",
+  "11:25"
+ ]
+}

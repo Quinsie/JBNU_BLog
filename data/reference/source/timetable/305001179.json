@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:09+09:00",
+ "stdid": 305001179,
+ "result": {
+  "BRT_SNAME": "송천동종점",
+  "COURSE_STIMELIST": " 05:50",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001179,
+  "BRT_NO": "355",
+  "BRT_ENAME": "전주대학교",
+  "BRT_ID": "355",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.5
+ },
+ "timeList": [
+  " 05:50"
+ ]
+}

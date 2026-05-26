@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:16+09:00",
+ "stdid": 305001749,
+ "result": {
+  "BRT_SNAME": "전북대종점",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 5,
+  "BRT_STDID": 305001749,
+  "BRT_NO": "5-5",
+  "BRT_ENAME": "전북대종점",
+  "BRT_ID": "5",
+  "BRT_CLASS": "5",
+  "BRT_LENGTH": 7.9
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

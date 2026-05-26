@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:16+09:00",
+ "stdid": 305001742,
+ "result": {
+  "BRT_SNAME": "분토종점",
+  "COURSE_STIMELIST": " 11:25, 16:35",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001742,
+  "BRT_NO": "86",
+  "BRT_ENAME": "소양",
+  "BRT_ID": "86",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 4
+ },
+ "timeList": [
+  " 11:25",
+  "16:35"
+ ]
+}

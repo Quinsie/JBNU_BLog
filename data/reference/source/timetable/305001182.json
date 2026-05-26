@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:09+09:00",
+ "stdid": 305001182,
+ "result": {
+  "BRT_SNAME": "송천주공아파트",
+  "COURSE_STIMELIST": " 05:55",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001182,
+  "BRT_NO": "554",
+  "BRT_ENAME": "삼천동종점",
+  "BRT_ID": "554",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 16
+ },
+ "timeList": [
+  " 05:55"
+ ]
+}

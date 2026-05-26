@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:11+09:00",
+ "stdid": 305001537,
+ "result": {
+  "BRT_SNAME": "원동마을",
+  "COURSE_STIMELIST": " 05:50, 07:10, 08:50, 13:00",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305001537,
+  "BRT_NO": "23",
+  "BRT_ENAME": "이서회차지",
+  "BRT_ID": "23",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 11.3
+ },
+ "timeList": [
+  " 05:50",
+  "07:10",
+  "08:50",
+  "13:00"
+ ]
+}

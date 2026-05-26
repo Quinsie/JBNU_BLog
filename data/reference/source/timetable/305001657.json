@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:13+09:00",
+ "stdid": 305001657,
+ "result": {
+  "BRT_SNAME": "감수리",
+  "COURSE_STIMELIST": " 08:10, 18:10",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001657,
+  "BRT_NO": "685",
+  "BRT_ENAME": "오봉리",
+  "BRT_ID": "685",
+  "BRT_CLASS": "0",
+  "BRT_TEXT": "08:10, 18:10 오봉리 운행(금구 미경유)",
+  "BRT_LENGTH": 20.7
+ },
+ "timeList": [
+  " 08:10",
+  "18:10"
+ ]
+}

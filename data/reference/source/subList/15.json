@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:03+09:00",
+ "brt_no": "15",
+ "resultList": [
+  {
+   "BRT_SNAME": "낙수정",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001214,
+   "BRT_ENAME": "흑석골종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "605",
+   "BRT_MAXINTERVAL": "195",
+   "BRT_GRPNM": "마을",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "15",
+   "BRT_ID": "15",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2030",
+   "BRT_MININTERVAL": "160"
+  },
+  {
+   "BRT_SNAME": "흑석골종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001215,
+   "BRT_ENAME": "낙수정",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "650",
+   "BRT_MAXINTERVAL": "195",
+   "BRT_GRPNM": "마을",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "15",
+   "BRT_ID": "15",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2130",
+   "BRT_MININTERVAL": "155"
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:06+09:00",
+ "stdid": 305000409,
+ "result": {
+  "SAT_NLIST": " 05:55",
+  "HOLI_NLIST": " 05:55",
+  "BRT_SNAME": "고속버스터미널입구.전북일보사",
+  "COURSE_STIMELIST": " 05:55",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305000409,
+  "BRT_NO": "554",
+  "BRT_ENAME": "둔산코아루2차아파트",
+  "BRT_ID": "554",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 20.9
+ },
+ "timeList": [
+  " 05:55"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:16+09:00",
+ "stdid": 305001732,
+ "result": {
+  "BRT_SNAME": "일임리",
+  "COURSE_STIMELIST": " 07:10",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001732,
+  "BRT_NO": "84",
+  "BRT_ENAME": "인덕마을",
+  "BRT_ID": "84",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 12.1
+ },
+ "timeList": [
+  " 07:10"
+ ]
+}

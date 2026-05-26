@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001708,
+ "result": {
+  "BRT_SNAME": "전북도립미술관",
+  "COURSE_STIMELIST": " 19:10",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001708,
+  "BRT_NO": "91",
+  "BRT_ENAME": "장작골",
+  "BRT_ID": "91",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 19.9
+ },
+ "timeList": [
+  " 19:10"
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001721,
+ "result": {
+  "BRT_SNAME": "상관주민센터",
+  "BRT_DNUM": 0,
+  "BRT_STDID": 305001721,
+  "BRT_NO": "76",
+  "BRT_ENAME": "어두마을",
+  "BRT_ID": "76",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 2.8
+ },
+ "timeList": [
+  "시간표없음"
+ ]
+}

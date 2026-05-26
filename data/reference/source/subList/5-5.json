@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "5-5",
+ "resultList": [
+  {
+   "BRT_SNAME": "전북대종점",
+   "BRT_GRPNM": "본선",
+   "BRT_DIRECTION": "1",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001749,
+   "BRT_NO": "5-5",
+   "BRT_ENAME": "전북대종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "5",
+   "BRT_FIRSTTIME": "600",
+   "BRT_CLASS": "5",
+   "BRT_LASTTIME": "600"
+  }
+ ]
+}

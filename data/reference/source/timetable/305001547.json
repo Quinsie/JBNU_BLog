@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:11+09:00",
+ "stdid": 305001547,
+ "result": {
+  "BRT_SNAME": "이서회차지",
+  "COURSE_STIMELIST": " 19:45, 21:20",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001547,
+  "BRT_NO": "25",
+  "BRT_ENAME": "대문안종점",
+  "BRT_ID": "25",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 9.2
+ },
+ "timeList": [
+  " 19:45",
+  "21:20"
+ ]
+}

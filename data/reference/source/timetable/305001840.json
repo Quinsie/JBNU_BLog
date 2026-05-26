@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:18+09:00",
+ "stdid": 305001840,
+ "result": {
+  "BRT_SNAME": "고잔",
+  "COURSE_STIMELIST": " 15:45, 17:05, 20:25",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001840,
+  "BRT_NO": "40",
+  "BRT_ENAME": "월드컵경기장",
+  "BRT_ID": "40",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 16
+ },
+ "timeList": [
+  " 15:45",
+  "17:05",
+  "20:25"
+ ]
+}

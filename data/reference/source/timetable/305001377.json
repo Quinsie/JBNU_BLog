@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001377,
+ "result": {
+  "BRT_SNAME": "원상림",
+  "COURSE_STIMELIST": " 06:38, 07:50",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001377,
+  "BRT_NO": "530",
+  "BRT_ENAME": "고산터미널",
+  "BRT_ID": "530",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 34.9
+ },
+ "timeList": [
+  " 06:38",
+  "07:50"
+ ]
+}

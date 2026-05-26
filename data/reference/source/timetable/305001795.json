@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:17+09:00",
+ "stdid": 305001795,
+ "result": {
+  "BRT_SNAME": "태평마을 입구",
+  "COURSE_STIMELIST": " 12:54, 14:49, 20:31",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001795,
+  "BRT_NO": "18",
+  "BRT_ENAME": "백구",
+  "BRT_ID": "18",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 12.1
+ },
+ "timeList": [
+  " 12:54",
+  "14:49",
+  "20:31"
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001358,
+ "result": {
+  "BRT_SNAME": "구암",
+  "COURSE_STIMELIST": " 08:00, 09:50, 20:20",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001358,
+  "BRT_NO": "24",
+  "BRT_ENAME": "이서회차지",
+  "BRT_ID": "24",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 8.8
+ },
+ "timeList": [
+  " 08:00",
+  "09:50",
+  "20:20"
+ ]
+}

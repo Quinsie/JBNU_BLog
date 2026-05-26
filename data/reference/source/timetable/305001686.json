@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:14+09:00",
+ "stdid": 305001686,
+ "result": {
+  "BRT_SNAME": "용문사.반곡마을",
+  "COURSE_STIMELIST": " 14:00, 19:35",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001686,
+  "BRT_NO": "85",
+  "BRT_ENAME": "소양행정복지센터",
+  "BRT_ID": "85",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 8.2
+ },
+ "timeList": [
+  " 14:00",
+  "19:35"
+ ]
+}

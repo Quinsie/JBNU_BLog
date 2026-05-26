@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:19+09:00",
+ "stdid": 305001878,
+ "result": {
+  "BRT_SNAME": "비봉종점",
+  "COURSE_STIMELIST": " 07:30",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001878,
+  "BRT_NO": "32",
+  "BRT_ENAME": "삼례터미널",
+  "BRT_ID": "32",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 27.8
+ },
+ "timeList": [
+  " 07:30"
+ ]
+}

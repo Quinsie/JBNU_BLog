@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:20+09:00",
+ "stdid": 305200174,
+ "result": {
+  "SAT_NLIST": " 05:55",
+  "HOLI_NLIST": " 05:55",
+  "BRT_SNAME": "전북대학교.농협앞",
+  "COURSE_STIMELIST": " 05:55",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305200174,
+  "BRT_NO": "559",
+  "BRT_ENAME": "삼천동종점",
+  "BRT_ID": "559",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 12.3
+ },
+ "timeList": [
+  " 05:55"
+ ]
+}

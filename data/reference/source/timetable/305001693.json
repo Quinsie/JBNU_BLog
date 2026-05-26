@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:14+09:00",
+ "stdid": 305001693,
+ "result": {
+  "BRT_SNAME": "소양행정복지센터",
+  "COURSE_STIMELIST": " 06:55, 12:25, 15:25, 18:10",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305001693,
+  "BRT_NO": "86",
+  "BRT_ENAME": "월상리",
+  "BRT_ID": "86",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 12
+ },
+ "timeList": [
+  " 06:55",
+  "12:25",
+  "15:25",
+  "18:10"
+ ]
+}

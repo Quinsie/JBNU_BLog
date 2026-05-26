@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "53",
+ "resultList": [
+  {
+   "BRT_SNAME": "완주군청",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000979,
+   "BRT_ENAME": "제촌",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "815",
+   "BRT_MAXINTERVAL": "275",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "53",
+   "BRT_ID": "53",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "1810",
+   "BRT_MININTERVAL": "130"
+  },
+  {
+   "BRT_SNAME": "제촌",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000980,
+   "BRT_ENAME": "완주군청",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "715",
+   "BRT_MAXINTERVAL": "300",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "53",
+   "BRT_ID": "53",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2150",
+   "BRT_MININTERVAL": "130"
+  }
+ ]
+}

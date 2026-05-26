@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:16+09:00",
+ "stdid": 305001743,
+ "result": {
+  "BRT_SNAME": "소양행정복지센터",
+  "COURSE_STIMELIST": " 14:55",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001743,
+  "BRT_NO": "87-1",
+  "BRT_ENAME": "약암마을",
+  "BRT_ID": "87",
+  "BRT_CLASS": "1",
+  "BRT_LENGTH": 8.6
+ },
+ "timeList": [
+  " 14:55"
+ ]
+}

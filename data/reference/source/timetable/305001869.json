@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:19+09:00",
+ "stdid": 305001869,
+ "result": {
+  "BRT_SNAME": "삼례역",
+  "COURSE_STIMELIST": " 09:35",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001869,
+  "BRT_NO": "30",
+  "BRT_ENAME": "둔산코아루2차아파트",
+  "BRT_ID": "30",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.6
+ },
+ "timeList": [
+  " 09:35"
+ ]
+}

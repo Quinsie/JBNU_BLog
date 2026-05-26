@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:05+09:00",
+ "brt_no": "57",
+ "resultList": [
+  {
+   "BRT_SNAME": "양야리경로당",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000987,
+   "BRT_ENAME": "봉동회차지",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "550",
+   "BRT_MAXINTERVAL": "200",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "57",
+   "BRT_ID": "57",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2220",
+   "BRT_MININTERVAL": "135"
+  },
+  {
+   "BRT_SNAME": "봉동회차지",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000988,
+   "BRT_ENAME": "양야리경로당",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "800",
+   "BRT_MAXINTERVAL": "200",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "57",
+   "BRT_ID": "57",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2200",
+   "BRT_MININTERVAL": "140"
+  }
+ ]
+}

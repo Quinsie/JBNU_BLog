@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001519,
+ "result": {
+  "BRT_SNAME": "전주동물원",
+  "COURSE_STIMELIST": " 22:40",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001519,
+  "BRT_NO": "165",
+  "BRT_ENAME": "효자로전북도청",
+  "BRT_ID": "165",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 15.4
+ },
+ "timeList": [
+  " 22:40"
+ ]
+}

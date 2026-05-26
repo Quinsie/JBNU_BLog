@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:05+09:00",
+ "brt_no": "81",
+ "resultList": [
+  {
+   "BRT_SNAME": "모래내시장",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001864,
+   "BRT_ENAME": "하이리",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "850",
+   "BRT_MAXINTERVAL": "240",
+   "BRT_GRPNM": "마을",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "81",
+   "BRT_ID": "81",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "1950",
+   "BRT_MININTERVAL": "200"
+  },
+  {
+   "BRT_SNAME": "하이리",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001865,
+   "BRT_ENAME": "모래내시장",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "625",
+   "BRT_MAXINTERVAL": "240",
+   "BRT_GRPNM": "마을",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "81",
+   "BRT_ID": "81",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2025",
+   "BRT_MININTERVAL": "180"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:16+09:00",
+ "stdid": 305001736,
+ "result": {
+  "BRT_SNAME": "응암마을",
+  "COURSE_STIMELIST": " 13:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001736,
+  "BRT_NO": "85",
+  "BRT_ENAME": "용문사.반곡마을",
+  "BRT_ID": "85",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 15.8
+ },
+ "timeList": [
+  " 13:00"
+ ]
+}

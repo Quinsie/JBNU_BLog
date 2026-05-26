@@ -1,0 +1,66 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "350",
+ "resultList": [
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305200617,
+   "BRT_ENAME": "삼례터미널",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "600",
+   "BRT_MAXINTERVAL": "38",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "350",
+   "BRT_ID": "350",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2225",
+   "BRT_MININTERVAL": "26"
+  },
+  {
+   "BRT_SNAME": "삼례터미널",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305200618,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "600",
+   "BRT_MAXINTERVAL": "38",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "350",
+   "BRT_ID": "350",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2225",
+   "BRT_MININTERVAL": "26"
+  },
+  {
+   "BRT_SNAME": "기린대로 병무청",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "1",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001177,
+   "BRT_NO": "350",
+   "BRT_ENAME": "삼례터미널",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "350",
+   "BRT_FIRSTTIME": "555",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "555"
+  },
+  {
+   "BRT_SNAME": "송천역네거리",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "2",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001180,
+   "BRT_NO": "350",
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "350",
+   "BRT_FIRSTTIME": "550",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "550"
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "fetched_at": "2026-05-26T13:11:03+09:00",
+ "brt_no": "2",
+ "resultList": [
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001153,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "550",
+   "BRT_MAXINTERVAL": "27",
+   "BRT_GRPNM": "본선",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "2",
+   "BRT_ID": "2",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2250",
+   "BRT_MININTERVAL": "10"
+  },
+  {
+   "BRT_SNAME": "전북은행본점",
+   "BRT_GRPNM": "본선",
+   "BRT_DIRECTION": "1",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001154,
+   "BRT_NO": "2",
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "2",
+   "BRT_FIRSTTIME": "600",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "600"
+  }
+ ]
+}

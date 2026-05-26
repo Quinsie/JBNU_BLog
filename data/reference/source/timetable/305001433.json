@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001433,
+ "result": {
+  "BRT_SNAME": "용정마을.하나로마트",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001433,
+  "BRT_NO": "75",
+  "BRT_ENAME": "평화동종점",
+  "BRT_ID": "75",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 17.9
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:17+09:00",
+ "stdid": 305001802,
+ "result": {
+  "BRT_SNAME": "태평마을 입구",
+  "COURSE_STIMELIST": " 08:23, 11:48",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001802,
+  "BRT_NO": "19",
+  "BRT_ENAME": "춘강",
+  "BRT_ID": "19",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 11.4
+ },
+ "timeList": [
+  " 08:23",
+  "11:48"
+ ]
+}

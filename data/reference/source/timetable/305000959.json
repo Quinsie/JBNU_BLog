@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:06+09:00",
+ "stdid": 305000959,
+ "result": {
+  "SAT_NLIST": " 06:00",
+  "HOLI_NLIST": " 06:00",
+  "BRT_SNAME": "충경로 객사",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305000959,
+  "BRT_NO": "354",
+  "BRT_ENAME": "우석대종점",
+  "BRT_ID": "354",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 16.8
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

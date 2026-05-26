@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:12+09:00",
+ "stdid": 305001582,
+ "result": {
+  "BRT_SNAME": "산정우정신세계아파트",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001582,
+  "BRT_NO": "810",
+  "BRT_ENAME": "평화동종점",
+  "BRT_ID": "810",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 15.1
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

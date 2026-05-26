@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:17+09:00",
+ "stdid": 305001804,
+ "result": {
+  "BRT_SNAME": "춘강",
+  "COURSE_STIMELIST": " 08:58, 20:03, 21:53",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001804,
+  "BRT_NO": "19",
+  "BRT_ENAME": "월드컵경기장",
+  "BRT_ID": "19",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.3
+ },
+ "timeList": [
+  " 08:58",
+  "20:03",
+  "21:53"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:12+09:00",
+ "stdid": 305001590,
+ "result": {
+  "BRT_SNAME": "전북예술회관",
+  "COURSE_STIMELIST": " 06:10",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001590,
+  "BRT_NO": "5002",
+  "BRT_ENAME": "전주대캠퍼스",
+  "BRT_ID": "5002",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 11.7
+ },
+ "timeList": [
+  " 06:10"
+ ]
+}

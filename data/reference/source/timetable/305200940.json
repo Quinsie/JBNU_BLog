@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:20+09:00",
+ "stdid": 305200940,
+ "result": {
+  "BRT_SNAME": "평화동종점",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 5,
+  "BRT_STDID": 305200940,
+  "BRT_NO": "1994",
+  "BRT_ENAME": "시외고속간이터미널",
+  "BRT_ID": "1994",
+  "BRT_CLASS": "0",
+  "BRT_TEXT": "전북현대모터스 주말 홈경기 한정노선",
+  "BRT_LENGTH": 18.2
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

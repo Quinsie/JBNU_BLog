@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:07+09:00",
+ "stdid": 305001102,
+ "result": {
+  "SAT_NLIST": " 06:05",
+  "HOLI_NLIST": " 06:05",
+  "BRT_SNAME": "고속버스터미널입구.전북일보사",
+  "COURSE_STIMELIST": " 06:05",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001102,
+  "BRT_NO": "110",
+  "BRT_ENAME": "비전대학교",
+  "BRT_ID": "110",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 20.1
+ },
+ "timeList": [
+  " 06:05"
+ ]
+}

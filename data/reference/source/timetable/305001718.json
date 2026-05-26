@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001718,
+ "result": {
+  "BRT_SNAME": "민목리",
+  "COURSE_STIMELIST": " 06:35",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001718,
+  "BRT_NO": "70",
+  "BRT_ENAME": "상관농협로컬푸드",
+  "BRT_ID": "70",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 17
+ },
+ "timeList": [
+  " 06:35"
+ ]
+}

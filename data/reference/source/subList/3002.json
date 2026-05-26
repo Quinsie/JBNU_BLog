@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "3002",
+ "resultList": [
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305300262,
+   "BRT_ENAME": "삼천동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "606",
+   "BRT_MAXINTERVAL": "38",
+   "BRT_GRPNM": "시내",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "3002",
+   "BRT_ID": "3002",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2230",
+   "BRT_MININTERVAL": "13"
+  },
+  {
+   "BRT_SNAME": "삼천동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305300263,
+   "BRT_ENAME": "송천동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "605",
+   "BRT_MAXINTERVAL": "38",
+   "BRT_GRPNM": "시내",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "3002",
+   "BRT_ID": "3002",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2230",
+   "BRT_MININTERVAL": "10"
+  }
+ ]
+}

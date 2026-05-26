@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:07+09:00",
+ "stdid": 305001010,
+ "result": {
+  "BRT_SNAME": "전북대학교.농협앞",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001010,
+  "BRT_NO": "3-1",
+  "BRT_ENAME": "전주대학교",
+  "BRT_ID": "3",
+  "BRT_CLASS": "1",
+  "BRT_LENGTH": 17.8
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

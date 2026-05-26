@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001434,
+ "result": {
+  "SAT_NLIST": " 06:00",
+  "HOLI_NLIST": " 06:00",
+  "BRT_SNAME": "전주대학교",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001434,
+  "BRT_NO": "75",
+  "BRT_ENAME": "전북대종점",
+  "BRT_ID": "75",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 16.3
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

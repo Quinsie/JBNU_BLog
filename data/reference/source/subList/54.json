@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "54",
+ "resultList": [
+  {
+   "BRT_SNAME": "완주군청",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000981,
+   "BRT_ENAME": "원구암마을",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "700",
+   "BRT_MAXINTERVAL": "280",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "54",
+   "BRT_ID": "54",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "1950",
+   "BRT_MININTERVAL": "215"
+  },
+  {
+   "BRT_SNAME": "원구암마을",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000982,
+   "BRT_ENAME": "완주군청",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "800",
+   "BRT_MAXINTERVAL": "270",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "54",
+   "BRT_ID": "54",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2045",
+   "BRT_MININTERVAL": "225"
+  }
+ ]
+}

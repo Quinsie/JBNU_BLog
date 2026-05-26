@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001459,
+ "result": {
+  "BRT_SNAME": "원오신마을회관",
+  "COURSE_STIMELIST": " 06:22",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001459,
+  "BRT_NO": "49",
+  "BRT_ENAME": "월드컵경기장",
+  "BRT_ID": "49",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 13.5
+ },
+ "timeList": [
+  " 06:22"
+ ]
+}

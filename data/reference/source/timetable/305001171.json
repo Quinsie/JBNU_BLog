@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:08+09:00",
+ "stdid": 305001171,
+ "result": {
+  "BRT_SNAME": "평화동종점",
+  "COURSE_STIMELIST": " 22:30",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001171,
+  "BRT_NO": "101",
+  "BRT_ENAME": "서신광진아파트",
+  "BRT_ID": "101",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 13.7
+ },
+ "timeList": [
+  " 22:30"
+ ]
+}

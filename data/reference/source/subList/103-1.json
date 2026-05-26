@@ -1,0 +1,22 @@
+{
+ "fetched_at": "2026-05-26T13:11:03+09:00",
+ "brt_no": "103-1",
+ "resultList": [
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001769,
+   "BRT_ENAME": "전주시양묘장",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "603",
+   "BRT_MAXINTERVAL": "40",
+   "BRT_GRPNM": "지선",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "103-1",
+   "BRT_ID": "103",
+   "BRT_CLASS": "1",
+   "BRT_LASTTIME": "2225",
+   "BRT_MININTERVAL": "22"
+  }
+ ]
+}

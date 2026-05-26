@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001707,
+ "result": {
+  "BRT_SNAME": "전북도립미술관",
+  "COURSE_STIMELIST": " 12:40, 21:00",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001707,
+  "BRT_NO": "91",
+  "BRT_ENAME": "하운암",
+  "BRT_ID": "91",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 18.2
+ },
+ "timeList": [
+  " 12:40",
+  "21:00"
+ ]
+}

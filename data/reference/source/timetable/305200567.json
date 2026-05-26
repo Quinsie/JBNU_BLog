@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:20+09:00",
+ "stdid": 305200567,
+ "result": {
+  "BRT_SNAME": "호성주공",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305200567,
+  "BRT_NO": "9",
+  "BRT_ENAME": "송천동종점",
+  "BRT_ID": "9",
+  "BRT_CLASS": "0",
+  "BRT_TEXT": "23:00 전북대병원 전주역첫마중길 전주역 우아중 청년회의소 전북대병원 순으로 운행 / 동부대로전주역 23:30 정시운행",
+  "BRT_LENGTH": 10.3
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

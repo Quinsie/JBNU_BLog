@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:07+09:00",
+ "stdid": 305001012,
+ "result": {
+  "BRT_SNAME": "동부시장",
+  "COURSE_STIMELIST": " 06:07",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001012,
+  "BRT_NO": "3-2",
+  "BRT_ENAME": "전주대학교",
+  "BRT_ID": "3",
+  "BRT_CLASS": "2",
+  "BRT_LENGTH": 14.5
+ },
+ "timeList": [
+  " 06:07"
+ ]
+}

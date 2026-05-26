@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001729,
+ "result": {
+  "BRT_SNAME": "소양행정복지센터",
+  "COURSE_STIMELIST": " 20:10",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001729,
+  "BRT_NO": "82-2",
+  "BRT_ENAME": "상리",
+  "BRT_ID": "82",
+  "BRT_CLASS": "2",
+  "BRT_LENGTH": 9.2
+ },
+ "timeList": [
+  " 20:10"
+ ]
+}

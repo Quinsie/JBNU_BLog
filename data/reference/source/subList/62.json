@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:05+09:00",
+ "brt_no": "62",
+ "resultList": [
+  {
+   "BRT_SNAME": "흑석골종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001814,
+   "BRT_ENAME": "삼산리",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "730",
+   "BRT_MAXINTERVAL": "255",
+   "BRT_GRPNM": "마을",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "62",
+   "BRT_ID": "62",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2210",
+   "BRT_MININTERVAL": "45"
+  },
+  {
+   "BRT_SNAME": "삼산리",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001815,
+   "BRT_ENAME": "흑석골종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "625",
+   "BRT_MAXINTERVAL": "260",
+   "BRT_GRPNM": "마을",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "62",
+   "BRT_ID": "62",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2105",
+   "BRT_MININTERVAL": "45"
+  }
+ ]
+}

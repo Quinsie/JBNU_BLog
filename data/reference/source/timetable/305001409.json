@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001409,
+ "result": {
+  "BRT_SNAME": "이편한세상 우아",
+  "COURSE_STIMELIST": " 06:05, 06:25",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001409,
+  "BRT_NO": "6",
+  "BRT_ENAME": "전주대학교",
+  "BRT_ID": "6",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.2
+ },
+ "timeList": [
+  " 06:05",
+  "06:25"
+ ]
+}

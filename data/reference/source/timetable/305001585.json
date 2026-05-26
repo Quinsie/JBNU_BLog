@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:12+09:00",
+ "stdid": 305001585,
+ "result": {
+  "BRT_SNAME": "예수병원",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001585,
+  "BRT_NO": "820",
+  "BRT_ENAME": "이서회차지",
+  "BRT_ID": "820",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 16.8
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:11+09:00",
+ "stdid": 305001535,
+ "result": {
+  "BRT_SNAME": "이서회차지",
+  "COURSE_STIMELIST": " 21:10",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001535,
+  "BRT_NO": "27",
+  "BRT_ENAME": "삼례역",
+  "BRT_ID": "27",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 17.2
+ },
+ "timeList": [
+  " 21:10"
+ ]
+}

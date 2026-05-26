@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001477,
+ "result": {
+  "BRT_SNAME": "풍남문",
+  "COURSE_STIMELIST": " 07:55, 12:05",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001477,
+  "BRT_NO": "12",
+  "BRT_ENAME": "내원당마을",
+  "BRT_ID": "12",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 12
+ },
+ "timeList": [
+  " 07:55",
+  "12:05"
+ ]
+}

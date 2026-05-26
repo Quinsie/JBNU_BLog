@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:06+09:00",
+ "stdid": 305000979,
+ "result": {
+  "BRT_SNAME": "완주군청",
+  "COURSE_STIMELIST": " 08:15, 10:25, 13:35, 18:10",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305000979,
+  "BRT_NO": "53",
+  "BRT_ENAME": "제촌",
+  "BRT_ID": "53",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 27.1
+ },
+ "timeList": [
+  " 08:15",
+  "10:25",
+  "13:35",
+  "18:10"
+ ]
+}

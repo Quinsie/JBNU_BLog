@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:16+09:00",
+ "stdid": 305001773,
+ "result": {
+  "BRT_SNAME": "전주대캠퍼스",
+  "COURSE_STIMELIST": " 22:42",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001773,
+  "BRT_NO": "4000",
+  "BRT_ENAME": "마당재",
+  "BRT_ID": "4000",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 13.3
+ },
+ "timeList": [
+  " 22:42"
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:08+09:00",
+ "stdid": 305001167,
+ "result": {
+  "BRT_SNAME": "월드컵경기장",
+  "COURSE_STIMELIST": " 11:45, 13:35",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001167,
+  "BRT_NO": "401",
+  "BRT_ENAME": "상하보",
+  "BRT_ID": "401",
+  "BRT_CLASS": "0",
+  "BRT_TEXT": "11:45, 13:35 월드컵경기장 출발 평화동종점 교대 후 상하보 정시운행",
+  "BRT_LENGTH": 32.2
+ },
+ "timeList": [
+  " 11:45",
+  "13:35"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:20+09:00",
+ "stdid": 305001891,
+ "result": {
+  "BRT_SNAME": "삼례터미널",
+  "COURSE_STIMELIST": " 21:35",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001891,
+  "BRT_NO": "36",
+  "BRT_ENAME": "완주국민체육센터",
+  "BRT_ID": "36",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.6
+ },
+ "timeList": [
+  " 21:35"
+ ]
+}

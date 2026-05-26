@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:11+09:00",
+ "stdid": 305001522,
+ "result": {
+  "BRT_SNAME": "이서회차지",
+  "COURSE_STIMELIST": " 22:40",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001522,
+  "BRT_NO": "165",
+  "BRT_ENAME": "호남고속",
+  "BRT_ID": "165",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 30.1
+ },
+ "timeList": [
+  " 22:40"
+ ]
+}

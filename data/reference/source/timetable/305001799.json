@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:17+09:00",
+ "stdid": 305001799,
+ "result": {
+  "BRT_SNAME": "용지종점",
+  "COURSE_STIMELIST": " 19:29",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001799,
+  "BRT_NO": "18",
+  "BRT_ENAME": "태평마을 입구",
+  "BRT_ID": "18",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 17.1
+ },
+ "timeList": [
+  " 19:29"
+ ]
+}

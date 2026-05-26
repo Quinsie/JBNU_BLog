@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001730,
+ "result": {
+  "BRT_SNAME": "동상거인경로당",
+  "COURSE_STIMELIST": " 06:45",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001730,
+  "BRT_NO": "83",
+  "BRT_ENAME": "소양행정복지센터",
+  "BRT_ID": "83",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 20.3
+ },
+ "timeList": [
+  " 06:45"
+ ]
+}

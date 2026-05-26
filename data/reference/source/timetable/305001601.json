@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:12+09:00",
+ "stdid": 305001601,
+ "result": {
+  "BRT_SNAME": "화원마을",
+  "COURSE_STIMELIST": " 13:00, 16:50",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001601,
+  "BRT_NO": "403",
+  "BRT_ENAME": "월드컵경기장",
+  "BRT_ID": "403",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 35
+ },
+ "timeList": [
+  " 13:00",
+  "16:50"
+ ]
+}

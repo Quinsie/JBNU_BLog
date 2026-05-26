@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:06+09:00",
+ "stdid": 305000983,
+ "result": {
+  "BRT_SNAME": "완주군청",
+  "COURSE_STIMELIST": " 09:00, 13:30, 17:10, 21:40",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305000983,
+  "BRT_NO": "55",
+  "BRT_ENAME": "모아엘가아파트",
+  "BRT_ID": "55",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 19.1
+ },
+ "timeList": [
+  " 09:00",
+  "13:30",
+  "17:10",
+  "21:40"
+ ]
+}

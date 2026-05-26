@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:13+09:00",
+ "stdid": 305001623,
+ "result": {
+  "SAT_NLIST": " 06:00",
+  "HOLI_NLIST": " 06:00",
+  "BRT_SNAME": "전북대학교.농협앞",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001623,
+  "BRT_NO": "119",
+  "BRT_ENAME": "평화동종점",
+  "BRT_ID": "119",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 17.6
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

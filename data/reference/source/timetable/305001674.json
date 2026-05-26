@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:14+09:00",
+ "stdid": 305001674,
+ "result": {
+  "BRT_SNAME": "앞멀",
+  "COURSE_STIMELIST": " 06:20, 08:25",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001674,
+  "BRT_NO": "82-2",
+  "BRT_ENAME": "상망표",
+  "BRT_ID": "82",
+  "BRT_CLASS": "2",
+  "BRT_LENGTH": 22.7
+ },
+ "timeList": [
+  " 06:20",
+  "08:25"
+ ]
+}

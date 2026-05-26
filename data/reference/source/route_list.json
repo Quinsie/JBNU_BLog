@@ -1,0 +1,1326 @@
+{
+ "fetched_at": "2026-05-26T13:11:03+09:00",
+ "total": 132,
+ "resultList": [
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 305132104,
+   "BRT_STDID": 305001153,
+   "BRT_NO": "2",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ID": 2,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 305100651,
+   "BRT_STDID": 305001271,
+   "BRT_NO": "3-1",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "전주대학교",
+   "BRT_ID": 3,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 305100651,
+   "BRT_STDID": 305001272,
+   "BRT_NO": "3-2",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "전주대학교",
+   "BRT_ID": 3,
+   "BRT_CLASS": 2
+  },
+  {
+   "BRT_SNAME": "전북대종점",
+   "BRT_EID": 316032081,
+   "BRT_STDID": 305001749,
+   "BRT_NO": "5-5",
+   "BRT_SID": 305032481,
+   "BRT_ENAME": "전북대종점",
+   "BRT_ID": 5,
+   "BRT_CLASS": 5
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 305100651,
+   "BRT_STDID": 305001100,
+   "BRT_NO": "6",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "전주대학교",
+   "BRT_ID": 6,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 305132104,
+   "BRT_STDID": 305001892,
+   "BRT_NO": "6-1",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ID": 6,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "전북대종점",
+   "BRT_EID": 316032081,
+   "BRT_STDID": 305001098,
+   "BRT_NO": "8-1",
+   "BRT_SID": 305032481,
+   "BRT_ENAME": "전북대종점",
+   "BRT_ID": 8,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "전북대종점",
+   "BRT_EID": 316032081,
+   "BRT_STDID": 305001099,
+   "BRT_NO": "8-2",
+   "BRT_SID": 305032481,
+   "BRT_ENAME": "전북대종점",
+   "BRT_ID": 8,
+   "BRT_CLASS": 2
+  },
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_EID": 306032304,
+   "BRT_STDID": 305200566,
+   "BRT_NO": "9",
+   "BRT_SID": 306032303,
+   "BRT_ENAME": "송천동종점",
+   "BRT_ID": 9,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화코오롱아파트",
+   "BRT_EID": 305100174,
+   "BRT_STDID": 305001783,
+   "BRT_NO": "10",
+   "BRT_SID": 305100362,
+   "BRT_ENAME": "추동",
+   "BRT_ID": 10,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "풍남문",
+   "BRT_EID": 305032617,
+   "BRT_STDID": 305001477,
+   "BRT_NO": "12",
+   "BRT_SID": 305100589,
+   "BRT_ENAME": "내원당마을",
+   "BRT_ID": 12,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "풍남문",
+   "BRT_EID": 305032622,
+   "BRT_STDID": 305001476,
+   "BRT_NO": "13",
+   "BRT_SID": 305100589,
+   "BRT_ENAME": "은석마을",
+   "BRT_ID": 13,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "낙수정",
+   "BRT_EID": 305100596,
+   "BRT_STDID": 305001213,
+   "BRT_NO": "14",
+   "BRT_SID": 305100597,
+   "BRT_ENAME": "낙수정",
+   "BRT_ID": 14,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "낙수정",
+   "BRT_EID": 305032649,
+   "BRT_STDID": 305001214,
+   "BRT_NO": "15",
+   "BRT_SID": 305100597,
+   "BRT_ENAME": "흑석골종점",
+   "BRT_ID": 15,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "풍남문",
+   "BRT_EID": 305100457,
+   "BRT_STDID": 305001866,
+   "BRT_NO": "16",
+   "BRT_SID": 305100589,
+   "BRT_ENAME": "삼경사",
+   "BRT_ID": 16,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "풍남문",
+   "BRT_EID": 305032649,
+   "BRT_STDID": 305001791,
+   "BRT_NO": "17",
+   "BRT_SID": 305100589,
+   "BRT_ENAME": "흑석골종점",
+   "BRT_ID": 17,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 311101575,
+   "BRT_STDID": 305001793,
+   "BRT_NO": "18",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "백구",
+   "BRT_ID": 18,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 311101242,
+   "BRT_STDID": 305001800,
+   "BRT_NO": "19",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "춘강",
+   "BRT_ID": 19,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "원마다리",
+   "BRT_EID": 305032675,
+   "BRT_STDID": 305001527,
+   "BRT_NO": "20",
+   "BRT_SID": 311101153,
+   "BRT_ENAME": "이서회차지",
+   "BRT_ID": 20,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "모산종점",
+   "BRT_EID": 305032675,
+   "BRT_STDID": 305001532,
+   "BRT_NO": "21",
+   "BRT_SID": 311100826,
+   "BRT_ENAME": "이서회차지",
+   "BRT_ID": 21,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "원동마을",
+   "BRT_EID": 305032675,
+   "BRT_STDID": 305001537,
+   "BRT_NO": "23",
+   "BRT_SID": 306101240,
+   "BRT_ENAME": "이서회차지",
+   "BRT_ID": 23,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "구암",
+   "BRT_EID": 305032675,
+   "BRT_STDID": 305001542,
+   "BRT_NO": "24",
+   "BRT_SID": 311100415,
+   "BRT_ENAME": "이서회차지",
+   "BRT_ID": 24,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "대문안종점",
+   "BRT_EID": 305032675,
+   "BRT_STDID": 305001544,
+   "BRT_NO": "25",
+   "BRT_SID": 312100377,
+   "BRT_ENAME": "이서회차지",
+   "BRT_ID": 25,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "콩쥐팥쥐마을",
+   "BRT_EID": 305032675,
+   "BRT_STDID": 305001548,
+   "BRT_NO": "26",
+   "BRT_SID": 312100499,
+   "BRT_ENAME": "이서회차지",
+   "BRT_ID": 26,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼례역",
+   "BRT_EID": 305032675,
+   "BRT_STDID": 305001671,
+   "BRT_NO": "27",
+   "BRT_SID": 312101649,
+   "BRT_ENAME": "이서회차지",
+   "BRT_ID": 27,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼례역",
+   "BRT_EID": 312101914,
+   "BRT_STDID": 305001869,
+   "BRT_NO": "30",
+   "BRT_SID": 312101649,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ID": 30,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼례역",
+   "BRT_EID": 312101914,
+   "BRT_STDID": 305001873,
+   "BRT_NO": "31",
+   "BRT_SID": 312101649,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ID": 31,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼례터미널",
+   "BRT_EID": 312101968,
+   "BRT_STDID": 305001875,
+   "BRT_NO": "32",
+   "BRT_SID": 312101674,
+   "BRT_ENAME": "비봉종점",
+   "BRT_ID": 32,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼례역",
+   "BRT_EID": 312101640,
+   "BRT_STDID": 305001879,
+   "BRT_NO": "33",
+   "BRT_SID": 312101649,
+   "BRT_ENAME": "지암마을",
+   "BRT_ID": 33,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼례역",
+   "BRT_EID": 312101640,
+   "BRT_STDID": 305001881,
+   "BRT_NO": "34",
+   "BRT_SID": 312101649,
+   "BRT_ENAME": "지암마을",
+   "BRT_ID": 34,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼례역",
+   "BRT_EID": 312101640,
+   "BRT_STDID": 305001883,
+   "BRT_NO": "34-1",
+   "BRT_SID": 312101649,
+   "BRT_ENAME": "지암마을",
+   "BRT_ID": 34,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "삼례역",
+   "BRT_EID": 312101937,
+   "BRT_STDID": 305001887,
+   "BRT_NO": "35",
+   "BRT_SID": 312101649,
+   "BRT_ENAME": "고산터미널",
+   "BRT_ID": 35,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼례역",
+   "BRT_EID": 312101937,
+   "BRT_STDID": 305001889,
+   "BRT_NO": "36",
+   "BRT_SID": 312101649,
+   "BRT_ENAME": "고산터미널",
+   "BRT_ID": 36,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 306101594,
+   "BRT_STDID": 305001835,
+   "BRT_NO": "40",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "고잔",
+   "BRT_ID": 40,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "하나로마트종점",
+   "BRT_EID": 306101554,
+   "BRT_STDID": 305001808,
+   "BRT_NO": "41",
+   "BRT_SID": 306101154,
+   "BRT_ENAME": "삼화동",
+   "BRT_ID": 41,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 312101093,
+   "BRT_STDID": 305001842,
+   "BRT_NO": "43",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "홍개",
+   "BRT_ID": 43,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 306101337,
+   "BRT_STDID": 305001846,
+   "BRT_NO": "45",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "덕동",
+   "BRT_ID": 45,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "하나로마트종점",
+   "BRT_EID": 306101510,
+   "BRT_STDID": 305001810,
+   "BRT_NO": "46",
+   "BRT_SID": 306101154,
+   "BRT_ENAME": "용신마을",
+   "BRT_ID": 46,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "하나로마트종점",
+   "BRT_EID": 305032666,
+   "BRT_STDID": 305001812,
+   "BRT_NO": "47",
+   "BRT_SID": 306101154,
+   "BRT_ENAME": "용덕마을",
+   "BRT_ID": 47,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 312101273,
+   "BRT_STDID": 305001854,
+   "BRT_NO": "48",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "신기종점",
+   "BRT_ID": 48,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 305032550,
+   "BRT_STDID": 305001462,
+   "BRT_NO": "49",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "월드컵경기장",
+   "BRT_ID": 49,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "소양회차지",
+   "BRT_EID": 312101782,
+   "BRT_STDID": 305001524,
+   "BRT_NO": "50",
+   "BRT_SID": 305032701,
+   "BRT_ENAME": "봉동주공아파트",
+   "BRT_ID": 50,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "고산터미널",
+   "BRT_EID": 312101914,
+   "BRT_STDID": 305000418,
+   "BRT_NO": "51",
+   "BRT_SID": 312101938,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ID": 51,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "완주군청",
+   "BRT_EID": 312101968,
+   "BRT_STDID": 305000970,
+   "BRT_NO": "52",
+   "BRT_SID": 312102033,
+   "BRT_ENAME": "비봉종점",
+   "BRT_ID": 52,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "완주군청",
+   "BRT_EID": 312101962,
+   "BRT_STDID": 305000979,
+   "BRT_NO": "53",
+   "BRT_SID": 312102033,
+   "BRT_ENAME": "제촌",
+   "BRT_ID": 53,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "완주군청",
+   "BRT_EID": 312101854,
+   "BRT_STDID": 305000981,
+   "BRT_NO": "54",
+   "BRT_SID": 312102033,
+   "BRT_ENAME": "원구암마을",
+   "BRT_ID": 54,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "모아엘가아파트",
+   "BRT_EID": 312102030,
+   "BRT_STDID": 305000984,
+   "BRT_NO": "55",
+   "BRT_SID": 312032799,
+   "BRT_ENAME": "완주군청",
+   "BRT_ID": 55,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "설경마을종점",
+   "BRT_EID": 305032805,
+   "BRT_STDID": 305000985,
+   "BRT_NO": "56",
+   "BRT_SID": 312101513,
+   "BRT_ENAME": "봉동회차지",
+   "BRT_ID": 56,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "양야리경로당",
+   "BRT_EID": 305032805,
+   "BRT_STDID": 305000987,
+   "BRT_NO": "57",
+   "BRT_SID": 312101985,
+   "BRT_ENAME": "봉동회차지",
+   "BRT_ID": 57,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "봉동회차지",
+   "BRT_EID": 312101643,
+   "BRT_STDID": 305000990,
+   "BRT_NO": "58",
+   "BRT_SID": 305032805,
+   "BRT_ENAME": "터지내마을",
+   "BRT_ID": 58,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "어린이창의체험관",
+   "BRT_EID": 306101626,
+   "BRT_STDID": 305001825,
+   "BRT_NO": "59",
+   "BRT_SID": 305032590,
+   "BRT_ENAME": "만경강변 진조리.은평",
+   "BRT_ID": 59,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "모아엘가아파트",
+   "BRT_EID": 312101911,
+   "BRT_STDID": 305000993,
+   "BRT_NO": "60",
+   "BRT_SID": 312032799,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ID": 60,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "비전대학교",
+   "BRT_EID": 305100651,
+   "BRT_STDID": 305001119,
+   "BRT_NO": "61",
+   "BRT_SID": 305100526,
+   "BRT_ENAME": "전주대학교",
+   "BRT_ID": 61,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "흑석골종점",
+   "BRT_EID": 305100487,
+   "BRT_STDID": 305001814,
+   "BRT_NO": "62",
+   "BRT_SID": 305032648,
+   "BRT_ENAME": "삼산리",
+   "BRT_ID": 62,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "흑석골종점",
+   "BRT_EID": 305100615,
+   "BRT_STDID": 305001816,
+   "BRT_NO": "62-1",
+   "BRT_SID": 305032648,
+   "BRT_ENAME": "원상림",
+   "BRT_ID": 62,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "흑석골종점",
+   "BRT_EID": 305132100,
+   "BRT_STDID": 305001818,
+   "BRT_NO": "63",
+   "BRT_SID": 305032648,
+   "BRT_ENAME": "호동마을",
+   "BRT_ID": 63,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "흑석골종점",
+   "BRT_EID": 305032331,
+   "BRT_STDID": 305001821,
+   "BRT_NO": "63-1",
+   "BRT_SID": 305032648,
+   "BRT_ENAME": "신덕마을",
+   "BRT_ID": 63,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "민목리",
+   "BRT_EID": 312100245,
+   "BRT_STDID": 305001717,
+   "BRT_NO": "70",
+   "BRT_SID": 312100570,
+   "BRT_ENAME": "상관농협로컬푸드",
+   "BRT_ID": 70,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 316032081,
+   "BRT_STDID": 305001608,
+   "BRT_NO": "74",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "전북대종점",
+   "BRT_ID": 74,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 316032081,
+   "BRT_STDID": 305001492,
+   "BRT_NO": "75",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "전북대종점",
+   "BRT_ID": 75,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "상관주민센터",
+   "BRT_EID": 305032719,
+   "BRT_STDID": 305001721,
+   "BRT_NO": "76",
+   "BRT_SID": 312100226,
+   "BRT_ENAME": "어두마을",
+   "BRT_ID": 76,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "대흥마을",
+   "BRT_EID": 312100245,
+   "BRT_STDID": 305001720,
+   "BRT_NO": "77",
+   "BRT_SID": 305032716,
+   "BRT_ENAME": "상관농협로컬푸드",
+   "BRT_ID": 77,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주동물원",
+   "BRT_EID": 311100086,
+   "BRT_STDID": 305200038,
+   "BRT_NO": "79",
+   "BRT_SID": 306101213,
+   "BRT_ENAME": "금산사",
+   "BRT_ID": 79,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "금상동",
+   "BRT_EID": 306100898,
+   "BRT_STDID": 305001470,
+   "BRT_NO": "80",
+   "BRT_SID": 306101014,
+   "BRT_ENAME": "모래내시장",
+   "BRT_ID": 80,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "모래내시장",
+   "BRT_EID": 312101259,
+   "BRT_STDID": 305001864,
+   "BRT_NO": "81",
+   "BRT_SID": 306100900,
+   "BRT_ENAME": "하이리",
+   "BRT_ID": 81,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "어린이창의체험관",
+   "BRT_EID": 306100653,
+   "BRT_STDID": 305001823,
+   "BRT_NO": "82",
+   "BRT_SID": 305032590,
+   "BRT_ENAME": "재전",
+   "BRT_ID": 82,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "상망표",
+   "BRT_EID": 312101842,
+   "BRT_STDID": 305001673,
+   "BRT_NO": "82-1",
+   "BRT_SID": 312101034,
+   "BRT_ENAME": "앞멀",
+   "BRT_ID": 82,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "앞멀",
+   "BRT_EID": 312101032,
+   "BRT_STDID": 305001674,
+   "BRT_NO": "82-2",
+   "BRT_SID": 312101840,
+   "BRT_ENAME": "상망표",
+   "BRT_ID": 82,
+   "BRT_CLASS": 2
+  },
+  {
+   "BRT_SNAME": "소양행정복지센터",
+   "BRT_EID": 305032678,
+   "BRT_STDID": 305001676,
+   "BRT_NO": "83",
+   "BRT_SID": 312101166,
+   "BRT_ENAME": "동상거인경로당",
+   "BRT_ID": 83,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "인덕마을",
+   "BRT_EID": 312101557,
+   "BRT_STDID": 305001678,
+   "BRT_NO": "84",
+   "BRT_SID": 312101500,
+   "BRT_ENAME": "일임리",
+   "BRT_ID": 84,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "용문사.반곡마을",
+   "BRT_EID": 312100856,
+   "BRT_STDID": 305001683,
+   "BRT_NO": "85",
+   "BRT_SID": 312101118,
+   "BRT_ENAME": "응암마을",
+   "BRT_ID": 85,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월상리",
+   "BRT_EID": 312101399,
+   "BRT_STDID": 305001689,
+   "BRT_NO": "86",
+   "BRT_SID": 312100476,
+   "BRT_ENAME": "분토종점",
+   "BRT_ID": 86,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_EID": 305100185,
+   "BRT_STDID": 305001610,
+   "BRT_NO": "87",
+   "BRT_SID": 306032303,
+   "BRT_ENAME": "원당리",
+   "BRT_ID": 87,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "다리목",
+   "BRT_EID": 312100763,
+   "BRT_STDID": 305001695,
+   "BRT_NO": "87-1",
+   "BRT_SID": 312101536,
+   "BRT_ENAME": "약암마을",
+   "BRT_ID": 87,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "약암마을",
+   "BRT_EID": 312101535,
+   "BRT_STDID": 305001697,
+   "BRT_NO": "87-2",
+   "BRT_SID": 312100760,
+   "BRT_ENAME": "다리목",
+   "BRT_ID": 87,
+   "BRT_CLASS": 2
+  },
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_EID": 305100203,
+   "BRT_STDID": 305001131,
+   "BRT_NO": "89",
+   "BRT_SID": 306032303,
+   "BRT_ENAME": "중인동",
+   "BRT_ID": 89,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "원안덕마을",
+   "BRT_EID": 312032790,
+   "BRT_STDID": 305001698,
+   "BRT_NO": "90",
+   "BRT_SID": 312100053,
+   "BRT_ENAME": "전북도립미술관",
+   "BRT_ID": 90,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "막은댐",
+   "BRT_EID": 312032790,
+   "BRT_STDID": 305001702,
+   "BRT_NO": "91",
+   "BRT_SID": 316100013,
+   "BRT_ENAME": "전북도립미술관",
+   "BRT_ID": 91,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "막은댐",
+   "BRT_EID": 312032790,
+   "BRT_STDID": 305001709,
+   "BRT_NO": "92",
+   "BRT_SID": 316100013,
+   "BRT_ENAME": "전북도립미술관",
+   "BRT_ID": 92,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "어린이창의체험관",
+   "BRT_EID": 305032407,
+   "BRT_STDID": 305001827,
+   "BRT_NO": "94",
+   "BRT_SID": 305032590,
+   "BRT_ENAME": "진기마을종점",
+   "BRT_ID": 94,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전북대종점",
+   "BRT_EID": 306101626,
+   "BRT_STDID": 305001831,
+   "BRT_NO": "97",
+   "BRT_SID": 305032481,
+   "BRT_ENAME": "만경강변 진조리.은평",
+   "BRT_ID": 97,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "진조리",
+   "BRT_EID": 306101612,
+   "BRT_STDID": 305001833,
+   "BRT_NO": "99-1",
+   "BRT_SID": 306101611,
+   "BRT_ENAME": "진조리",
+   "BRT_ID": 99,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "진조리",
+   "BRT_EID": 306101612,
+   "BRT_STDID": 305001834,
+   "BRT_NO": "99-2",
+   "BRT_SID": 306101611,
+   "BRT_ENAME": "진조리",
+   "BRT_ID": 99,
+   "BRT_CLASS": 2
+  },
+  {
+   "BRT_SNAME": "전북대종점",
+   "BRT_EID": 305132104,
+   "BRT_STDID": 305001088,
+   "BRT_NO": "101",
+   "BRT_SID": 305032481,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ID": 101,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_EID": 305032317,
+   "BRT_STDID": 305001331,
+   "BRT_NO": "102",
+   "BRT_SID": 306032303,
+   "BRT_ENAME": "전주시양묘장",
+   "BRT_ID": 102,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_EID": 305032317,
+   "BRT_STDID": 305001769,
+   "BRT_NO": "103-1",
+   "BRT_SID": 306032303,
+   "BRT_ENAME": "전주시양묘장",
+   "BRT_ID": 103,
+   "BRT_CLASS": 1
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 306032304,
+   "BRT_STDID": 305001094,
+   "BRT_NO": "104",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "송천동종점",
+   "BRT_ID": 104,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 306032304,
+   "BRT_STDID": 305001616,
+   "BRT_NO": "108",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "송천동종점",
+   "BRT_ID": 108,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "비전대학교",
+   "BRT_EID": 305032693,
+   "BRT_STDID": 305001752,
+   "BRT_NO": "110",
+   "BRT_SID": 305100526,
+   "BRT_ENAME": "대성동종점",
+   "BRT_ID": 110,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 305132105,
+   "BRT_STDID": 305001618,
+   "BRT_NO": "119",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ID": 119,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주동물원",
+   "BRT_EID": 305032675,
+   "BRT_STDID": 305001141,
+   "BRT_NO": "165",
+   "BRT_SID": 306101213,
+   "BRT_ENAME": "이서회차지",
+   "BRT_ID": 165,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "기린봉",
+   "BRT_EID": 306101154,
+   "BRT_STDID": 305001423,
+   "BRT_NO": "200",
+   "BRT_SID": 305100699,
+   "BRT_ENAME": "하나로마트종점",
+   "BRT_ID": 200,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "비전대학교",
+   "BRT_EID": 305100527,
+   "BRT_STDID": 305001425,
+   "BRT_NO": "220",
+   "BRT_SID": 305100526,
+   "BRT_ENAME": "비전대학교",
+   "BRT_ID": 220,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 312101701,
+   "BRT_STDID": 305001144,
+   "BRT_NO": "309",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "우석대종점",
+   "BRT_ID": 309,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주시양묘장",
+   "BRT_EID": 312101701,
+   "BRT_STDID": 305001635,
+   "BRT_NO": "337",
+   "BRT_SID": 305032318,
+   "BRT_ENAME": "우석대종점",
+   "BRT_ID": 337,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 312101673,
+   "BRT_STDID": 305200617,
+   "BRT_NO": "350",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "삼례터미널",
+   "BRT_ID": 350,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "비전대학교",
+   "BRT_EID": 312101701,
+   "BRT_STDID": 305001149,
+   "BRT_NO": "354",
+   "BRT_SID": 305100526,
+   "BRT_ENAME": "우석대종점",
+   "BRT_ID": 354,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 312101673,
+   "BRT_STDID": 305001151,
+   "BRT_NO": "355",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "삼례터미널",
+   "BRT_ID": 355,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "비전대학교",
+   "BRT_EID": 312101701,
+   "BRT_STDID": 305001756,
+   "BRT_NO": "383",
+   "BRT_SID": 305100526,
+   "BRT_ENAME": "우석대종점",
+   "BRT_ID": 383,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 312101701,
+   "BRT_STDID": 305200112,
+   "BRT_NO": "385",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "우석대종점",
+   "BRT_ID": 385,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 305032507,
+   "BRT_STDID": 305001758,
+   "BRT_NO": "386",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "익산더반포레아파트",
+   "BRT_ID": 386,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 312100229,
+   "BRT_STDID": 305001598,
+   "BRT_NO": "401",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "상하보",
+   "BRT_ID": 401,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 312100229,
+   "BRT_STDID": 305001600,
+   "BRT_NO": "402",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "상하보",
+   "BRT_ID": 402,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 312100177,
+   "BRT_STDID": 305001767,
+   "BRT_NO": "403",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "화원마을",
+   "BRT_ID": 403,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "월드컵경기장",
+   "BRT_EID": 305100203,
+   "BRT_STDID": 305001646,
+   "BRT_NO": "420",
+   "BRT_SID": 305032550,
+   "BRT_ENAME": "중인동",
+   "BRT_ID": 420,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 305032805,
+   "BRT_STDID": 305001155,
+   "BRT_NO": "500",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "봉동회차지",
+   "BRT_ID": 500,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 305032805,
+   "BRT_STDID": 305001159,
+   "BRT_NO": "501",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "봉동회차지",
+   "BRT_ID": 501,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대학교",
+   "BRT_EID": 312101937,
+   "BRT_STDID": 305001199,
+   "BRT_NO": "530",
+   "BRT_SID": 305100650,
+   "BRT_ENAME": "고산터미널",
+   "BRT_ID": 530,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 312101914,
+   "BRT_STDID": 305001162,
+   "BRT_NO": "550",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ID": 550,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼천동종점",
+   "BRT_EID": 312101914,
+   "BRT_STDID": 305001647,
+   "BRT_NO": "554",
+   "BRT_SID": 305032325,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ID": 554,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "삼천동종점",
+   "BRT_EID": 312101914,
+   "BRT_STDID": 305001649,
+   "BRT_NO": "559",
+   "BRT_SID": 305032325,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ID": 559,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "감수리",
+   "BRT_EID": 305032383,
+   "BRT_STDID": 305001651,
+   "BRT_NO": "644",
+   "BRT_SID": 306101354,
+   "BRT_ENAME": "원평종점",
+   "BRT_ID": 644,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "감수리",
+   "BRT_EID": 311100232,
+   "BRT_STDID": 305001653,
+   "BRT_NO": "684",
+   "BRT_SID": 306101354,
+   "BRT_ENAME": "금구",
+   "BRT_ID": 684,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "감수리",
+   "BRT_EID": 311100247,
+   "BRT_STDID": 305001657,
+   "BRT_NO": "685",
+   "BRT_SID": 306101354,
+   "BRT_ENAME": "오봉리",
+   "BRT_ID": 685,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_EID": 316100042,
+   "BRT_STDID": 305001223,
+   "BRT_NO": "752",
+   "BRT_SID": 306032303,
+   "BRT_ENAME": "관촌터미널",
+   "BRT_ID": 752,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 305032701,
+   "BRT_STDID": 305001580,
+   "BRT_NO": "810",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "소양회차지",
+   "BRT_ID": 810,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "이서회차지",
+   "BRT_EID": 305032701,
+   "BRT_STDID": 305001584,
+   "BRT_NO": "820",
+   "BRT_SID": 305032675,
+   "BRT_ENAME": "소양회차지",
+   "BRT_ID": 820,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "에코시티종점차고지(승하차X)",
+   "BRT_EID": 312032790,
+   "BRT_STDID": 305001257,
+   "BRT_NO": "970",
+   "BRT_SID": 305032847,
+   "BRT_ENAME": "전북도립미술관",
+   "BRT_ID": 970,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주동물원",
+   "BRT_EID": 305032702,
+   "BRT_STDID": 305001659,
+   "BRT_NO": "999",
+   "BRT_SID": 306101213,
+   "BRT_ENAME": "국립전주박물관종점",
+   "BRT_ID": 999,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 312101701,
+   "BRT_STDID": 305001564,
+   "BRT_NO": "1001",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "우석대종점",
+   "BRT_ID": 1001,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 312101701,
+   "BRT_STDID": 305001565,
+   "BRT_NO": "1002",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "우석대종점",
+   "BRT_ID": 1002,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 305032183,
+   "BRT_STDID": 305200940,
+   "BRT_NO": "1994",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "시외고속간이터미널",
+   "BRT_ID": 1994,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 306032304,
+   "BRT_STDID": 305001760,
+   "BRT_NO": "2001",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "송천동종점",
+   "BRT_ID": 2001,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_EID": 306032304,
+   "BRT_STDID": 305001762,
+   "BRT_NO": "2002",
+   "BRT_SID": 305132105,
+   "BRT_ENAME": "송천동종점",
+   "BRT_ID": 2002,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_EID": 305132104,
+   "BRT_STDID": 305000956,
+   "BRT_NO": "3001",
+   "BRT_SID": 306032303,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ID": 3001,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "송천동종점",
+   "BRT_EID": 305032320,
+   "BRT_STDID": 305300262,
+   "BRT_NO": "3002",
+   "BRT_SID": 306032303,
+   "BRT_ENAME": "삼천동종점",
+   "BRT_ID": 3002,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대캠퍼스",
+   "BRT_EID": 305032694,
+   "BRT_STDID": 305001573,
+   "BRT_NO": "4000",
+   "BRT_SID": 305032695,
+   "BRT_ENAME": "전주대캠퍼스",
+   "BRT_ID": 4000,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대캠퍼스",
+   "BRT_EID": 305032694,
+   "BRT_STDID": 305001574,
+   "BRT_NO": "5001",
+   "BRT_SID": 305032695,
+   "BRT_ENAME": "전주대캠퍼스",
+   "BRT_ID": 5001,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "전주대캠퍼스",
+   "BRT_EID": 305032694,
+   "BRT_STDID": 305001575,
+   "BRT_NO": "5002",
+   "BRT_SID": 305032695,
+   "BRT_ENAME": "전주대캠퍼스",
+   "BRT_ID": 5002,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "비전대학교",
+   "BRT_EID": 305100527,
+   "BRT_STDID": 305001764,
+   "BRT_NO": "6001",
+   "BRT_SID": 305100526,
+   "BRT_ENAME": "비전대학교",
+   "BRT_ID": 6001,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "비전대학교",
+   "BRT_EID": 305100527,
+   "BRT_STDID": 305001765,
+   "BRT_NO": "6002",
+   "BRT_SID": 305100526,
+   "BRT_ENAME": "비전대학교",
+   "BRT_ID": 6002,
+   "BRT_CLASS": 0
+  },
+  {
+   "BRT_SNAME": "어린이창의체험관",
+   "BRT_EID": 306101579,
+   "BRT_STDID": 305001018,
+   "BRT_NO": "8490",
+   "BRT_SID": 305032590,
+   "BRT_ENAME": "신유강",
+   "BRT_ID": 8490,
+   "BRT_CLASS": 0
+  }
+ ]
+}

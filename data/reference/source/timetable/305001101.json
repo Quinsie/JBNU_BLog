@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:07+09:00",
+ "stdid": 305001101,
+ "result": {
+  "BRT_SNAME": "한국전기안전공사본사",
+  "COURSE_STIMELIST": " 06:05",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001101,
+  "BRT_NO": "110",
+  "BRT_ENAME": "대성동종점",
+  "BRT_ID": "110",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 20.7
+ },
+ "timeList": [
+  " 06:05"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:08+09:00",
+ "stdid": 305001177,
+ "result": {
+  "BRT_SNAME": "기린대로 병무청",
+  "COURSE_STIMELIST": " 05:55",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001177,
+  "BRT_NO": "350",
+  "BRT_ENAME": "삼례터미널",
+  "BRT_ID": "350",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 17.3
+ },
+ "timeList": [
+  " 05:55"
+ ]
+}

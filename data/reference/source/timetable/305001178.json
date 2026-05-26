@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:08+09:00",
+ "stdid": 305001178,
+ "result": {
+  "BRT_SNAME": "고속버스터미널입구.전북일보사",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001178,
+  "BRT_NO": "355",
+  "BRT_ENAME": "삼례터미널",
+  "BRT_ID": "355",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 12.1
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

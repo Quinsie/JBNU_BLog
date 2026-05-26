@@ -1,0 +1,66 @@
+{
+ "fetched_at": "2026-05-26T13:11:05+09:00",
+ "brt_no": "550",
+ "resultList": [
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001162,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "550",
+   "BRT_MAXINTERVAL": "33",
+   "BRT_GRPNM": "본선",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "550",
+   "BRT_ID": "550",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2225",
+   "BRT_MININTERVAL": "27"
+  },
+  {
+   "BRT_SNAME": "둔산코아루2차아파트",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001164,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "610",
+   "BRT_MAXINTERVAL": "38",
+   "BRT_GRPNM": "본선",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "550",
+   "BRT_ID": "550",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2234",
+   "BRT_MININTERVAL": "27"
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_GRPNM": "본선",
+   "BRT_DIRECTION": "1",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001163,
+   "BRT_NO": "550",
+   "BRT_ENAME": "차량등록사업소",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "550",
+   "BRT_FIRSTTIME": "2255",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2255"
+  },
+  {
+   "BRT_SNAME": "호성진흥3단지",
+   "BRT_GRPNM": "본선",
+   "BRT_DIRECTION": "2",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001165,
+   "BRT_NO": "550",
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "550",
+   "BRT_FIRSTTIME": "605",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "605"
+  }
+ ]
+}

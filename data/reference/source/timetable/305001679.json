@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:14+09:00",
+ "stdid": 305001679,
+ "result": {
+  "BRT_SNAME": "인덕마을",
+  "COURSE_STIMELIST": " 11:20, 22:20",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001679,
+  "BRT_NO": "84",
+  "BRT_ENAME": "소양행정복지센터",
+  "BRT_ID": "84",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 6.8
+ },
+ "timeList": [
+  " 11:20",
+  "22:20"
+ ]
+}

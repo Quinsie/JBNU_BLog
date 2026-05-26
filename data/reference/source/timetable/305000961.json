@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:06+09:00",
+ "stdid": 305000961,
+ "result": {
+  "SAT_NLIST": " 22:35",
+  "HOLI_NLIST": " 22:35",
+  "BRT_SNAME": "평화동종점",
+  "COURSE_STIMELIST": " 22:35",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305000961,
+  "BRT_NO": "500",
+  "BRT_ENAME": "운곡모아미래도2차아파트",
+  "BRT_ID": "500",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 19
+ },
+ "timeList": [
+  " 22:35"
+ ]
+}

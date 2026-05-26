@@ -1,0 +1,22 @@
+{
+ "fetched_at": "2026-05-26T13:11:05+09:00",
+ "brt_no": "60",
+ "resultList": [
+  {
+   "BRT_SNAME": "모아엘가아파트",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000993,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "740",
+   "BRT_MAXINTERVAL": "270",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "60",
+   "BRT_ID": "60",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "1750",
+   "BRT_MININTERVAL": "150"
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:19+09:00",
+ "stdid": 305001880,
+ "result": {
+  "BRT_SNAME": "지암마을",
+  "COURSE_STIMELIST": " 10:40, 15:10, 19:20, 21:10",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305001880,
+  "BRT_NO": "33",
+  "BRT_ENAME": "삼례역",
+  "BRT_ID": "33",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 20.3
+ },
+ "timeList": [
+  " 10:40",
+  "15:10",
+  "19:20",
+  "21:10"
+ ]
+}

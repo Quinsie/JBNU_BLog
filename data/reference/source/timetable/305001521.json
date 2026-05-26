@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:11+09:00",
+ "stdid": 305001521,
+ "result": {
+  "BRT_SNAME": "전동성당.한옥마을",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001521,
+  "BRT_NO": "165",
+  "BRT_ENAME": "이서회차지",
+  "BRT_ID": "165",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 27.4
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

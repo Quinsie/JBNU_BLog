@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:17+09:00",
+ "stdid": 305001797,
+ "result": {
+  "BRT_SNAME": "용지종점",
+  "COURSE_STIMELIST": " 06:23, 08:07, 17:23",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001797,
+  "BRT_NO": "18",
+  "BRT_ENAME": "월드컵경기장",
+  "BRT_ID": "18",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 20
+ },
+ "timeList": [
+  " 06:23",
+  "08:07",
+  "17:23"
+ ]
+}

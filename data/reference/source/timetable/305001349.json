@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:09+09:00",
+ "stdid": 305001349,
+ "result": {
+  "BRT_SNAME": "이서회차지",
+  "COURSE_STIMELIST": " 22:10",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001349,
+  "BRT_NO": "21",
+  "BRT_ENAME": "신일해피트리",
+  "BRT_ID": "21",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 3.8
+ },
+ "timeList": [
+  " 22:10"
+ ]
+}

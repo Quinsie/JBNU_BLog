@@ -1,0 +1,80 @@
+{
+ "fetched_at": "2026-05-26T13:11:05+09:00",
+ "brt_no": "554",
+ "resultList": [
+  {
+   "BRT_SNAME": "삼천동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001647,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "600",
+   "BRT_MAXINTERVAL": "49",
+   "BRT_GRPNM": "시내",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "554",
+   "BRT_ID": "554",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2205",
+   "BRT_MININTERVAL": "29"
+  },
+  {
+   "BRT_SNAME": "둔산코아루2차아파트",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001648,
+   "BRT_ENAME": "삼천동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "600",
+   "BRT_MAXINTERVAL": "51",
+   "BRT_GRPNM": "시내",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "554",
+   "BRT_ID": "554",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2143",
+   "BRT_MININTERVAL": "29"
+  },
+  {
+   "BRT_SNAME": "고속버스터미널입구.전북일보사",
+   "BRT_GRPNM": "시내",
+   "BRT_DIRECTION": "1",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305000409,
+   "BRT_NO": "554",
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "554",
+   "BRT_FIRSTTIME": "555",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "555"
+  },
+  {
+   "BRT_SNAME": "송천주공아파트",
+   "BRT_GRPNM": "시내",
+   "BRT_DIRECTION": "2",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001182,
+   "BRT_NO": "554",
+   "BRT_ENAME": "삼천동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "554",
+   "BRT_FIRSTTIME": "555",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "555"
+  },
+  {
+   "BRT_SNAME": "둔산코아루2차아파트",
+   "BRT_GRPNM": "시내",
+   "BRT_DIRECTION": "2",
+   "BRT_SUBID": "B",
+   "BRT_STDID": 305000962,
+   "BRT_NO": "554",
+   "BRT_ENAME": "효천우미린1차아파트",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "554",
+   "BRT_FIRSTTIME": "2225",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2225"
+  }
+ ]
+}

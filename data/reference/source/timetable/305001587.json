@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:12+09:00",
+ "stdid": 305001587,
+ "result": {
+  "BRT_SNAME": "소양회차지",
+  "COURSE_STIMELIST": " 22:20",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001587,
+  "BRT_NO": "820",
+  "BRT_ENAME": "전주대학교",
+  "BRT_ID": "820",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 19.7
+ },
+ "timeList": [
+  " 22:20"
+ ]
+}

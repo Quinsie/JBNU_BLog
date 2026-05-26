@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:13+09:00",
+ "stdid": 305001624,
+ "result": {
+  "BRT_SNAME": "동부대로전주역",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001624,
+  "BRT_NO": "119",
+  "BRT_ENAME": "전주대학교",
+  "BRT_ID": "119",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 15.8
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

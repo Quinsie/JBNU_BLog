@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:08+09:00",
+ "stdid": 305001158,
+ "result": {
+  "BRT_SNAME": "호성진흥3단지",
+  "COURSE_STIMELIST": " 05:50",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001158,
+  "BRT_NO": "500",
+  "BRT_ENAME": "평화동종점",
+  "BRT_ID": "500",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.3
+ },
+ "timeList": [
+  " 05:50"
+ ]
+}

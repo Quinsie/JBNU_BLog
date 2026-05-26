@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:09+09:00",
+ "stdid": 305001180,
+ "result": {
+  "BRT_SNAME": "송천역네거리",
+  "COURSE_STIMELIST": " 05:50",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001180,
+  "BRT_NO": "350",
+  "BRT_ENAME": "평화동종점",
+  "BRT_ID": "350",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.8
+ },
+ "timeList": [
+  " 05:50"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:07+09:00",
+ "stdid": 305001097,
+ "result": {
+  "BRT_SNAME": "시외고속간이터미널",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001097,
+  "BRT_NO": "1994",
+  "BRT_ENAME": "국민연금공단",
+  "BRT_ID": "1994",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 12.2
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001724,
+ "result": {
+  "BRT_SNAME": "상망표",
+  "COURSE_STIMELIST": " 13:53",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001724,
+  "BRT_NO": "82-1",
+  "BRT_ENAME": "소양행정복지센터",
+  "BRT_ID": "82",
+  "BRT_CLASS": "1",
+  "BRT_LENGTH": 2.8
+ },
+ "timeList": [
+  " 13:53"
+ ]
+}

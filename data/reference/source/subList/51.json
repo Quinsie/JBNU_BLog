@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "51",
+ "resultList": [
+  {
+   "BRT_SNAME": "고산터미널",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000418,
+   "BRT_ENAME": "둔산코아루2차아파트",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "650",
+   "BRT_MAXINTERVAL": "340",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "51",
+   "BRT_ID": "51",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2140",
+   "BRT_MININTERVAL": "105"
+  },
+  {
+   "BRT_SNAME": "둔산코아루2차아파트",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000417,
+   "BRT_ENAME": "고산터미널",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "750",
+   "BRT_MAXINTERVAL": "460",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "51",
+   "BRT_ID": "51",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2230",
+   "BRT_MININTERVAL": "105"
+  }
+ ]
+}

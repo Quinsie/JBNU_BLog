@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:13+09:00",
+ "stdid": 305001658,
+ "result": {
+  "BRT_SNAME": "오봉리",
+  "COURSE_STIMELIST": " 06:30, 09:50, 19:50",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001658,
+  "BRT_NO": "685",
+  "BRT_ENAME": "감수리",
+  "BRT_ID": "685",
+  "BRT_CLASS": "0",
+  "BRT_TEXT": "06:30, 09:50, 19:50 오봉리 출발(금구 미경유)",
+  "BRT_LENGTH": 22.5
+ },
+ "timeList": [
+  " 06:30",
+  "09:50",
+  "19:50"
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:17+09:00",
+ "stdid": 305001793,
+ "result": {
+  "BRT_SNAME": "월드컵경기장",
+  "COURSE_STIMELIST": " 09:26, 11:26",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001793,
+  "BRT_NO": "18",
+  "BRT_ENAME": "백구",
+  "BRT_ID": "18",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.4
+ },
+ "timeList": [
+  " 09:26",
+  "11:26"
+ ]
+}

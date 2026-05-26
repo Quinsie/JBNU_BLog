@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:19+09:00",
+ "stdid": 305001864,
+ "result": {
+  "BRT_SNAME": "모래내시장",
+  "COURSE_STIMELIST": " 08:50, 12:30, 16:30, 19:50",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305001864,
+  "BRT_NO": "81",
+  "BRT_ENAME": "하이리",
+  "BRT_ID": "81",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 8.1
+ },
+ "timeList": [
+  " 08:50",
+  "12:30",
+  "16:30",
+  "19:50"
+ ]
+}

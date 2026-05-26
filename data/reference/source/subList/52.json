@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "52",
+ "resultList": [
+  {
+   "BRT_SNAME": "완주군청",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000970,
+   "BRT_ENAME": "비봉종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "610",
+   "BRT_MAXINTERVAL": "140",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "52",
+   "BRT_ID": "52",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2140",
+   "BRT_MININTERVAL": "29"
+  },
+  {
+   "BRT_SNAME": "비봉종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000971,
+   "BRT_ENAME": "완주군청",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "710",
+   "BRT_MAXINTERVAL": "120",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "52",
+   "BRT_ID": "52",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2150",
+   "BRT_MININTERVAL": "15"
+  }
+ ]
+}

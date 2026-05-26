@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:19+09:00",
+ "stdid": 305001861,
+ "result": {
+  "BRT_SNAME": "덕동",
+  "COURSE_STIMELIST": " 07:40, 11:27",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001861,
+  "BRT_NO": "48",
+  "BRT_ENAME": "월드컵경기장",
+  "BRT_ID": "48",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.9
+ },
+ "timeList": [
+  " 07:40",
+  "11:27"
+ ]
+}

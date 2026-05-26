@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001714,
+ "result": {
+  "BRT_SNAME": "전북도립미술관",
+  "COURSE_STIMELIST": " 09:40",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001714,
+  "BRT_NO": "92",
+  "BRT_ENAME": "가는정이",
+  "BRT_ID": "92",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 18.1
+ },
+ "timeList": [
+  " 09:40"
+ ]
+}

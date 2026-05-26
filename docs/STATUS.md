@@ -3,20 +3,26 @@
 > **매 작업(commit)마다 갱신.** "지금 어디까지 왔고, 바로 다음 뭘 할지"를 항상 여기서 확인.
 
 ## 현재 단계
-**Phase 0 — 환경/구조 셋업** (진행중)
+**Phase 1 수집기 구현** 직전 (Phase 0 골격 + 정적 기준 데이터 완료)
 
 ## 완료
-- 디렉토리 골격 (`app/ src/ docs/ data/`)
-- `.gitignore` (data raw/interim/features/models/predictions·zip·flutter·env 제외, reference 추적)
-- `src/common/paths.py` — 경로 단일 해석 (절대경로 미사용, `BLOG_RAW_DIR`/`BLOG_DATA_ROOT` 오버라이드)
-- `requirements.txt`, `.env.example`, `docs/ROADMAP.md`
+- **Phase 0 골격**: 디렉토리, `.gitignore`(raw/interim/features/models/predictions·logs·zip·flutter·env 제외, reference 추적), `paths.py`(절대경로 0), `requirements.txt`, `.env.example`, docs(ROADMAP/STATUS/SETUP), README
+- **공유 데이터**: `blog` 그룹(jiho·yubin·hyewon·gaeun, gid 1005), `/mnt/data1/B_Log`=`jiho:blog` 2775(setgid), `data/raw` 심볼릭. `setup_data.sh`
+- **git**: `~/BLog` 독립 리포 init, remote `Quinsie/JBNU_BLog` 등록 (push 보류). 첫 commit `ec73d80`
+- **정적 기준 데이터 (API 실수집, 446 기준)**:
+  - `src/common/jeonju_api.py`(ITS 클라이언트, WAF체크), `src/common/grid.py`(격자변환)
+  - `src/scripts/fetch_static.py` → `reference/source/`: route_list(132)·subList(132)·stops(446)·vtx(446)·timetable(446, BRT_TEXT 85개). 24MB
+  - `src/scripts/build_reference.py` → `reference/built/`: `stdid_list.json`(446+메타)·`nx_ny_coords.json`(격자 43개)
 
 ## 다음 할 일 (순서)
-1. **공유 데이터 셋업** — `blog` 그룹(jiho·yubin·hyewon·gaeun) 생성, `/mnt/data1/B_Log` chown(2775 setgid), `data/raw` → `/mnt/data1/B_Log/raw` 심볼릭. `src/scripts/setup_data.sh` + `docs/SETUP.md`.
-2. **git init** — `~/BLog` 독립 리포, remote `Quinsie/JBNU_BLog` (push 는 사용자 신호 후).
-3. **수집기 이식** — 이가은 collector → `src/collector/`, paths.py 연동.
-4. **stdid 446 반영** — 수집기가 446개 stdid 로드하도록 (정적 목록 `data/reference/source/`).
-5. **수집기 robust 가동** — bus 5초 / traffic 1분 / weather / incident, 24h 무손실 검증.
+1. **수집기 구현** (`src/collector/`, 이가은 아이디어 차용·직접 구현·paths 연동):
+   - bus 5초 (446 stdid, `stdid_list.json` 로드), traffic 1분, weather 전격자(43), incident(URL 설정 시)
+   - writer(jsonl append+fsync / atomic), logger(일자회전), 에러분류, tickstats, supervisor(`__main__`)
+   - run.sh (nohup/systemd) + 중복실행방지
+2. **robust 검증** — 1~2시간 가동 → 헬스로그·디스크증가율·무손실 확인
+3. **가동** — 내일 첫차(05:30경) 전까지 띄워놓기
+
+## 결정 사항 (확정)
 
 ## 결정 사항 (확정)
 - 한 서버에서 전부 처리 (backend/midServer 분리 없음).

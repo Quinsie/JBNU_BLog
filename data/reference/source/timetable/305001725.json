@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:15+09:00",
+ "stdid": 305001725,
+ "result": {
+  "BRT_SNAME": "소양행정복지센터",
+  "COURSE_STIMELIST": " 14:30",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001725,
+  "BRT_NO": "82-1",
+  "BRT_ENAME": "앞멀",
+  "BRT_ID": "82",
+  "BRT_CLASS": "1",
+  "BRT_LENGTH": 19.7
+ },
+ "timeList": [
+  " 14:30"
+ ]
+}

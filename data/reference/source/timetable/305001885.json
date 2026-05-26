@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:19+09:00",
+ "stdid": 305001885,
+ "result": {
+  "BRT_SNAME": "해전",
+  "COURSE_STIMELIST": " 07:40, 11:40, 18:00",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001885,
+  "BRT_NO": "34-1",
+  "BRT_ENAME": "지암마을",
+  "BRT_ID": "34",
+  "BRT_CLASS": "1",
+  "BRT_LENGTH": 20.9
+ },
+ "timeList": [
+  " 07:40",
+  "11:40",
+  "18:00"
+ ]
+}

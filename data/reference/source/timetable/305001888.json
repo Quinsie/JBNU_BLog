@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:19+09:00",
+ "stdid": 305001888,
+ "result": {
+  "BRT_SNAME": "고산터미널",
+  "COURSE_STIMELIST": " 09:33, 14:20",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001888,
+  "BRT_NO": "35",
+  "BRT_ENAME": "삼례역",
+  "BRT_ID": "35",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 23.3
+ },
+ "timeList": [
+  " 09:33",
+  "14:20"
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:12+09:00",
+ "stdid": 305001586,
+ "result": {
+  "SAT_NLIST": " 06:10",
+  "HOLI_NLIST": " 06:10",
+  "BRT_SNAME": "안덕원로.고려병원",
+  "COURSE_STIMELIST": " 06:10",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001586,
+  "BRT_NO": "820",
+  "BRT_ENAME": "이서회차지",
+  "BRT_ID": "820",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 20
+ },
+ "timeList": [
+  " 06:10"
+ ]
+}

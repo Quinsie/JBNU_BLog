@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:07+09:00",
+ "stdid": 305001064,
+ "result": {
+  "BRT_SNAME": "둔산코아루2차아파트",
+  "COURSE_STIMELIST": " 14:50, 21:00",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001064,
+  "BRT_NO": "30",
+  "BRT_ENAME": "삼례터미널",
+  "BRT_ID": "30",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 13.1
+ },
+ "timeList": [
+  " 14:50",
+  "21:00"
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "fetched_at": "2026-05-26T13:11:14+09:00",
+ "stdid": 305001696,
+ "result": {
+  "BRT_SNAME": "다리목",
+  "COURSE_STIMELIST": " 14:20, 16:10",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305001696,
+  "BRT_NO": "87-1",
+  "BRT_ENAME": "소양행정복지센터",
+  "BRT_ID": "87",
+  "BRT_CLASS": "1",
+  "BRT_LENGTH": 5.3
+ },
+ "timeList": [
+  " 14:20",
+  "16:10"
+ ]
+}

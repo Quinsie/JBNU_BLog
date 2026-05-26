@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:16+09:00",
+ "stdid": 305001739,
+ "result": {
+  "BRT_SNAME": "응암마을",
+  "COURSE_STIMELIST": " 10:40, 20:55, 22:40",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001739,
+  "BRT_NO": "85",
+  "BRT_ENAME": "소양",
+  "BRT_ID": "85",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 6
+ },
+ "timeList": [
+  " 10:40",
+  "20:55",
+  "22:40"
+ ]
+}

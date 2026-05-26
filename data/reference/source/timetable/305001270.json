@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:09+09:00",
+ "stdid": 305001270,
+ "result": {
+  "BRT_SNAME": "전주대학교",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001270,
+  "BRT_NO": "200",
+  "BRT_ENAME": "기린봉",
+  "BRT_ID": "200",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 19.7
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:07+09:00",
+ "stdid": 305001096,
+ "result": {
+  "BRT_SNAME": "우미린2차아파트",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001096,
+  "BRT_NO": "1994",
+  "BRT_ENAME": "시외고속간이터미널",
+  "BRT_ID": "1994",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 8.1
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:11+09:00",
+ "stdid": 305001541,
+ "result": {
+  "BRT_SNAME": "이서회차지",
+  "COURSE_STIMELIST": " 14:30, 16:05, 18:10, 20:45",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305001541,
+  "BRT_NO": "23",
+  "BRT_ENAME": "대농",
+  "BRT_ID": "23",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 6.2
+ },
+ "timeList": [
+  " 14:30",
+  "16:05",
+  "18:10",
+  "20:45"
+ ]
+}

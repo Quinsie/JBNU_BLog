@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:17+09:00",
+ "stdid": 305001789,
+ "result": {
+  "BRT_SNAME": "완산생활체육공원",
+  "COURSE_STIMELIST": " 07:44, 15:34, 17:59, 20:30",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305001789,
+  "BRT_NO": "10",
+  "BRT_ENAME": "평화코오롱아파트",
+  "BRT_ID": "10",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 11.6
+ },
+ "timeList": [
+  " 07:44",
+  "15:34",
+  "17:59",
+  "20:30"
+ ]
+}

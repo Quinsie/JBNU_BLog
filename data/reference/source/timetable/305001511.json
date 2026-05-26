@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:10+09:00",
+ "stdid": 305001511,
+ "result": {
+  "BRT_SNAME": "모래내시장",
+  "COURSE_STIMELIST": " 15:10, 18:40, 22:10",
+  "BRT_DNUM": 3,
+  "BRT_STDID": 305001511,
+  "BRT_NO": "80",
+  "BRT_ENAME": "금상동",
+  "BRT_ID": "80",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 7.5
+ },
+ "timeList": [
+  " 15:10",
+  "18:40",
+  "22:10"
+ ]
+}

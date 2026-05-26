@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:06+09:00",
+ "stdid": 305000963,
+ "result": {
+  "BRT_SNAME": "삼천동종점",
+  "COURSE_STIMELIST": " 22:30",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305000963,
+  "BRT_NO": "559",
+  "BRT_ENAME": "삼봉로완주소방서",
+  "BRT_ID": "559",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 26.1
+ },
+ "timeList": [
+  " 22:30"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:08+09:00",
+ "stdid": 305001174,
+ "result": {
+  "BRT_SNAME": "동부대로전주역",
+  "COURSE_STIMELIST": " 05:50",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001174,
+  "BRT_NO": "337",
+  "BRT_ENAME": "우석대종점",
+  "BRT_ID": "337",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 16.4
+ },
+ "timeList": [
+  " 05:50"
+ ]
+}

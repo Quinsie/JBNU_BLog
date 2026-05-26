@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:12+09:00",
+ "stdid": 305001605,
+ "result": {
+  "BRT_SNAME": "충경로 객사",
+  "COURSE_STIMELIST": " 06:05",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001605,
+  "BRT_NO": "6002",
+  "BRT_ENAME": "비전대학교",
+  "BRT_ID": "6002",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14
+ },
+ "timeList": [
+  " 06:05"
+ ]
+}

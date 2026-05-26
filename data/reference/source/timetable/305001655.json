@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:13+09:00",
+ "stdid": 305001655,
+ "result": {
+  "BRT_SNAME": "감수리",
+  "COURSE_STIMELIST": " 15:30",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001655,
+  "BRT_NO": "684",
+  "BRT_ENAME": "신성리",
+  "BRT_ID": "684",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 25.6
+ },
+ "timeList": [
+  " 15:30"
+ ]
+}

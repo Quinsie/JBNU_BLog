@@ -1,0 +1,22 @@
+{
+ "fetched_at": "2026-05-26T13:11:03+09:00",
+ "brt_no": "14",
+ "resultList": [
+  {
+   "BRT_SNAME": "낙수정",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001213,
+   "BRT_ENAME": "낙수정",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "740",
+   "BRT_MAXINTERVAL": "195",
+   "BRT_GRPNM": "마을",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "14",
+   "BRT_ID": "14",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2210",
+   "BRT_MININTERVAL": "155"
+  }
+ ]
+}

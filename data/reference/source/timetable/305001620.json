@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:13+09:00",
+ "stdid": 305001620,
+ "result": {
+  "SAT_NLIST": " 22:20",
+  "HOLI_NLIST": " 22:20",
+  "BRT_SNAME": "전주대학교",
+  "COURSE_STIMELIST": " 22:20",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001620,
+  "BRT_NO": "119",
+  "BRT_ENAME": "모래내시장",
+  "BRT_ID": "119",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 18.6
+ },
+ "timeList": [
+  " 22:20"
+ ]
+}

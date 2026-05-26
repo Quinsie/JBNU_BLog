@@ -1,0 +1,38 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "55",
+ "resultList": [
+  {
+   "BRT_SNAME": "모아엘가아파트",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000984,
+   "BRT_ENAME": "완주군청",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "605",
+   "BRT_MAXINTERVAL": "270",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "55",
+   "BRT_ID": "55",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2230",
+   "BRT_MININTERVAL": "220"
+  },
+  {
+   "BRT_SNAME": "완주군청",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305000983,
+   "BRT_ENAME": "모아엘가아파트",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "900",
+   "BRT_MAXINTERVAL": "270",
+   "BRT_GRPNM": "고산",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "55",
+   "BRT_ID": "55",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2140",
+   "BRT_MININTERVAL": "220"
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "fetched_at": "2026-05-26T13:11:07+09:00",
+ "stdid": 305000991,
+ "result": {
+  "SAT_NLIST": " 06:00",
+  "HOLI_NLIST": " 06:00",
+  "BRT_SNAME": "서곡광장",
+  "COURSE_STIMELIST": " 06:00",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305000991,
+  "BRT_NO": "309",
+  "BRT_ENAME": "평화동종점",
+  "BRT_ID": "309",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 14.3
+ },
+ "timeList": [
+  " 06:00"
+ ]
+}

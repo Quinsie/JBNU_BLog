@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:06+09:00",
+ "stdid": 305000962,
+ "result": {
+  "BRT_SNAME": "둔산코아루2차아파트",
+  "COURSE_STIMELIST": " 22:25",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305000962,
+  "BRT_NO": "554",
+  "BRT_ENAME": "효천우미린1차아파트",
+  "BRT_ID": "554",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 29.9
+ },
+ "timeList": [
+  " 22:25"
+ ]
+}

@@ -1,0 +1,80 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "500",
+ "resultList": [
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001155,
+   "BRT_ENAME": "봉동회차지",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "605",
+   "BRT_MAXINTERVAL": "33",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "500",
+   "BRT_ID": "500",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2210",
+   "BRT_MININTERVAL": "27"
+  },
+  {
+   "BRT_SNAME": "봉동회차지",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001157,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "600",
+   "BRT_MAXINTERVAL": "33",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "500",
+   "BRT_ID": "500",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2220",
+   "BRT_MININTERVAL": "26"
+  },
+  {
+   "BRT_SNAME": "남부시장",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "1",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001156,
+   "BRT_NO": "500",
+   "BRT_ENAME": "봉동회차지",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "500",
+   "BRT_FIRSTTIME": "600",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "600"
+  },
+  {
+   "BRT_SNAME": "호성진흥3단지",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "2",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001158,
+   "BRT_NO": "500",
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "500",
+   "BRT_FIRSTTIME": "550",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "550"
+  },
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "1",
+   "BRT_SUBID": "B",
+   "BRT_STDID": 305000961,
+   "BRT_NO": "500",
+   "BRT_ENAME": "운곡모아미래도2차아파트",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "500",
+   "BRT_FIRSTTIME": "2235",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2235"
+  }
+ ]
+}

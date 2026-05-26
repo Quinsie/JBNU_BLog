@@ -1,0 +1,52 @@
+{
+ "fetched_at": "2026-05-26T13:11:04+09:00",
+ "brt_no": "501",
+ "resultList": [
+  {
+   "BRT_SNAME": "평화동종점",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001159,
+   "BRT_ENAME": "봉동회차지",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "557",
+   "BRT_MAXINTERVAL": "94",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "1",
+   "BRT_NO": "501",
+   "BRT_ID": "501",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2230",
+   "BRT_MININTERVAL": "60"
+  },
+  {
+   "BRT_SNAME": "봉동회차지",
+   "BRT_SUBID": "0",
+   "BRT_STDID": 305001160,
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_FIRSTTIME": "751",
+   "BRT_MAXINTERVAL": "93",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "2",
+   "BRT_NO": "501",
+   "BRT_ID": "501",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "2142",
+   "BRT_MININTERVAL": "60"
+  },
+  {
+   "BRT_SNAME": "초포삼거리",
+   "BRT_GRPNM": "저상",
+   "BRT_DIRECTION": "2",
+   "BRT_SUBID": "A",
+   "BRT_STDID": 305001161,
+   "BRT_NO": "501",
+   "BRT_ENAME": "평화동종점",
+   "BRT_ILREGINTERVALYN": "N",
+   "BRT_ID": "501",
+   "BRT_FIRSTTIME": "635",
+   "BRT_CLASS": "0",
+   "BRT_LASTTIME": "635"
+  }
+ ]
+}

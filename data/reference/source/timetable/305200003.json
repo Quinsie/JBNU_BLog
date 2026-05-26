@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:20+09:00",
+ "stdid": 305200003,
+ "result": {
+  "SAT_NLIST": " 22:00",
+  "HOLI_NLIST": " 22:00",
+  "BRT_SNAME": "전주대학교",
+  "COURSE_STIMELIST": " 22:00, 22:20",
+  "BRT_DNUM": 2,
+  "BRT_STDID": 305200003,
+  "BRT_NO": "3-1",
+  "BRT_ENAME": "전동성당.한옥마을",
+  "BRT_ID": "3",
+  "BRT_CLASS": "1",
+  "BRT_LENGTH": 15.7
+ },
+ "timeList": [
+  " 22:00",
+  "22:20"
+ ]
+}

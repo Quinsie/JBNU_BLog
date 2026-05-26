@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:09+09:00",
+ "stdid": 305001303,
+ "result": {
+  "BRT_SNAME": "비전대학교",
+  "COURSE_STIMELIST": " 08:01, 11:48, 15:22, 19:07",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305001303,
+  "BRT_NO": "354",
+  "BRT_ENAME": "우석대종점",
+  "BRT_ID": "354",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 22.1
+ },
+ "timeList": [
+  " 08:01",
+  "11:48",
+  "15:22",
+  "19:07"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:09+09:00",
+ "stdid": 305001183,
+ "result": {
+  "BRT_SNAME": "서부시장",
+  "COURSE_STIMELIST": " 05:55",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001183,
+  "BRT_NO": "559",
+  "BRT_ENAME": "둔산코아루2차아파트",
+  "BRT_ID": "559",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 27.3
+ },
+ "timeList": [
+  " 05:55"
+ ]
+}

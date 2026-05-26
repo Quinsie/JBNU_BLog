@@ -1,0 +1,18 @@
+{
+ "fetched_at": "2026-05-26T13:11:09+09:00",
+ "stdid": 305001326,
+ "result": {
+  "BRT_SNAME": "전라감영.완산경찰서",
+  "COURSE_STIMELIST": " 06:12",
+  "BRT_DNUM": 1,
+  "BRT_STDID": 305001326,
+  "BRT_NO": "530",
+  "BRT_ENAME": "고산터미널",
+  "BRT_ID": "530",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 24.1
+ },
+ "timeList": [
+  " 06:12"
+ ]
+}

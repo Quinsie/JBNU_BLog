@@ -1,0 +1,21 @@
+{
+ "fetched_at": "2026-05-26T13:11:13+09:00",
+ "stdid": 305001651,
+ "result": {
+  "BRT_SNAME": "감수리",
+  "COURSE_STIMELIST": " 07:56, 11:38, 15:20, 19:15",
+  "BRT_DNUM": 4,
+  "BRT_STDID": 305001651,
+  "BRT_NO": "644",
+  "BRT_ENAME": "원평종점",
+  "BRT_ID": "644",
+  "BRT_CLASS": "0",
+  "BRT_LENGTH": 30.9
+ },
+ "timeList": [
+  " 07:56",
+  "11:38",
+  "15:20",
+  "19:15"
+ ]
+}
