@@ -3,7 +3,14 @@
 > **매 작업(commit)마다 갱신.** "지금 어디까지 왔고, 바로 다음 뭘 할지"를 항상 여기서 확인.
 
 ## 현재 단계
-**Phase 1 수집기 구현** 직전 (Phase 0 골격 + 정적 기준 데이터 완료)
+**Phase 1 수집기 — 가동 중 ✅** (446@5s 무손실). 다음은 Phase 2 정적정비 잔여 / Phase 3 후처리.
+
+### 가동 현황 (2026-05-26 배포)
+- `nohup bash src/scripts/run.sh` 로 상시 가동 (flock 중복방지, 크래시 시 자동 재시작).
+- bus 446@5s ok 100%·polling 5.0s / traffic 60s / weather 실황·초단기·단기 43격자.
+- 저장: `/mnt/data1/B_Log/raw` (jiho:blog 2775, 팀 공유). data/raw 심볼릭.
+- 알려진 이슈: 중기예보(longForecast) HTTP_403 = KMA 키 중기예보 API 미구독(비차단, DATA_NOTES).
+- 재시작/종료: `pkill -f src.collector` / 부팅 후 재가동은 추후 systemd or cron @reboot.
 
 ## 완료
 - **Phase 0 골격**: 디렉토리, `.gitignore`(raw/interim/features/models/predictions·logs·zip·flutter·env 제외, reference 추적), `paths.py`(절대경로 0), `requirements.txt`, `.env.example`, docs(ROADMAP/STATUS/SETUP), README
