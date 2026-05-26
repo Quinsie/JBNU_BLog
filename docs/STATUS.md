@@ -4,8 +4,9 @@
 > 전체 그림·단계 의존성은 [ROADMAP.md](ROADMAP.md), 데이터 신뢰성은 [DATA_NOTES.md](DATA_NOTES.md).
 
 ## 현재 위치
-**Phase 3 trip 재구성 v1 검증 완료 → v1.1 정련 진행 중** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
-- v1.1 ①공휴일 캘린더 **완료**(`holidays` KR public: 음력명절·대체공휴일·선거일·2026 재지정 제헌절, 휴일>토 우선). ②종점 reference 연결 **완료**(max ROUTE_ORD 권위·`n_stops_route` 기록, 종점도달 55%로 정직화). ③이상치 분석 ④시간표 prior 게이팅 = 잔여.
+**Phase 3 trip 재구성 v1.1 정련 완료** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
+- v1.1 ①공휴일 캘린더(`holidays` KR public: 음력명절·대체공휴일·선거일·2026 재지정 제헌절, 휴일>토) ②종점 reference 연결(max ROUTE_ORD 권위·`n_stops_route`, 종점도달 55%로 정직화) ③이상치 25건 분석(흩어짐 확인=시간표 최신, 큰 오차=벽지 슬롯공백 강제매칭) ④매칭 게이트 `on_schedule`(600s, off-schedule 0.6%) — **전부 완료**.
+- 발차검출 자체는 보정 불필요로 검증됨(origin_wait median 14s·origin_moving 8s) → ④는 "발차 교정"이 아닌 "매칭 QA"로 재해석.
 - 1차 모델 검증·결정 → [design/first-model.md](design/first-model.md) (갈림길 3개 확정).
 - trip 재구성 설계 확정 → [design/trip-reconstruction.md](design/trip-reconstruction.md) (발차검출·종료일반화·구간타깃).
 - **v1 스크립트** `src/preprocess/trip_reconstruct.py`: 305200112 검증 — 발차 5건 전부 예정시간표 ±64s 매칭, 품질분기·종점·글리치·공백분할 정상.
@@ -27,9 +28,9 @@
 - ~~중기예보(longForecast) 403~~ **해결**(5/26): KMA 중기예보 API 구독 반영 → land/ta ok=200 실데이터 수집 중.
 
 ## 다음 할 일
-1. **trip 재구성 v1 전노선 스트레스테스트**: 저녁 데이터로 전 stdid 돌려 집계(풀trip 수율·발차매칭 분포·품질분기·이상치) → 임계값(R/K/gap) 튜닝.
-2. **v1.1**: 시간표 prior 슬롯 게이팅(발차 애매구간 보정), 공휴일 캘린더, 종점 stop수 reference 연결.
-3. **1차 feature 가공** → GBDT 학습 (Phase 4). 미결정 갈림길 #3(지리종속성→route_nodes) 결판.
+1. **데이터 축적 대기**: 전일(평일·주말) 풀데이터 쌓이면 임계값(R/K/gap/MATCH_GATE) 재튜닝 + gap≥5 종점미달 49노선 해소 확인. (현재 5/26 저녁 부분데이터뿐 → 1차 학습은 시기상조)
+2. **미결정 갈림길 #3 결판**: 지리종속성을 1차에 넣을지 → 넣으면 vtx/route_nodes 올해 데이터로 재검증이 선행조건(작년 101노선 어긋남). feature 스키마 확정의 블로커.
+3. **1차 feature 가공** → GBDT 학습 (Phase 4). #3 결판 후 착수.
 4. (운영) `.73` 차단 풀리면 `.74` 우회 원복(STATUS 위 §원복).
 
 ## 후처리에서 풀 과제 (기억)

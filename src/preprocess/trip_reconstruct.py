@@ -34,6 +34,8 @@ START_ORD_MAX = 2      # 시작 ord 가 이 이하면 "기점 포착" 후보(발
 R_PARK = 30.0          # 기점 정차 중심점 반경(m): 이 안이면 정차로 간주
 R_DEPART = 50.0        # 발차 판정: 중심점에서 이만큼 벗어나고
 K_DEPART = 3           #   K틱 연속 유지되면 지속이탈 = 발차
+MATCH_GATE_SEC = 600   # 매칭 게이트: 검출발차가 최근접 예정슬롯과 이보다 멀면 off-schedule
+                       #   (벽지노선 슬롯공백·미편성 운행 등 → 무의미한 강제매칭 방지)
 
 
 @dataclass
@@ -315,11 +317,15 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> list[dict]:
                 continue
             max_ord = max((o.so for o in trip if o.so is not None), default=0)
             slot, delta = match_schedule(dep_iso, sched)
+            # 게이트: 슬롯과 너무 멀면 매칭 무의미(벽지 슬롯공백·미편성) → on_schedule=False.
+            # slot/delta 는 정보로 남기되 schedule 파생 feature 는 on_schedule 로 거른다.
+            on_sched = None if delta is None else (abs(delta) <= MATCH_GATE_SEC)
             records.append({
                 "stdid": int(stdid), "brt_no": meta.get("brt_no"),
                 "plate_no": plate, "service_date": date_str, "daytype": dtype,
                 "departure_ts": dep_iso, "departure_quality": quality,
                 "matched_sched": slot, "sched_delta_sec": delta,
+                "on_schedule": on_sched,
                 "start_ord": trip[0].so, "end_ord": max_ord,
                 "n_stops_route": terminus_ord,
                 "reached_terminus": terminus_ord > 0 and max_ord >= terminus_ord - 1,
@@ -388,6 +394,11 @@ def _aggregate(all_recs: list[dict]) -> None:
         within = lambda s: sum(1 for d in deltas if d <= s) / len(deltas) * 100
         print(f"  발차매칭 |오차|: median {st.median(deltas):.0f}s p90 {p(deltas,.9)}s "
               f"max {max(deltas)}s | ≤60s {within(60):.0f}% ≤180s {within(180):.0f}%")
+    matched = [r for r in all_recs if r.get("on_schedule") is not None]
+    if matched:
+        off = sum(1 for r in matched if not r["on_schedule"])
+        print(f"  off-schedule(게이트 {MATCH_GATE_SEC}s 초과): {off} / {len(matched)} "
+              f"({off/len(matched)*100:.1f}%)")
     print(f"  글리치 버린 관측 총합: {glitch}")
 
 
