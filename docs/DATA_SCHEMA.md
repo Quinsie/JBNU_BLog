@@ -110,6 +110,8 @@ ITS `selectBisRouteTimeInfo`. 노선(방향)별 시점 시간표.
   "n_obs":328, "glitch_dropped":0,
   "seg_gps_recovered":2,                        // ord 얼음으로 결측된 정류장을 GPS 근접매칭으로 복원한 수
   "stops_unrecoverable":1,                      // ord·GPS 둘 다 얼어 못 잡은 정류장 수(쓸 수 없는 구간)
+  "off_route_obs":0,                            // 노선 최대 인접정류장간격 초과 관측 수(차고지/회송/외래버스 의심). >0=학습 주의. ord>종점 불가능값은 load 단계 하드드롭됨
+
   "stops":    [ {"ord":1,"pass_ts":"...","src":"ord"}, {"ord":7,"pass_ts":"...","src":"gps"}, ... ],
   "segments": [ {"from":1,"to":2,"elapsed_sec":210.0,"src":"ord"}, ... ] }  // ← 1차 모델 y(구간소요)
 }

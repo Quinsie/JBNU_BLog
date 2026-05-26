@@ -420,6 +420,19 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
         terminus_ord = max((o.so for seq in by_plate.values() for o in seq
                             if o.so is not None), default=0)
 
+    # off-route 판정용: 노선 최대 인접정류장 간격(기하 불변식 — on-route 면 최근접
+    # 정류장 거리 ≤ 이 값. 초과 = off-route). 노선적응형이라 벽지노선 과삭제 없음.
+    coord_list = list(stop_coords.values())
+    ks = sorted(stop_coords)
+    route_max_gap = max((haversine(*stop_coords[ks[i]], *stop_coords[ks[i + 1]])
+                         for i in range(len(ks) - 1)), default=0.0)
+
+    # 하드드롭: reference 로 불가능한 ord(>종점, <1) = 외래/오염(API 누수·번호중복).
+    # 거리 무관이라 안전(305001677 ord45 류). None-ord(위치만) 은 궤적용으로 유지.
+    for plate in by_plate:
+        by_plate[plate] = [o for o in by_plate[plate]
+                           if o.so is None or 1 <= o.so <= terminus_ord]
+
     # 1) trip 레코드 (매칭 필드는 아래 노선전역 배정에서 채움)
     records: list[dict] = []
     for plate, seq in by_plate.items():
@@ -435,6 +448,11 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
             if not segments:
                 continue
             max_ord = max((o.so for o in trip if o.so is not None), default=0)
+            # off-route 관측 수(노선 최대간격 초과 = 차고지/회송/외래버스 의심). flag 만.
+            off_route = sum(
+                1 for o in trip if o.lat is not None and coord_list
+                and min(haversine(o.lat, o.lng, la, ln) for la, ln in coord_list)
+                > route_max_gap) if route_max_gap else 0
             records.append({
                 "stdid": int(stdid), "brt_no": meta.get("brt_no"),
                 "plate_no": plate, "service_date": date_str, "daytype": dtype,
@@ -447,6 +465,7 @@ def reconstruct_stdid(stdid: int | str, date_str: str) -> tuple[list[dict], dict
                 "n_obs": len(trip), "glitch_dropped": dropped,
                 "seg_gps_recovered": n_rec,        # ord 얼음 → GPS 근접으로 복원한 정류장 수
                 "stops_unrecoverable": n_unrec,    # ord·GPS 둘 다 얼어 못 잡은 정류장 수(쓸수없음)
+                "off_route_obs": off_route,        # 노선 최대간격 초과 관측 수(차고지/회송/외래 의심). >0 면 학습서 주의
                 "stops": stops, "segments": segments,
             })
 
@@ -561,6 +580,8 @@ def _aggregate(all_recs: list[dict], all_diags: list[dict]) -> None:
     print(f"  ord얼음 정류장: GPS복원 {rec} / 복원불가(쓸수없음) {unrec} "
           f"({rec/(rec+unrec)*100:.0f}% 복원)" if rec + unrec else "  ord얼음: 없음")
     print(f"  구간 출처: ord(고신뢰) {seg_all-seg_gps} / gps복원 {seg_gps} ({seg_gps/seg_all*100:.1f}%)")
+    offr = sum(1 for r in all_recs if r.get("off_route_obs", 0) > 0)
+    print(f"  off-route 관측 보유 trip(차고지/회송/외래 의심): {offr} ({offr/n*100:.1f}%)")
     print(f"  글리치 버린 관측 총합: {glitch}")
 
 
