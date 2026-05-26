@@ -14,13 +14,19 @@
   - `src/scripts/fetch_static.py` → `reference/source/`: route_list(132)·subList(132)·stops(446)·vtx(446)·timetable(446, BRT_TEXT 85개). 24MB
   - `src/scripts/build_reference.py` → `reference/built/`: `stdid_list.json`(446+메타)·`nx_ny_coords.json`(격자 43개)
 
-## 다음 할 일 (순서)
-1. **수집기 구현** (`src/collector/`, 이가은 아이디어 차용·직접 구현·paths 연동):
-   - bus 5초 (446 stdid, `stdid_list.json` 로드), traffic 1분, weather 전격자(43), incident(URL 설정 시)
-   - writer(jsonl append+fsync / atomic), logger(일자회전), 에러분류, tickstats, supervisor(`__main__`)
-   - run.sh (nohup/systemd) + 중복실행방지
-2. **robust 검증** — 1~2시간 가동 → 헬스로그·디스크증가율·무손실 확인
-3. **가동** — 내일 첫차(05:30경) 전까지 띄워놓기
+## 완료 (이어서)
+- **수집기 구현 완료** (`src/collector/`): bus/traffic/weather(전격자43)/incident + supervisor(`__main__`, flock 중복방지) + common(clock/log/io) + health(에러분류·tickstats). venv(.venv, py3.13) 설치.
+- 스모크 테스트: bus 446 stdid 로드·busPosList 8필드 정상 저장 확인.
+
+## ⚠️ 막힌 지점 — 수집 부하/조율 (사용자 결정 필요)
+- 446 stdid @5s = 초당 89req. **게다가 같은 머신/IP에서 yubin(132@5s, pid236689)·gaeun(run.sh, pid133422) 수집기가 동시 가동 중** → ITS 서버 throttle. 내 테스트 중 yubin 로그에도 tick 지연 경고 발생.
+- 측정: 내 수집기 단독 아닌 상태라 timeout/SERVER_DISCONNECTED 다발, median latency 큼 (세마포어 대기 포함 과장).
+- **결정 필요**: ① BLog 수집기가 yubin/gaeun 것을 대체 → 그 둘 중단? ② 446@5s 단독도 버거우면 부하정책(시간표필터 ON / 10초 주기 / 그대로).
+
+## 다음 할 일 (사용자 결정 후)
+1. 기존 수집기 중단 조율 → 내 수집기 단독으로 446@5s 실측
+2. 필요시 USE_TIMETABLE_FILTER=1 또는 interval 조정
+3. run.sh(nohup/systemd) + 디스크 증가율 측정 → 내일 첫차 전 가동
 
 ## 결정 사항 (확정)
 
