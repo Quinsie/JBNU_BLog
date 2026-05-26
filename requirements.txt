@@ -1,0 +1,14 @@
+# ── 수집기 (Phase 1) ─────────────────────────────────
+aiohttp>=3.9
+requests>=2.31
+python-dotenv>=1.0
+APScheduler>=3.10
+tzdata>=2024.1
+
+# ── 후처리 / ML (Phase 3~) : 필요 시점에 활성화 ──────
+# pandas>=2.2
+# pyarrow>=16
+# numpy>=1.26
+# scikit-learn>=1.4
+# lightgbm>=4.3
+# torch>=2.2

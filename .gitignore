@@ -1,0 +1,40 @@
+# ── Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ── 비밀/환경 ────────────────────────────────────────
+.env
+
+# ── 런타임 로그 ──────────────────────────────────────
+/logs/
+
+# ── 대용량·재생성 데이터 (reference 만 추적) ──────────
+# data/raw 는 심볼릭 링크라 트레일링 슬래시 없이 (디렉토리/링크 모두 매칭)
+/data/raw
+/data/interim
+/data/features
+/data/models
+/data/predictions
+
+# ── 제출/배포 zip (절대 커밋 금지) ───────────────────
+*.zip
+
+# ── Flutter / Dart (app/) ────────────────────────────
+app/build/
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/.packages
+app/.pub-cache/
+app/.pub/
+app/**/*.iml
+app/android/.gradle/
+app/ios/Pods/
+
+# ── OS / 에디터 ──────────────────────────────────────
+.DS_Store
+*.swp
