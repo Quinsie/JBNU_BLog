@@ -256,16 +256,19 @@ def load_route_meta(stdid: int | str) -> dict:
 
 
 def load_terminus_ord(stdid: int | str) -> int | None:
-    """stops reference → 종점 ord(= max ROUTE_ORD).
+    """stops reference → 종점 ord(= max STOP_ORD).
 
-    ⚠️ len(resultList) 가 아니라 max(ROUTE_ORD): 446노선 중 76개는 ROUTE_ORD 에
-    결번이 있어 len 으로는 종점 ord 를 과소추정한다. 버스 API LATEST_STOP_ORD 는
-    ROUTE_ORD 공간을 쓰므로 max 가 실제 종점 순번."""
+    ⚠️ ROUTE_ORD 가 아니라 STOP_ORD 다. stops 레코드엔 두 ord 가 있다:
+      - ROUTE_ORD: 노드 기반(비정류장 노드 포함) → 결번 존재(446중 76노선).
+      - STOP_ORD : 정류장 연속 순번 1..N(전 446노선 결번 0, = len).
+    버스 API LATEST_STOP_ORD 는 STOP_ORD 공간을 쓴다(검증: 결번노선에서 버스
+    관측값이 ROUTE_ORD 결번값을 그대로 갖고 연속 1..N → STOP_ORD 와 일치).
+    ROUTE_ORD 를 쓰면 종점이 과대추정되고 버스 ord 와 어긋난다."""
     fp = REF_SOURCE_DIR / "stops" / f"{stdid}.json"
     if not fp.exists():
         return None
     d = json.load(open(fp, encoding="utf-8"))
-    ords = [s.get("ROUTE_ORD") for s in d.get("resultList", [])]
+    ords = [s.get("STOP_ORD") for s in d.get("resultList", [])]
     ords = [o for o in ords if o is not None]
     return max(ords) if ords else None
 

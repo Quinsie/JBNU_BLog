@@ -85,6 +85,7 @@ ITS `selectBisRouteTimeInfo`. 노선(방향)별 시점 시간표.
 
 ### reference/source/  기타
 `route_list`(전체노선) · `subList`(노선↔방향/stdid) · `stops`(노선별 정류장) · `vtx`(노선 선형 좌표열). ⚠️ vtx 일부 어긋남 → 올해 데이터로 재검증 필요.
+- **stops 의 ord 2종**: `ROUTE_ORD`(노드기반, 결번有) vs `STOP_ORD`(정류장 연속 1..N). 버스 `LATEST_STOP_ORD` = **STOP_ORD 공간** → 종점 ord·trip 재구성은 STOP_ORD 사용(DATA_NOTES 검증).
 
 ### reference/built/
 - `stdid_list.json` — `{routes:[{stdid, first_time, last_time, ...}]}` 446개(수집 대상).
@@ -104,7 +105,7 @@ ITS `selectBisRouteTimeInfo`. 노선(방향)별 시점 시간표.
   "matched_sched":"21:38", "sched_delta_sec":-64, // 최근접 예정슬롯 + (검출−예정)초
   "on_schedule":true,                           // |delta|<=게이트(600s). false=무의미매칭(벽지 슬롯공백·미편성), null=시간표/발차없음
   "start_ord":1, "end_ord":42,
-  "n_stops_route":48,                           // 노선 종점 ord(reference max ROUTE_ORD)
+  "n_stops_route":43,                           // 노선 종점 ord(reference max STOP_ORD, =정류장수). ROUTE_ORD 아님 — 버스 ord 는 STOP_ORD 공간
   "reached_terminus":true,                      // end_ord >= n_stops_route-1 (ord 의미상 −1 허용)
   "n_obs":328, "glitch_dropped":0,
   "stops":    [ {"ord":1,"pass_ts":"...T21:36:56+09:00"}, ... ],  // 정류장 통과시각

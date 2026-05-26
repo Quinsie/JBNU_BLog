@@ -5,7 +5,8 @@
 
 ## 현재 위치
 **Phase 3 trip 재구성 v1.1 정련 완료** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
-- v1.1 ①공휴일 캘린더(`holidays` KR public: 음력명절·대체공휴일·선거일·2026 재지정 제헌절, 휴일>토) ②종점 reference 연결(max ROUTE_ORD 권위·`n_stops_route`, 종점도달 55%로 정직화) ③이상치 25건 분석(흩어짐 확인=시간표 최신, 큰 오차=벽지 슬롯공백 강제매칭) ④매칭 게이트 `on_schedule`(600s, off-schedule 0.6%) — **전부 완료**.
+- v1.1 ①공휴일 캘린더(`holidays` KR public: 음력명절·대체공휴일·선거일·2026 재지정 제헌절, 휴일>토) ②종점 reference 연결(**max STOP_ORD** 권위·`n_stops_route`, 종점도달 66%) ③이상치 25건 분석(흩어짐 확인=시간표 최신, 큰 오차=벽지 슬롯공백 강제매칭) ④매칭 게이트 `on_schedule`(600s, off-schedule 0.6%) — **전부 완료**.
+  - ⚠️ ②는 처음 `ROUTE_ORD`(노드기반·결번有)로 잘못 구현 → 버스 `LATEST_STOP_ORD`가 `STOP_ORD`(연속) 공간임을 검증하고 정정. [DATA_NOTES](DATA_NOTES.md) 참조.
 - 발차검출 자체는 보정 불필요로 검증됨(origin_wait median 14s·origin_moving 8s) → ④는 "발차 교정"이 아닌 "매칭 QA"로 재해석.
 - 1차 모델 검증·결정 → [design/first-model.md](design/first-model.md) (갈림길 3개 확정).
 - trip 재구성 설계 확정 → [design/trip-reconstruction.md](design/trip-reconstruction.md) (발차검출·종료일반화·구간타깃).
