@@ -12,7 +12,7 @@ from src.common.paths import (
 BUS_URL = "https://its.jeonju.go.kr/bis/selectBisRouteLocationList.do"
 # 적응형 폴링: 버스 있으면 ACTIVE 주기, 빈 응답이면 IDLE 주기로 백오프.
 BUS_ACTIVE_INTERVAL_SEC = float(os.environ.get("BUS_ACTIVE_INTERVAL_SEC", "10"))
-BUS_IDLE_INTERVAL_SEC = float(os.environ.get("BUS_IDLE_INTERVAL_SEC", "60"))
+BUS_IDLE_INTERVAL_SEC = float(os.environ.get("BUS_IDLE_INTERVAL_SEC", "30"))
 # 버스트 방지 핵심: launch 사이 강제 최소 간격(ms). 어떤 경우에도 이보다 촘촘히 안 쏨.
 BUS_MIN_GAP_MS = float(os.environ.get("BUS_MIN_GAP_MS", "20"))
 BUS_CONCURRENCY = int(os.environ.get("BUS_CONCURRENCY", "50"))   # in-flight 안전망 상한
