@@ -16,6 +16,8 @@ v1.1 + 보강 항목(상세는 [DATA_NOTES](DATA_NOTES.md)·[design/trip-reconst
 
 **raw robustness 점검(310,969 관측) 완료**: 기본위생 깨끗(좌표·SPEED·중복·badjson 0). PLATE_NO 비유일·off-route·자정 전부 처리. bbox밖 307(0.1%)=시외구간, 비차단. (설계근거 [design/first-model.md](design/first-model.md) 갈림길 3개)
 
+**5/27 첫 평일 풀데이터(00~17시) 점검 완료** — trip 3098개, 종점도달 66→**83%**, 발차매칭 median 24s. trip0 노선 74개·미매칭 34% **전부 정상**(우측절단+저빈도 미운행+off-route 하드드롭, 버그 아님). 미매칭의 78%는 18시+ 미수집분. 상세·결론 [DATA_NOTES](DATA_NOTES.md) 5/27 항목. → 18시+ 쌓이면 재집계.
+
 ## 완료
 - **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
 - **공유 데이터**: `blog` 그룹(jiho·yubin·hyewon·gaeun), `/mnt/data1/B_Log`=`jiho:blog` 2775(setgid), `data/raw` 심볼릭. `setup_data.sh`.
