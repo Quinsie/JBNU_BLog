@@ -14,7 +14,7 @@
 ### 17:37 시스템 타임존 UTC → Asia/Seoul 전환
 - 발견: `logs/*.log` 일자 회전이 **KST 09:00** 에 일어남 (예: `bus.log.20260527` 가 5/28 08:59 까지 추가됨). 원인 = 시스템 TZ=`Etc/UTC` + `TimedRotatingFileHandler(when="midnight")` 의 기본 동작이 *시스템 localtime* 자정 회전 → UTC 자정 = KST 09:00.
 - 영향 범위: **로그 파일 회전 시점뿐.** 데이터(ts·hour_key·date_key·trip service_date) 는 전부 `src/common/clock.py` 의 명시적 KST 처리라 무영향.
-- 조치: `sudo timedatectl set-timezone Asia/Seoul` → `blog-collector` 재시작(이미 로드된 핸들러가 캐시한 rollover 시각 갱신). 다음 회전은 2026-05-29 00:00 KST 예정.
+- 조치: ① `sudo timedatectl set-timezone Asia/Seoul` ② `src/common/log.py` 에 `_KSTMidnightRotatingFileHandler` subclass 추가(시스템 TZ 무관하게 KST 자정 회전·KST 일자 suffix 강제 — 향후 TZ 가 어떤 이유로 다시 UTC 가 돼도 로그는 KST 기준 유지) ③ `blog-collector` 재시작. 다음 회전은 2026-05-29 00:00 KST 예정.
 - 부수효과: 시스템 전역 TZ 변경 — 같은 서버의 cron·systemd timer·다른 사용자 로그 회전도 KST 기준이 됨. (서버가 한국 소재이므로 의도된 정합)
 
 ### 04:38~05:03 첫차 전 차고지 telemetry leak
