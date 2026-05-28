@@ -16,6 +16,7 @@
 - 영향 범위: **로그 파일 회전 시점뿐.** 데이터(ts·hour_key·date_key·trip service_date) 는 전부 `src/common/clock.py` 의 명시적 KST 처리라 무영향.
 - 조치: ① `sudo timedatectl set-timezone Asia/Seoul` ② `src/common/log.py` 에 `_KSTMidnightRotatingFileHandler` subclass 추가(시스템 TZ 무관하게 KST 자정 회전·KST 일자 suffix 강제 — 향후 TZ 가 어떤 이유로 다시 UTC 가 돼도 로그는 KST 기준 유지) ③ `blog-collector` 재시작. 다음 회전은 2026-05-29 00:00 KST 예정.
 - 부수효과: 시스템 전역 TZ 변경 — 같은 서버의 cron·systemd timer·다른 사용자 로그 회전도 KST 기준이 됨. (서버가 한국 소재이므로 의도된 정합)
+- 기존 UTC-자정 회전 백업 파일 재분할: 라인별 KST timestamp 파싱 → `logs/*.log.YYYYMMDD` 를 KST 일자로 재그루핑(원본은 `*.bak_utc` 로 보존). 활성 파일 앞에 KST 5/28 09:00 이전 분량 prepend 해서 활성 = KST 5/28 전체 분량 → 다음 회전 시 덮어쓰기 충돌 없이 `*.log.20260528` 로 정확히 회전. (collector ~10초 stop, polling 1 cycle 손실 — 데이터 영향 미미)
 
 ### 04:38~05:03 첫차 전 차고지 telemetry leak
 - 새벽 시간(00~04:37 idle=892) 후 04:38부터 25분간 차량 2대 telemetry 일시 등장 → 05:04~05:40 다시 idle → 05:41 본격 첫차 ramp-up.
