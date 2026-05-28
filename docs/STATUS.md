@@ -16,7 +16,7 @@ v1.1 + 보강 항목(상세는 [DATA_NOTES](DATA_NOTES.md)·[design/trip-reconst
 
 **raw robustness 점검(310,969 관측) 완료**: 기본위생 깨끗(좌표·SPEED·중복·badjson 0). PLATE_NO 비유일·off-route·자정 전부 처리. bbox밖 307(0.1%)=시외구간, 비차단. (설계근거 [design/first-model.md](design/first-model.md) 갈림길 3개)
 
-**5/27 첫 평일 풀데이터(00~17시) 점검 완료** — trip 3098개, 종점도달 66→**83%**, 발차매칭 median 24s. trip0 노선 74개·미매칭 34% **전부 정상**(우측절단+저빈도 미운행+off-route 하드드롭, 버그 아님). 미매칭의 78%는 18시+ 미수집분. 상세·결론 [DATA_NOTES](DATA_NOTES.md) 5/27 항목. → 18시+ 쌓이면 재집계.
+**5/27 풀데이터(24h) 재집계 완료 — funnel 확정**: raw 차량관측 172만 → 시간표슬롯 4,466 → trip 4,290 → **1차 학습용 trip 4,063 (슬롯의 91%)** → **학습 segment 184,595 (y라벨)**. 종점도달 89%, 발차매칭 median 24s, off-schedule 1.6%. 손실 = 슬롯→trip 9% (검출누락+결행+미운행) + segment 단위 추가 1% 복원불가. 검토거리 4건([DATA_NOTES](DATA_NOTES.md) 5/27 항목 — 검출누락 315/plate 4자리 충돌/저빈도 결행/얼음 심각 75 trip).
 
 ## 완료
 - **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
