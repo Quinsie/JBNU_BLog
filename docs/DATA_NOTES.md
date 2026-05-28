@@ -11,6 +11,12 @@
 - 복구: `.74` 재부착 → ITS 200 확인 → 수집기 재시작. trip 재구성 입장에선 해당 6분 ord 전이 결측으로 흡수(보간 안 함) → y라벨 오염 0, 일부 segment 만 비움.
 - ⚠️ **재발 위험**: 인터넷 단절·리부팅마다 동일 사고. 자동복구 옵션(systemd ExecStartPre 로 IP 재부착) 미적용 — [STATUS](STATUS.md) 막힌 것/임시조치 참조.
 
+### 17:37 시스템 타임존 UTC → Asia/Seoul 전환
+- 발견: `logs/*.log` 일자 회전이 **KST 09:00** 에 일어남 (예: `bus.log.20260527` 가 5/28 08:59 까지 추가됨). 원인 = 시스템 TZ=`Etc/UTC` + `TimedRotatingFileHandler(when="midnight")` 의 기본 동작이 *시스템 localtime* 자정 회전 → UTC 자정 = KST 09:00.
+- 영향 범위: **로그 파일 회전 시점뿐.** 데이터(ts·hour_key·date_key·trip service_date) 는 전부 `src/common/clock.py` 의 명시적 KST 처리라 무영향.
+- 조치: `sudo timedatectl set-timezone Asia/Seoul` → `blog-collector` 재시작(이미 로드된 핸들러가 캐시한 rollover 시각 갱신). 다음 회전은 2026-05-29 00:00 KST 예정.
+- 부수효과: 시스템 전역 TZ 변경 — 같은 서버의 cron·systemd timer·다른 사용자 로그 회전도 KST 기준이 됨. (서버가 한국 소재이므로 의도된 정합)
+
 ### 04:38~05:03 첫차 전 차고지 telemetry leak
 - 새벽 시간(00~04:37 idle=892) 후 04:38부터 25분간 차량 2대 telemetry 일시 등장 → 05:04~05:40 다시 idle → 05:41 본격 첫차 ramp-up.
   - plate **1579** (제일여객, 305001660 노선): ord=2 stuck 23분, GPS 289m 범위, 저속 10~34km/h → 차고지 출고·warm-up 회전
