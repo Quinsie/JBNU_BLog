@@ -11,6 +11,18 @@
           }
         ]
       }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR:-.}/.claude/hooks/user_prompt_submit.sh\"",
+            "timeout": 10,
+            "statusMessage": "anti-drift 가드..."
+          }
+        ]
+      }
     ]
   }
 }
