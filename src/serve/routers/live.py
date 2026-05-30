@@ -6,7 +6,7 @@
 
 from fastapi import APIRouter, HTTPException, Query
 
-from .. import store
+from .. import store, dummy
 from ..schemas import BusLive, ArrivalBoard, ArrivalItem, Source
 
 router = APIRouter(prefix="/v1", tags=["실황(live)"])
@@ -30,13 +30,14 @@ def get_bus(bus_id: str) -> BusLive:
 
 @router.get("/stops/{stop_id}/arrivals", response_model=ArrivalBoard, summary="정류장 도착예정 보드")
 def stop_arrivals(stop_id: int) -> ArrivalBoard:
-    """이 정류장에 접근 중인 버스들(몇 정류장 전 = 실황). 잔여 분초는 2차 모델 후 채움."""
+    """이 정류장에 접근 중인 버스들. `stops_away`=실황(real). `eta_sec`=2차 모델 전까지 더미(stops_away 비례)."""
     a = store.arrivals(stop_id)
     if a is None:
         raise HTTPException(404, f"정류장 {stop_id} 없음")
     return ArrivalBoard(
         stop_id=a["stop_id"], stop_name=a["stop_name"],
         arrivals=[ArrivalItem(brt_no=i["brt_no"], stdid=i["stdid"], bus_id=i["bus_id"],
-                              stops_away=i["stops_away"], eta_sec=None, eta_source=Source.dummy)
+                              stops_away=i["stops_away"],
+                              eta_sec=dummy.arrival_eta_sec(i["stops_away"]), eta_source=Source.dummy)
                   for i in a["arrivals"]],
     )

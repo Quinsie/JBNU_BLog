@@ -98,6 +98,7 @@ class StopEtaItem(BaseModel):
 class StopEta(BaseModel):
     stop_id: int
     mode: Source = Field(..., description="pre_eta(1차) | live_eta(2차)")
+    dummy: bool = Field(True, description="더미값 여부(모델 완성 시 false). 값은 의미있게 채우되 실제 예측 아님")
     items: list[StopEtaItem]
 
 
@@ -111,6 +112,7 @@ class BusEta(BaseModel):
     bus_id: str
     stdid: int
     mode: Source = Field(..., description="pre_eta(1차) | live_eta(2차)")
+    dummy: bool = Field(True, description="더미값 여부(모델 완성 시 false)")
     stops: list[BusStopEtaItem]
 
 
@@ -170,6 +172,7 @@ class PlanResponse(BaseModel):
     recommended: PlanOption
     alternatives: list[PlanOption] = Field(default_factory=list)
     advice: str = Field(..., description="행동 요약(예: '지금 출발하세요')")
+    dummy: bool = Field(True, description="더미값 여부(에이전트 완성 시 false). 값은 의미있게 채움")
     source: Source = Source.dummy
 
 
