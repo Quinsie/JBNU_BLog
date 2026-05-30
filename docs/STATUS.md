@@ -4,6 +4,8 @@
 > **큰 그림은 [VISION.md](VISION.md)(단일 권위, 항상 먼저 짚는다).** 실행 시퀀스·단계 의존성은 [ROADMAP.md](ROADMAP.md), 데이터 신뢰성은 [DATA_NOTES.md](DATA_NOTES.md).
 
 ## 현재 위치
+**🧭 문서 체계 anti-drift 재정비 완료** (branch `docs/ia-restructure`, 이번 세션): 작업이 깊어질수록 큰 그림을 잃던 문제를 *구조로* 차단 — **[VISION.md](VISION.md) 앵커(단일 권위)** + 세션/매턴 훅 자동주입(`.claude/`) + CLAUDE §anti-drift 의례·라우팅 맵 + ROADMAP 2트랙×M0~M5 격자. 도구중립 일반 플레이북 `~/.claude/anti-drift-playbook.md`. 빈 위성(wireframe·app-api-flow·second-model·agent)은 해당 작업 진입 시 작성([VISION §6](VISION.md) placeholder).
+
 **Phase 3 trip 재구성 v1.1 + robustness + 첫 풀데 검증 완료** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
 다음: **Phase 4 — 1차 모델 설계 진입**. 진입 path(Path A vtx 재검증 선행 vs Path B 비지리 baseline 우선) 결정 대기.
 
@@ -61,6 +63,7 @@ raw 차량관측 1,719,458 → 시간표슬롯 4,466 → trip 4,290 → 1차 학
 - ~~중기예보(longForecast) 403~~ **해결**(5/26): KMA 중기예보 API 구독 반영 → land/ta ok=200 실데이터 수집 중.
 
 ## 다음 할 일
+0. **(사용자와 직접) trip 재구성 휴리스틱 점검** — 발차 검출 등 휴리스틱을 눈으로 보며 가능성별 실험·검증(= y라벨 근간 = 1차 전처리 신뢰성). 사용자가 "나중에 샅샅이" 표명(이번 세션). → [trip-reconstruction](design/trip-reconstruction.md) + [first-model](design/first-model.md) §3.
 1. **(결정 대기) Phase 4 1차 모델 진입 path 선택**:
    - **Path A (design 임계경로)**: vtx 검수 → 깨진 노선 보정 → route_nodes 재생성 → 교통 typical 매핑 → 지리feature 포함 GBDT
    - **Path B (빠른 iteration)**: 비지리 feature 만으로 dumb baseline + 첫 GBDT → 측정 후 지리feature 추가 정당화
