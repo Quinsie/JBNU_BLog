@@ -6,7 +6,8 @@
 from fastapi import APIRouter, HTTPException, Query
 
 from .. import store
-from ..schemas import RouteSummary, RouteDetail, StopSummary, StopInRoute, LatLng, Source
+from ..schemas import (RouteSummary, RouteDetail, StopSummary, StopInRoute, LatLng,
+                       DepartureList, Source)
 
 router = APIRouter(prefix="/v1", tags=["기준데이터(reference)"])
 
@@ -32,6 +33,15 @@ def get_route(stdid: int) -> RouteDetail:
         polyline=[LatLng(**p) for p in d["polyline"]],
         source=Source.reference,
     )
+
+
+@router.get("/routes/{stdid}/departures", response_model=DepartureList, summary="노선 발차슬롯 목록")
+def route_departures(stdid: int, daytype: str | None = Query(None, description="평일|토|일+공휴일 (미지정=오늘)")) -> DepartureList:
+    """그 노선의 시간표 발차슬롯(HHMM). 추론 엔드포인트의 `depart` 키 소스(= trip 재구성·1차 단위와 동일)."""
+    d = store.route_departures(stdid, daytype)
+    if d is None:
+        raise HTTPException(404, f"노선 {stdid} 시간표 없음")
+    return DepartureList(**d, source=Source.reference)
 
 
 @router.get("/stops/search", response_model=list[StopSummary], summary="정류장 검색")

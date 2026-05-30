@@ -33,47 +33,55 @@
 2. **목적지 = 임의 지점(주소/좌표)** — geocoding + 출발/도착 양쪽 도보. (정류장 단위 아님)
 3. **도보 = OSRM 전주 추출**(서버 미설치 → 설치 예정). 그 전엔 plan 내부 더미.
 
-## 4. 엔드포인트 (`/v1` 프리픽스)
+## 4. 핵심 단위 — "버스" = `(stdid, 발차슬롯)`, plate 아님
+정정(중요): 예측의 단위는 **물리 차량(번호판)** 이 아니라 **한 배차(trip) = `(stdid, 발차슬롯)`** 다.
+- 앱은 plate 를 모르고 plate 로 추적하지 않는다. raw plate(4자리)는 **비유일**(같은 회사 두 차량 충돌, [STATUS](../STATUS.md) 후처리과제)이고 우리 trip 재구성 내부용일 뿐 **계약에 노출 안 함**.
+- **"특정 물리버스의 실시간 위치/ETA"는 운영상 불가** — 차량을 특정할 수 없고, 한 번호판이 매일 같은 시각 같은 노선을 도는 것도 아님.
+- **발차슬롯 = 시간표 HHMM** — `trip_reconstruct.load_route_meta` 가 주는 바로 그 슬롯(= trip 재구성 매칭 단위 = 1차 모델 학습 단위). API·전처리·모델이 **같은 단위**를 공유 → 정합.
+- 1차 사전추론 = "그 배차가 발차부터 **각 정류장에 도착하는 clock-time**"(=first-model §3.1 의 누적 도착시각).
+- 실황 버스 위치는 **익명 점**(추적 식별자 없음).
+
+## 5. 엔드포인트 (`/v1` 프리픽스)
 | 메서드 | 경로 | 계층 | 상태 |
 |---|---|---|---|
 | GET | `/routes` | 기준데이터 | real |
 | GET | `/routes/{stdid}` | 기준데이터(정류장 시퀀스 + polyline) | real |
+| GET | `/routes/{stdid}/departures?daytype=` | 기준데이터(시간표 발차슬롯 HHMM) | real |
 | GET | `/stops/{stop_id}` | 기준데이터(좌표·경유노선) | real |
 | GET | `/stops/search?q=` | 기준데이터 | real |
 | GET | `/stops/nearby?lat=&lng=&radius_m=` | 기준데이터 | real |
-| GET | `/buses?stdid=` | 실황 | real |
-| GET | `/buses/{bus_id}` | 실황 | real |
+| GET | `/routes/{stdid}/buses` | 실황(익명 현재위치) | real |
 | GET | `/stops/{stop_id}/arrivals` | 실황(stops_away) + eta_sec 더미 | 부분 real |
-| GET | `/stops/{stop_id}/eta?mode=pre\|live` | 사전/실시간추론 | dummy |
-| GET | `/buses/{bus_id}/eta?mode=pre\|live` | 사전/실시간추론 | dummy |
+| GET | `/routes/{stdid}/departures/{hhmm}/eta?mode=pre\|live` | 추론 #10 (배차→각 정류장 도착) | dummy |
+| GET | `/stops/{stop_id}/eta?mode=pre\|live` | 추론 #9 (정류장에 오는 배차별 도착) | dummy |
 | GET | `/weather?lat=&lng=` | 날씨(현재+예보) | real |
 | POST | `/plan`, `/plan/recheck` | 에이전트 | dummy |
 | GET | `/health` | 운영 | real |
 
-좌표는 (lat,lng) WGS84, 시각은 KST ISO8601, 잔여시간은 `*_sec`. 스키마 상세는 Swagger.
+좌표 (lat,lng) WGS84, 시각 KST ISO8601, 발차 HHMM, 잔여시간 `*_sec`. 스키마 상세는 Swagger.
+⚠️ 주말 발차: SAT/HOLI 별도표는 102개 노선만 보유 → 나머지는 주말 `departures` 가 빔(시간표 데이터 특성).
 
-## 5. 데이터 액세스 (`src/serve/store.py`)
+## 6. 데이터 액세스 (`src/serve/store.py`)
 real 응답은 전부 여기 한 곳에서. 경로는 `src/common/paths.py`(절대경로 0).
 - **기준데이터**: `stdid_list`(446) + 정류장 인덱스(stop_id→좌표·경유 stdid·ord, 1회 빌드 캐시). vtx→polyline.
-- **실황**: ITS 를 **추가 호출하지 않고** 우리가 이미 수집한 `raw/bus/{stdid}/{YYYYMMDD_HH}.jsonl`의
-  최신 줄을 패스스루(추가 부하 0 · IP차단 리스크 0). 전 노선 스냅샷 **TTL 8s 캐시**.
-  `arrivals` 의 `stops_away` = 정류장 ord − 버스 현재 ord(지난 버스 제외).
-- **날씨**: 좌표→KMA 격자(`common.grid.latlng_to_grid`) → 초단기실황(현재)+초단기예보(시간별). 실황 SKY 결측은 예보 첫 항목으로 보강.
+- **발차슬롯**: `trip_reconstruct.{load_route_meta, daytype_of, _parse_slots}` 재사용 → 전처리·모델과 동일 소스.
+- **실황**: ITS 를 **추가 호출하지 않고** 우리가 수집한 `raw/bus/{stdid}/{YYYYMMDD_HH}.jsonl` 최신 줄을
+  익명 패스스루(추가 부하 0 · IP차단 리스크 0). 전 노선 스냅샷 **TTL 8s 캐시**. `arrivals.stops_away` = 정류장 ord − 버스 현재 ord.
+- **날씨**: 좌표→KMA 격자(`common.grid`) → 초단기실황(현재)+초단기예보(시간별).
 
-## 6. 더미 정책
-- "더미"임을 **명시**: `dummy:true`(StopEta·BusEta·PlanResponse) / `source:dummy` / `eta_source:dummy`.
-- 값은 **쓰레기·null 금지 — real 에 grounding** 한 그럴듯한 값. 실제 정류장·노선·버스로 구성하고
-  *예측 수치(시각·확률)만* fabricate(`src/serve/dummy.py`). 결정적(난수 없음).
-- real 교체 시 모델 추론 호출 + `dummy:false`. **계약 모양은 유지**(세부 명세는 조금씩 바뀔 수 있음).
+## 7. 더미 정책
+- "더미"임을 **명시**: `dummy:true`(DepartureEta·StopBoardEta·PlanResponse) / `source:dummy` / `eta_source:dummy`.
+- 값은 **쓰레기·null 금지 — real 에 grounding**: 실제 노선·정류장·발차슬롯으로 구성하고 *예측 수치(도착 clock-time·확률)만* fabricate(`src/serve/dummy.py`). 결정적.
+- real 교체 시 1차/2차 모델·에이전트 호출 + `dummy:false`. **계약 모양 유지**(세부 명세는 조금 바뀔 수 있음).
 
-## 7. 운영 / 외부 공개
+## 8. 운영 / 외부 공개
 - 기동: `bash scripts/run_serve.sh` (uvicorn :8000 + cloudflared 임시 터널).
 - **방화벽이 QUIC(UDP)을 막음 → cloudflared `--protocol http2`(TCP443) 필수**(없으면 CF 1033).
 - **trycloudflare URL 은 cloudflared 재기동 시에만 변경**(코드 수정으론 안 바뀜. uvicorn `--reload` 면 코드 저장 자동반영).
 - Cloudflare Tunnel 서비스는 **무료**(트래픽 과금 없음). 고정 URL = named tunnel + Cloudflare 등록 도메인(도메인값 별도). 무료 고정 대안 = Tailscale Funnel.
 - ⚠️ 보류(공개 전 필수): **API키 + rate limit**, systemd 영속화(현재 자동복구 없음).
 
-## 8. 남은 작업
+## 9. 남은 작업
 1. geocoding(Kakao Local 또는 VWorld 키) + OSRM 전주 추출 설치 → plan 내부 도보 real.
 2. 1차/2차 모델 완성 시 추론(pre/live-eta)·plan 라우터 real 교체.
 3. 배포 영속화: systemd(uvicorn+cloudflared) + named tunnel(고정 URL) + API키/rate limit.

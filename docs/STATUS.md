@@ -29,7 +29,8 @@ raw 차량관측 1,719,458 → 시간표슬롯 4,466 → trip 4,290 → 1차 학
 
 **계층 용어 확정**(혼동 방지 — "정적" 금지어): **기준데이터**(reference, 모델불필요) · **실황**(live, BIS 패스스루) · **사전추론**(pre-eta, 1차) · **실시간추론**(live-eta, 2차) · **plan**(에이전트) · weather. 각 응답 `source` 필드로 dummy/real 출처 표기.
 
-엔드포인트 14개: 기준데이터 `/v1/routes` `/routes/{stdid}` `/stops/{id}` `/stops/search` `/stops/nearby` · 실황 `/buses` `/buses/{id}` `/stops/{id}/arrivals` · 추론 `/stops/{id}/eta?mode=` `/buses/{id}/eta?mode=` · `/weather` · ⭐`POST /plan` `/plan/recheck` · `/health`. 도보는 엔드포인트 아님(내부 OSRM 모듈로 plan 에 흡수).
+**핵심 단위 정정**: 예측 단위 = **`(stdid, 발차슬롯)` = 한 배차(trip)**, plate 아님(plate 비유일·차량추적 운영불가). 발차슬롯은 `trip_reconstruct.load_route_meta`(= trip재구성·1차모델과 동일 소스). 실황 버스는 **익명 위치**.
+엔드포인트: 기준데이터 `/v1/routes` `/routes/{stdid}` `/routes/{stdid}/departures` `/stops/{id}` `/stops/search` `/stops/nearby` · 실황 `/routes/{stdid}/buses` `/stops/{id}/arrivals` · 추론 `/routes/{stdid}/departures/{hhmm}/eta` `/stops/{id}/eta` · `/weather` · ⭐`POST /plan` `/plan/recheck` · `/health`. 도보는 엔드포인트 아님(plan 내부 OSRM).
 
 **진입 결정**(프론트 협의): ① 에이전트=서버 `/plan` 단일 ② 목적지=임의 지점(geocoding+양쪽 도보) ③ 도보=OSRM 전주 추출.
 

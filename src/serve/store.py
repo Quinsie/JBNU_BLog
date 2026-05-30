@@ -16,6 +16,9 @@ from pathlib import Path
 from src.common.clock import now_kst
 from src.common.grid import latlng_to_grid
 from src.common.paths import REF_SOURCE_DIR, REF_BUILT_DIR, RAW_BUS_DIR, RAW_WEATHER_DIR
+# 발차슬롯·daytype 은 trip 재구성과 **같은 소스**를 재사용(= 1차 학습 단위와 일치 보장)
+from src.preprocess.trip_reconstruct import (
+    load_route_meta as _trip_meta, daytype_of as _daytype_of, _parse_slots)
 
 _STOPS_DIR = REF_SOURCE_DIR / "stops"
 _VTX_DIR = REF_SOURCE_DIR / "vtx"
@@ -117,6 +120,22 @@ def search_stops(q: str, limit: int = 20) -> list[dict]:
     return out
 
 
+def current_daytype() -> str:
+    return _daytype_of(now_kst().date())
+
+
+def route_departures(stdid: int, daytype: str | None = None) -> dict | None:
+    """노선의 시간표 발차슬롯(HHMM 정렬). trip_reconstruct 와 같은 소스 → 1차 단위와 일치."""
+    meta = _trip_meta(stdid)
+    if not meta:
+        return None
+    dt = daytype or current_daytype()
+    hhmm, _ = _parse_slots((meta.get("sched") or {}).get(dt, []))
+    routes()
+    return {"stdid": int(stdid), "brt_no": meta.get("brt_no") or _stdid_brt.get(int(stdid)),
+            "daytype": dt, "departures": [h.replace(":", "") for h in hhmm]}
+
+
 def stops_nearby(lat: float, lng: float, radius_m: int, limit: int = 30) -> list[dict]:
     res = []
     for e in _build_stop_index().values():
@@ -164,8 +183,7 @@ def _snapshot() -> dict:
         sd = int(r["stdid"])
         buses = []
         for b in _latest_bus_line(sd):
-            buses.append({
-                "bus_id": str(b.get("PLATE_NO", "")).strip(),
+            buses.append({   # 익명 위치 — plate 노출 안 함(비유일·추적 불가)
                 "stdid": sd, "brt_no": r.get("brt_no", ""),
                 "lat": b.get("LAT"), "lng": b.get("LNG"),
                 "stop_ord": b.get("LATEST_STOP_ORD"),
@@ -176,19 +194,9 @@ def _snapshot() -> dict:
     return snap
 
 
-def buses(stdid: int | None) -> list[dict]:
-    snap = _snapshot()
-    if stdid is not None:
-        return snap.get(int(stdid), [])
-    return [b for lst in snap.values() for b in lst]
-
-
-def bus_one(bus_id: str) -> dict | None:
-    for lst in _snapshot().values():
-        for b in lst:
-            if b["bus_id"] == bus_id:
-                return b
-    return None
+def route_buses(stdid: int) -> list[dict]:
+    """노선 위 버스들의 현재 위치(익명)."""
+    return _snapshot().get(int(stdid), [])
 
 
 def arrivals(stop_id: int) -> dict | None:
@@ -204,7 +212,7 @@ def arrivals(stop_id: int) -> dict | None:
             bord = b.get("stop_ord")
             if bord is None or bord > stop_ord:
                 continue   # 이미 지난 버스 제외
-            items.append({"brt_no": b["brt_no"], "stdid": stdid, "bus_id": b["bus_id"],
+            items.append({"brt_no": b["brt_no"], "stdid": stdid,
                           "stops_away": stop_ord - bord})
     items.sort(key=lambda x: x["stops_away"])
     return {"stop_id": stop_id, "stop_name": e["stop_name"], "arrivals": items}
