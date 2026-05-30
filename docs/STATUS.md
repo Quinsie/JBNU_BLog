@@ -32,7 +32,14 @@ raw 차량관측 1,719,458 → 시간표슬롯 4,466 → trip 4,290 → 1차 학
 엔드포인트 14개: 기준데이터 `/v1/routes` `/routes/{stdid}` `/stops/{id}` `/stops/search` `/stops/nearby` · 실황 `/buses` `/buses/{id}` `/stops/{id}/arrivals` · 추론 `/stops/{id}/eta?mode=` `/buses/{id}/eta?mode=` · `/weather` · ⭐`POST /plan` `/plan/recheck` · `/health`. 도보는 엔드포인트 아님(내부 OSRM 모듈로 plan 에 흡수).
 
 **진입 결정**(프론트 협의): ① 에이전트=서버 `/plan` 단일 ② 목적지=임의 지점(geocoding+양쪽 도보) ③ 도보=OSRM 전주 추출.
-다음(serve): ⓐ 기준데이터 real 교체(reference 서빙) ⓑ weather real ⓒ 실황 BIS 패스스루 ⓓ 외부공개(Cloudflare Tunnel 검토) + API키/rate limit. 모델 의존(추론·plan)은 모델 완성 시 라우터 교체.
+
+**real 교체 완료**(모델 불필요 계층): ⓐ 기준데이터(reference 서빙, 노선446·정류장·polyline) ⓑ weather(KMA 격자→실황+예보) ⓒ 실황(우리 raw 최신 스냅샷 패스스루, ITS 추가호출 0). 데이터 액세스는 `src/serve/store.py` 한 곳. 추론(pre/live-eta)·plan 은 모델 완성 시 라우터 교체.
+
+**외부 공개**: cloudflared **임시 터널** 가동 검증 완료(외부경로로 real 응답 확인). 기동 `bash scripts/run_serve.sh`.
+- ⚠️ 방화벽이 QUIC(UDP)을 막아 **`--protocol http2` 필수**(없으면 CF 1033).
+- ⚠️ trycloudflare URL 은 재기동마다 변경(고정 URL=named tunnel+계정 필요, 보류).
+- ⚠️ uvicorn/cloudflared systemd 미관리 → 자동복구 없음. **API키/rate limit 미적용**(공개 전 필수).
+다음(serve): 고정 URL(named tunnel)·systemd 영속화·API키, geocoding(Kakao/VWorld)·OSRM 설치.
 
 ## 완료
 - **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
