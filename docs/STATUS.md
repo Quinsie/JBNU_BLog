@@ -24,6 +24,16 @@ raw 차량관측 1,719,458 → 시간표슬롯 4,466 → trip 4,290 → 1차 학
 
 **갈림길 #3 — 정리**: 설계상 결정 **완료**(=지리종속성 1차 통합 + route_nodes·교통 typical 매핑을 1차 임계경로에 포함, [first-model.md](design/first-model.md) §2.2·§5). STATUS 의 기존 "미결정" 표현은 부정확이었음 — 결정은 됐고, 그 선행작업(vtx 올해데이터 재검증)이 미착수.
 
+## 병행 트랙 — serve API (Phase 7, branch `feat/serve-api`)
+프론트 협업용 앱-facing API. **FastAPI 스캐폴드 = 전 엔드포인트 dummy + 자동 Swagger(`/docs`) 완료**. 실행 `uvicorn src.serve.app:app --host 0.0.0.0 --port 8000`.
+
+**계층 용어 확정**(혼동 방지 — "정적" 금지어): **기준데이터**(reference, 모델불필요) · **실황**(live, BIS 패스스루) · **사전추론**(pre-eta, 1차) · **실시간추론**(live-eta, 2차) · **plan**(에이전트) · weather. 각 응답 `source` 필드로 dummy/real 출처 표기.
+
+엔드포인트 14개: 기준데이터 `/v1/routes` `/routes/{stdid}` `/stops/{id}` `/stops/search` `/stops/nearby` · 실황 `/buses` `/buses/{id}` `/stops/{id}/arrivals` · 추론 `/stops/{id}/eta?mode=` `/buses/{id}/eta?mode=` · `/weather` · ⭐`POST /plan` `/plan/recheck` · `/health`. 도보는 엔드포인트 아님(내부 OSRM 모듈로 plan 에 흡수).
+
+**진입 결정**(프론트 협의): ① 에이전트=서버 `/plan` 단일 ② 목적지=임의 지점(geocoding+양쪽 도보) ③ 도보=OSRM 전주 추출.
+다음(serve): ⓐ 기준데이터 real 교체(reference 서빙) ⓑ weather real ⓒ 실황 BIS 패스스루 ⓓ 외부공개(Cloudflare Tunnel 검토) + API키/rate limit. 모델 의존(추론·plan)은 모델 완성 시 라우터 교체.
+
 ## 완료
 - **Phase 0**: 디렉토리 골격, `paths.py`(절대경로 0), `.gitignore`, conda env `Blog`, docs, `CLAUDE.md`, README.
 - **공유 데이터**: `blog` 그룹(jiho·yubin·hyewon·gaeun), `/mnt/data1/B_Log`=`jiho:blog` 2775(setgid), `data/raw` 심볼릭. `setup_data.sh`.
