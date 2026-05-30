@@ -5,7 +5,7 @@
 사용자가 *목적지 + 목표 도착 시각* 을 입력하면, 도보·탑승버스·환승·예상도착을 종합해
 **"지금 출발해야 하는가 / 어떤 버스를 타야 하는가 / 안전한 대안은 무엇인가"** 를 행동 단위로 안내한다.
 
-> 전체 그림은 [docs/ROADMAP.md](docs/ROADMAP.md), 현재 진행상황은 [docs/STATUS.md](docs/STATUS.md), 환경 셋업은 [docs/SETUP.md](docs/SETUP.md).
+> 큰 그림·비전은 [docs/VISION.md](docs/VISION.md)(단일 권위), 진행상황은 [docs/STATUS.md](docs/STATUS.md), 환경 셋업은 [docs/SETUP.md](docs/SETUP.md).
 
 ## 구조
 

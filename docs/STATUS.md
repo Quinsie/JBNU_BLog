@@ -1,7 +1,7 @@
 # STATUS
 
 > **매 작업(commit)마다 갱신.** "지금 어디까지 왔고, 바로 다음 뭘 할지"를 항상 여기서 확인.
-> 전체 그림·단계 의존성은 [ROADMAP.md](ROADMAP.md), 데이터 신뢰성은 [DATA_NOTES.md](DATA_NOTES.md).
+> **큰 그림은 [VISION.md](VISION.md)(단일 권위, 항상 먼저 짚는다).** 실행 시퀀스·단계 의존성은 [ROADMAP.md](ROADMAP.md), 데이터 신뢰성은 [DATA_NOTES.md](DATA_NOTES.md).
 
 ## 현재 위치
 **Phase 3 trip 재구성 v1.1 + robustness + 첫 풀데 검증 완료** (branch `design/first-model`). 수집기는 `.74` 우회로 가동 중.
