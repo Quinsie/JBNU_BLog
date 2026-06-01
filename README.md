@@ -30,30 +30,29 @@ serve 는 "맨 끝 단계"가 아니라 처음부터 양 트랙을 잇는 척추
 
 ```
 코어 트랙 ──  raw수집 ─▶ trip재구성 ─▶ 1차모델 ─▶ 2차모델 ─▶ 에이전트 ─┐
- (예측 자산)   ✅          ✅          (설계)     (예정)     (예정)    │
+ (예측 자산)                                                          │
                                                                        ▼
                                                                ┌──────────────┐
                                                                │   serve API   │ ◀ 합류점 (앱-facing 계약)
-                                                               │  (부분 real)  │
                                                                └──────────────┘
                                                                        ▲
 서비스 트랙 ─ 와이어프레임 ─▶ Flutter 앱 ─────────────────────────────┘
- (사용자 접점)  (예정)          (미착수)
+ (사용자 접점)
 ```
 
 데이터는 한 방향으로만 흐른다: `reference`(기준, 곁에 둠) │ `raw → interim → features → models → predictions`.
 
 ### 컴포넌트 한눈에
 
-| 컴포넌트 | 역할 (입력 → 출력) | 상태 |
-|---|---|---|
-| **수집기** | ITS·KMA 를 raw 무손실 저장 (가공 0) | ✅ 가동 |
-| **trip 재구성** | raw → 실제 운행 trip + 구간 y라벨 | ✅ v1.1 |
-| **1차 모델 (사전추론)** | 발차 전, 전 정류장 도착 clock-time 예측 (배차 = `(stdid, 발차슬롯)`) | 설계 |
-| **2차 모델 (실시간추론)** | 발차 감지 후 1차를 prior 로 남은 정류장 보정 (attention-transformer) | 예정 |
-| **에이전트** | 목적지+목표시각 → 탑승 버스열 역산 → 현위치 기반 지속 알림 | 예정 |
-| **serve API** | 두 트랙 합류점. 앱-facing REST 계약 | 부분 real |
-| **앱 (Flutter)** | 사용자 입출력 + 알림 수신 (iOS/Android) | 미착수 |
+| 컴포넌트 | 역할 (입력 → 출력) |
+|---|---|
+| **수집기** | ITS·KMA 를 raw 무손실 저장 (가공 0) |
+| **trip 재구성** | raw → 실제 운행 trip + 구간 y라벨 |
+| **1차 모델 (사전추론)** | 발차 전, 전 정류장 도착 clock-time 예측 (배차 = `(stdid, 발차슬롯)`) |
+| **2차 모델 (실시간추론)** | 발차 감지 후 1차를 prior 로 남은 정류장 보정 (attention-transformer) |
+| **에이전트** | 목적지+목표시각 → 탑승 버스열 역산 → 현위치 기반 지속 알림 |
+| **serve API** | 두 트랙 합류점. 앱-facing REST 계약 |
+| **앱 (Flutter)** | 사용자 입출력 + 알림 수신 (iOS/Android) |
 
 > 마일스톤(M0~M5)·여정·책임 경계 등 권위 정의는 [docs/VISION.md](docs/VISION.md), 지금 어디까지 왔는지는 [docs/STATUS.md](docs/STATUS.md).
 
@@ -64,13 +63,13 @@ serve 는 "맨 끝 단계"가 아니라 처음부터 양 트랙을 잇는 척추
 monorepo — 한 서버에서 수집→전처리→ML→추론→Agent 를 전부 처리하고, 앱은 그 위에 얹는다.
 
 ```
-app/                 Flutter 앱 (iOS/Android) — 미착수
+app/                 Flutter 앱 (iOS/Android)
 src/                 Python (단일 서버)
   collector/         수집기 — bus·traffic·weather·incident + supervisor(flock)
   common/            공용 — paths·clock·grid·io·log·jeonju_api
   preprocess/        trip_reconstruct.py (trip 재구성, all-core)
-  models/            1차·2차 모델 (예정)
-  agent/             목표도착 역산 에이전트 (예정)
+  models/            1차·2차 모델
+  agent/             목표도착 역산 에이전트
   serve/             FastAPI 앱-facing API — app·routers·store·schemas
   scripts/           build_reference·fetch_static·setup_data.sh·run.sh(수집기 supervisor)
 scripts/             run_serve.sh (serve 기동 + cloudflared 터널)
@@ -127,8 +126,8 @@ bash scripts/run_serve.sh
 - **전처리**: multiprocessing 전 코어(`ProcessPoolExecutor`) · holidays(KR 공휴일)
 - **serve API**: FastAPI · uvicorn · pydantic (코드가 곧 OpenAPI/Swagger)
 - **외부 공개**: cloudflared (임시 터널)
-- **ML (예정)**: LightGBM(1차 GBDT) · PyTorch(2차 Transformer) · scikit-learn · pandas · pyarrow
-- **앱 (예정)**: Flutter (iOS + Android)
+- **ML**: LightGBM(1차 GBDT) · PyTorch(2차 Transformer) · scikit-learn · pandas · pyarrow
+- **앱**: Flutter (iOS + Android)
 
 ---
 
